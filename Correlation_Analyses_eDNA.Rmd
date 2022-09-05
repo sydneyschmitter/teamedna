@@ -1,0 +1,183 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+
+
+#bring in taxonomy and meta data from working directory. 
+#CO1_raw_taxonomy <- read.csv(file = "CO1_ASV_raw_taxonomy_100.csv", header = TRUE, row.names = 1)
+#or
+#CO1_filtered_taxonomy <- read.csv(file = "CO1_ASV_sum_by_taxonomy_100_filtered.csv", header = TRUE, row.names = 1)
+library(vegan)
+library(ggplot2)
+
+correlation_metadata <- read.csv("metadata.csv")
+correlation_metadata <- correlation_metadata[1:38,]
+order.taxa <- read.csv("corder_taxa.csv")
+order.taxa[is.na(order.taxa)] <- 0  # Replace NaN & Inf with NA
+
+pca_taxonomy <- order.taxa
+pca_metadata <- correlation_metadata
+order.taxa$Depths <- correlation_metadata$DEPTH
+order.taxa$Station <- correlation_metadata$STATION.NUMBER
+#coi_metadata <- read.csv("coi-metadata.csv", row.names = 1)
+
+```
+
+```{r}
+# Calculating NMDS correlation
+
+#Converting Absolute Abundance to Relative Abundance, using decostand funciton in vegan
+# Calculating relative abundance and creating new dataframe with relative abundance data
+pca_taxonomy_rel <- decostand(pca_taxonomy, method = "total")
+
+# Calculate bray distance matrix
+pca_taxonomy_dist <- vegdist(pca_taxonomy_rel, method = "bray")
+
+# Running NMDS in vegan (metaMDS), 
+pca_taxonomy_NMS <-
+  metaMDS(pca_taxonomy_dist,
+          distance = "bray",
+          k = 3,
+          maxit = 999, 
+          trymax = 500)
+
+
+pca_taxonomy_NMS$sample.num <- pca_metadata$SAMPLE..
+pca_taxonomy_NMS$depth <- pca_metadata$DEPTH
+pca_taxonomy_NMS$station <- pca_metadata$STATION.NUMBER
+
+plot(pca_taxonomy_NMS, type = "n")
+points(pca_taxonomy_NMS)
+
+ordi.plot <- ordiplot(pca_taxonomy_NMS, ordiellipse(pca_taxonomy_NMS$points, pca_taxonomy_NMS$sample.num))
+
+#ordicluster or ordiplot or hclust for plotting
+cl <- hclust(pca_taxonomy_dist)
+pca_taxonomy_NMS_df <- data.frame(pca_taxonomy_NMS$points)
+
+NMS.plot <- plot(pca_taxonomy_NMS
+     , type="n")
+points(pca_taxonomy_NMS, display = "sites", cex = 0.8, pch=21, col="red", bg="yellow")
+text(pca_taxonomy_NMS)
+summary(pca_taxonomy_NMS)
+
+ordination <- ordicluster(pca_taxonomy_NMS, cl)
+ordiplot(ordination)
+
+factor(pca_taxonomy_NMS$points, levels = all.metadata2$SAMPLE..)
+
+order.taxa$Depths <- all.metadata2$DEPTH
+order.taxa$Station <- all.metadata2$STATION.NUMBER
+
+
+
+#bring in taxonomy and meta data from working directory. 
+#CO1_raw_taxonomy <- read.csv(file = "CO1_ASV_raw_taxonomy_100.csv", header = TRUE, row.names = 1)
+#or
+#CO1_filtered_taxonomy <- read.csv(file = "CO1_ASV_sum_by_taxonomy_100_filtered.csv", header = TRUE, row.names = 1)
+
+```
+
+```{r}
+#pca_taxonomy <- order.taxa[11:38,]
+#pca_metadata <- all.metadata2[11:38,]
+#coi_metadata <- read.csv("coi-metadata.csv", row.names = 1)
+
+#Converting Absolute Abundance to Relative Abundance, using decostand funciton in vegan
+# Calculating relative abundance and creating new dataframe with relative abundance data
+pca_taxonomy_rel <- decostand(pca_taxonomy, method = "total")
+
+# Calculate bray distance matrix
+pca_taxonomy_dist <- vegdist(pca_taxonomy_rel, method = "bray")
+
+# Running NMDS in vegan (metaMDS), 
+pca_taxonomy_NMS <-
+  metaMDS(pca_taxonomy_dist,
+          distance = "bray",
+          k = 3,
+          maxit = 999, 
+          trymax = 500,
+          wascores = TRUE)
+
+
+#ordicluster or ordiplot or hclust for plotting
+cl <- hclust(pca_taxonomy_dist)
+
+plot(pca_taxonomy_NMS
+     , type="n")
+points(pca_taxonomy_NMS, display = "sites", cex = 0.8, pch=21, col="red", bg="yellow")
+text(pca_taxonomy_NMS)
+
+pca_taxonomy_NMS$points
+
+ordiellipse(pca_taxonomy_NMS,iidx, col=1:4, kind = "ehull", lwd=3)
+
+ordination <- ordicluster(pca_taxonomy_NMS, cl)
+ordiplot(ordination)
+
+factor(pca_taxonomy_NMS$points, levels = all.metadata2$SAMPLE..)
+
+# PCA analysis with depth as the factor
+PCA = prcomp(order.taxa,scale. = T) #you don't need to center and scale before this cause this function does this for you, center is T by default and you set scale. = T
+PCs = PCA$x #extracting PC scores
+to_plot = data.frame(PC1 = PCs[,1],
+                     PC2 = PCs[,2],
+                     type = as.factor(all.metadata2$DEPTH)) #put your groups here as type
+ggplot(to_plot, aes(PC1, PC2, color = type)) +
+  geom_point() + ggtitle("PCA Analysis of Similarity of Sample Site Order Composition")
+
+df.nmds <- data.frame(pca_taxonomy_NMS$points, 
+                      type = as.factor(all.metadata2$STATION.NUMBER))
+ggplot(df.nmds, aes(MDS1, MDS2, color = type)) + geom_point() + 
+  ggtitle("NMDS Analysis of Similarity of Sample Site Order Composition")
+
+```
+
+```{r}
+# PCA analysis
+PCA = prcomp(order.taxa,scale. = T) #you don't need to center and scale before this cause this function does this for you, center is T by default and you set scale. = T
+PCs = PCA$x #extracting PC scores
+to_plot = data.frame(PC1 = PCs[,1],
+                     PC2 = PCs[,2],
+                     type = as.factor(all.metadata2$STATION.NUMBER)) #put your groups here as type
+ggplot(to_plot, aes(PC1, PC2, color = type)) +
+  geom_point() + ggtitle("PCA Analysis of Similarity of Sample Site Order Composition")
+
+df.nmds <- data.frame(pca_taxonomy_NMS$points, 
+                      type = as.factor(all.metadata2$STATION.NUMBER))
+ggplot(df.nmds, aes(MDS1, MDS2, color = type)) + geom_point() + 
+  ggtitle("NMDS Analysis of Similarity of Sample Site Order Composition")
+
+
+# CCA analysis
+mod <- cca(order.taxa ~ DEPTH, pca_metadata)
+plot(mod, type="n", scaling = "symmetric")
+## Catch the invisible result of ordihull...
+pl <- with(pca_metadata, ordihull(mod, DEPTH,
+                              scaling = "symmetric", label = TRUE))
+## ... and find centres and areas of the hulls
+summary(pl)
+## use more colours and add ellipsoid hulls
+plot(mod, type = "n")
+pl <- with(pca_metadata, ordihull(mod, DEPTH,
+                              scaling = "symmetric", col = 1:4,
+                              draw= "ehull", label =TRUE))
+with(pca_metadata, ordiellipse(mod, DEPTH, scaling = "symmetric",
+                           kind = "ehull", col = 1:4, lwd=1, label = TRUE))
+
+
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
