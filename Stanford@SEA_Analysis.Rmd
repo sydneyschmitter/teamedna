@@ -1,0 +1,594 @@
+---
+title: "Stanford@SEA Analysis"
+author: "Sydney Schmitter and Tanvi Dutta Gupta"
+date: "4/25/2022"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(censusapi)
+library(sf)
+library(tigris)
+library(mapview)
+library(readxl)
+library(leaflet)
+library(ggplot2)
+library(shiny)
+library(shinydashboard)
+```
+
+```{r}
+#sampling locations code
+#plug in longitude, latitude of sampling sites and it will map on leaflet along with the ship track
+eDNA <- read.csv("eDNA_data.csv")
+
+map <- leaflet() %>%
+    addProviderTiles(providers$Esri.OceanBasemap) %>%
+    addProviderTiles(providers$Hydda.RoadsAndLabels, group = 'Place Names') %>% addWMSTiles(
+    "https://gis.ngdc.noaa.gov/arcgis/services/graticule/MapServer/WMSServer/",
+    layers = c("1-degree grid", "5-degree grid"),
+    options = WMSTileOptions(format = "image/png8", transparent = TRUE),
+    attribution = NULL,group = 'Graticules') %>%
+    setView(lng = -162.0787, lat = 5.8885, zoom = 7) %>%
+    addLayersControl(overlayGroups = c('Place Names',
+                      'Sampling Sites',
+                      'Ship Track'),
+                      options = layersControlOptions(collapsed = FALSE),
+                      position = 'topright') %>%
+  addCircleMarkers(data = eDNA, ~Longitude, ~Latitude,
+                   weight = 0.5,
+                   col = 'black',
+                   fillColor = 'darkslategrey',
+                   radius = 4,
+                   fillOpacity = 0.9,
+                   stroke = T,
+                   label = ~paste0(as.character(Sitename,3),
+                                   as.character(round(Latitude,3)), ', ',
+                                   as.character(round(Longitude,3))),
+                   group = 'Sampling Sites') %>%
+  addPolylines(data = eDNA, ~Longitude, ~Latitude,
+               weight = 3,
+               color = 'red',
+               popup = 'SSV Robert C. Seamans Ship Track',
+               smoothFactor = 3,
+               group = 'Ship Track')
+
+map
+```
+
+```{r}
+#family breakdown graph for sample site 1 (Hawai'I Nearshore)
+familydatasite1 <- read.csv("familybreakdownsamplesite1.csv")
+
+vect_order <- c("400m",
+                "200m Replicate 2",
+                "200m Replicate 1",
+                "5m Replicate 2",
+                "5m Replicate 1"
+)
+
+familydatasite1 <- familydatasite1 %>% mutate(Depth = factor(familydatasite1$Depth, levels = vect_order, ordered = T))
+
+
+familybarchartsite1 <- familydatasite1 %>%
+ggplot() +
+  geom_bar(
+    aes(
+      x = Depth,
+      y = Proportion,
+      fill = Family
+    ),
+    stat = "identity",
+    position = "fill"
+  ) +
+  labs(
+    x = "Sample Depth",
+    y = "Proportion of eDNA in Sample",
+    title = "Number of Family Reads per Sample Depth",
+    fill = "Family Name"
+  ) +
+  coord_flip() +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "vertical"
+  )  +
+  guides(
+    fill = guide_legend(
+      reverse = T
+    )
+  )
+
+familybarchartsite1
+```
+
+```{r}
+#genus graph for sample site 1 (Hawai'I Nearshore)
+genusdatasite1 <- read.csv("genusbreakdownsamplesite1.csv")
+
+vect_order <- c("400m",
+                "200m Replicate 2",
+                "200m Replicate 1",
+                "5m Replicate 2",
+                "5m Replicate 1"
+)
+
+genusdatasite1 <- genusdatasite1 %>% mutate(Depth = factor(genusdatasite1$Depth, levels = vect_order, ordered = T))
+
+
+genusbarchart1 <- genusdatasite1 %>%
+ggplot() +
+  geom_bar(
+    aes(
+      x = Depth,
+      y = Proportion,
+      fill = Genus
+    ),
+    stat = "identity",
+    position = "fill"
+  ) +
+  labs(
+    x = "Sample Depth",
+    y = "Proportion of eDNA in Sample",
+    title = "Number of Genus Reads per Sample Depth",
+    fill = "Genus Name"
+  ) +
+  coord_flip() +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "vertical"
+  )  +
+  guides(
+    fill = guide_legend(
+      reverse = T
+    )
+  )
+
+
+genusbarchart1
+```
+
+```{r}
+#family breakdown graph for sample site 2 (Keiahoe/Hawai'i)
+familydatasite2 <- read.csv("familybreakdownsamplesite2.csv")
+
+vect_order2 <- c("400",
+                "200",
+                "50"
+)
+
+familydatasite2 <- familydatasite2 %>% mutate(Depth = factor(familydatasite2$Depth, levels = vect_order2, ordered = T))
+
+
+familybarchartsite2 <- familydatasite2 %>%
+ggplot() +
+  geom_bar(
+    aes(
+      x = Depth,
+      y = Proportion.of.Reads,
+      fill = Family
+    ),
+    stat = "identity",
+    position = "fill"
+  ) +
+  labs(
+    x = "Sample Depth",
+    y = "Proportion of Consensus Reads",
+    title = "Number of Family Reads per Sample Depth at Site 2 (Keiahoe/Hawai'i)",
+    fill = "Family Name"
+  ) +
+  coord_flip() +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "vertical"
+  )  +
+  guides(
+    fill = guide_legend(
+      reverse = T
+    )
+  )
+
+familybarchartsite2
+```
+
+```{r}
+#family breakdown graph for sample site 3 (Cyclonic Eddy)
+familydatasite3 <- read.csv("familybreakdownsamplesite3.csv")
+
+vect_order3 <- c("400",
+                "200"
+)
+
+familydatasite3 <- familydatasite3 %>% mutate(Depth = factor(familydatasite3$Depth, levels = vect_order3, ordered = T))
+
+
+familybarchartsite3 <- familydatasite3 %>%
+ggplot() +
+  geom_bar(
+    aes(
+      x = Depth,
+      y = Proportion.of.Reads,
+      fill = Family
+    ),
+    stat = "identity",
+    position = "fill"
+  ) +
+  labs(
+    x = "Sample Depth",
+    y = "Proportion of Consensus Reads",
+    title = "Number of Family Reads per Sample Depth at Site 3 (Cyclonic Eddy)",
+    fill = "Family Name"
+  ) +
+  coord_flip() +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "vertical"
+  )  +
+  guides(
+    fill = guide_legend(
+      reverse = T
+    )
+  )
+
+familybarchartsite3
+```
+
+```{r}
+#family breakdown graph for sample site 4 (Eddy Convergence)
+familydatasite4 <- read.csv("familybreakdownsamplesite4.csv")
+
+vect_order4 <- c("400"
+)
+
+familydatasite4 <- familydatasite4 %>% mutate(Depth = factor(familydatasite4$Depth, levels = vect_order4, ordered = T))
+
+
+familybarchartsite4 <- familydatasite4 %>%
+ggplot() +
+  geom_bar(
+    aes(
+      x = Depth,
+      y = Proportion.of.Reads,
+      fill = Family
+    ),
+    stat = "identity",
+    position = "fill"
+  ) +
+  labs(
+    x = "Sample Depth",
+    y = "Proportion of Consensus Reads",
+    title = "Number of Family Reads per Sample Depth at Site 4 (Eddy Convergence)",
+    fill = "Family Name"
+  ) +
+  coord_flip() +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "vertical"
+  )  +
+  guides(
+    fill = guide_legend(
+      reverse = T
+    )
+  )
+
+familybarchartsite4
+```
+
+```{r}
+#family breakdown graph for sample site 5 (Swordfish Seamount)
+familydatasite5 <- read.csv("familybreakdownsamplesite5.csv")
+
+vect_order5 <- c("400",
+                "200"
+)
+
+familydatasite5 <- familydatasite5 %>% mutate(Depth = factor(familydatasite5$Depth, levels = vect_order5, ordered = T))
+
+
+familybarchartsite5 <- familydatasite5 %>%
+ggplot() +
+  geom_bar(
+    aes(
+      x = Depth,
+      y = Proportion.of.Reads,
+      fill = Order
+    ),
+    stat = "identity",
+    position = "fill"
+  ) +
+  labs(
+    x = "Sample Depth (meters)",
+    y = "Proportion of Consensus Reads",
+    title = "Number of Order Reads per Sample Depth at Site 5 (Swordfish Seamount)",
+    fill = "Order Name"
+  ) +
+  coord_flip() +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "vertical"
+  )  +
+  guides(
+    fill = guide_legend(
+      reverse = T
+    )
+  )
+
+familybarchartsite5
+```
+
+```{r}
+#family breakdown graph for sample site 6 (Anticyclonic Eddy)
+familydatasite6 <- read.csv("familybreakdownsamplesite6.csv")
+
+vect_order6 <- c("400",
+                "200"
+)
+
+familydatasite6 <- familydatasite6 %>% mutate(Depth = factor(familydatasite6$Depth, levels = vect_order6, ordered = T))
+
+
+familybarchartsite6 <- familydatasite6 %>%
+ggplot() +
+  geom_bar(
+    aes(
+      x = Depth,
+      y = Proportion.of.Reads,
+      fill = Family
+    ),
+    stat = "identity",
+    position = "fill"
+  ) +
+  labs(
+    x = "Sample Depth",
+    y = "Proportion of Consensus Reads",
+    title = "Number of Family Reads per Sample Depth at Site 6 (Anticyclonic Eddy)",
+    fill = "Family Name"
+  ) +
+  coord_flip() +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "vertical"
+  )  +
+  guides(
+    fill = guide_legend(
+      reverse = T
+    )
+  )
+
+familybarchartsite6
+```
+
+```{r}
+#family breakdown graph for 400m across samples 1-6
+depth400data <- read.csv("depth400datatotal.csv")
+
+vect_order400 <- c("Site 1, Hawai'i Nearshore",
+                "Site 2, Keiahoe/Hawai'i",
+                "Site 3, Cyclonic Eddy",
+                "Site 4, Eddy Convergence",
+                "Site 5, Swordfish Seamount",
+                "Site 6, Anticyclonic Eddy",
+                "Site 7, Edge of Cyclonic Eddy",
+                "Site 8, Cyclonic Eddy",
+                "Site 12, Subtropical Gyre",
+                "Site 16, OMZ Compression"
+)
+
+depth400data <- depth400data %>% mutate(Description = factor(depth400data$Description, levels = vect_order400, ordered = T))
+
+familybarchartsitedepth400 <- depth400data %>%
+ggplot() +
+  geom_bar(
+    aes(
+      x = Description,
+      y = Proportion.of.Reads,
+      fill = Order
+    ),
+    stat = "identity",
+    position = "fill"
+  ) +
+  labs(
+    x = "Site Description",
+    y = "Proportion of Consensus Reads",
+    title = "Number of Consensus Order Reads per Sample Site at Depth 400m",
+    fill = "Order Name"
+  ) +
+  coord_flip() +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "vertical"
+  )  +
+  guides(
+    fill = guide_legend(
+      reverse = T
+    )
+  )
+
+familybarchartsitedepth400
+```
+
+```{r}
+#order  breakdown graph for anticyclonic/cyclonic/convergence eddy
+eddydata <- read.csv("eddydata.csv")
+
+eddyvector <- c("Site 3, Cyclonic Eddy (400m)",
+                "Site 3, Cyclonic Eddy (200m)",
+                "Site 7, Edge of Cyclonic Eddy (400m)",
+                "Site 7, Edge of Cyclonic Eddy (200m)",
+                "Site 4, Eddy Convergence (400m)",
+                "Site 6, Anticyclonic Eddy (400m)",
+                "Site 6, Anticyclonic Eddy (200m)"
+)
+
+eddydata <- eddydata %>% mutate(Description = factor(eddydata$Description, levels = eddyvector, ordered = T))
+
+eddybarchart <- eddydata %>%
+ggplot() +
+  geom_bar(
+    aes(
+      x = Description,
+      y = Proportion.of.Reads,
+      fill = Order
+    ),
+    stat = "identity",
+    position = "fill"
+  ) +
+  labs(
+    x = "Site Description",
+    y = "Proportion of Consensus Reads",
+    title = "Number of Consensus Order Reads from Anticyclonic Eddy to Cyclonic Eddy",
+    fill = "Order Name"
+  ) +
+  coord_flip() +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "vertical"
+  )  +
+  guides(
+    fill = guide_legend(
+      reverse = T
+    )
+  )
+
+eddybarchart
+```
+
+```{r}
+#family breakdown graph for 200m across samples 1-6
+depth200data <- read.csv("depth200datatotal.csv")
+
+vect_order200 <- c("Site 1, Hawai'i Nearshore",
+                "Site 2, Keiahoe/Hawai'i",
+                "Site 3, Cyclonic Eddy",
+                "Site 5, Swordfish Seamount",
+                "Site 6, Anticyclonic Eddy",
+                "Site 7, Edge of Cyclonic Eddy",
+                "Site 13, Open Ocean"
+)
+
+depth200data <- depth200data %>% mutate(Description = factor(depth200data$Description, levels = vect_order200, ordered = T))
+
+familybarchartsitedepth200 <- depth200data %>%
+ggplot() +
+  geom_bar(
+    aes(
+      x = Description,
+      y = Proportion.of.Reads,
+      fill = Order
+    ),
+    stat = "identity",
+    position = "fill"
+  ) +
+  labs(
+    x = "Site Description",
+    y = "Proportion of Consensus Reads",
+    title = "Number of Consensus Order Reads per Sample Site at Depth 200m",
+    fill = "Order Name"
+  ) +
+  coord_flip() +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "vertical"
+  )  +
+  guides(
+    fill = guide_legend(
+      reverse = T
+    )
+  )
+
+familybarchartsitedepth200
+```
+
+```{r}
+dsltotaldata <- read.csv("dslandmastergraphingsheet.csv")
+
+vect_orderdsltotaldata <- c(
+                "Site 17, Divergence (350m)",
+                "Site 16, OMZ Compression (400m)",
+                "Site 13, Open Ocean (210m)",
+                "Site 12, Subtropical Gyre (400m)",
+                "Site 8, Cyclonic Eddy (400m)",
+                "Site 7, Edge of Cyclonic Eddy (200m)",
+                "Site 7, Edge of Cyclonic Eddy (400m)",
+                "Site 6, Anticyclonic Eddy (200m)",
+                "Site 6, Anticyclonic Eddy (400m)",
+                "Site 5, Swordfish Seamount (200m)",
+                "Site 5, Swordfish Seamount (400m)",
+                "Site 4, Eddy Convergence (400m)",
+                "Site 3, Cyclonic Eddy (200m)",
+                "Site 3, Cyclonic Eddy (400m)",
+                "Site 2, Keiahoe/Hawai'I (200m)",
+                "Site 2, Keiahoe/Hawai'I (400m)",
+                "Site 1, Hawai'i Nearshore (400m)",
+        "Site 1, Hawai'i Nearshore (200m)"
+)
+
+dsltotaldata <- dsltotaldata %>% mutate(DescriptionDepth = factor(dsltotaldata$DescriptionDepth, levels = vect_orderdsltotaldata, ordered = T))
+
+dsltotaldatachart <- dsltotaldata %>%
+ggplot() +
+  geom_bar(
+    aes(
+      x = DescriptionDepth,
+      y = Proportion.of.Reads,
+      fill = Class
+    ),
+    stat = "identity",
+    position = "fill"
+  ) +
+  labs(
+    x = "Site Description",
+    y = "Proportion of Consensus Reads",
+    title = "Distribution of Taxonomic Classes Across Sample Sites at the Deep Scattering Layer",
+    fill = "Class Name"
+  ) +
+  coord_flip() +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "vertical"
+  )  +
+  guides(
+    fill = guide_legend(
+      reverse = T
+    )
+  )
+
+dsltotaldatachart
+```
+
+```{r}
+#horizontal bar chart
+horizontalbarchartdata <- read.csv("horizontalbarchart1_data.csv")
+
+horizontalbarchartdepth <- horizontalbarchartdata %>%
+ggplot() +
+  geom_bar(
+    aes(
+      x = OMZDepth,
+      y = Proportion,
+      fill = Species
+    ),
+    stat = "identity",
+    position = "fill"
+  ) +
+  labs(
+    x = "OMZ Depth",
+    y = "Proportion of eDNA in Sample",
+    title = "Number of Species Reads per OMZ Depth",
+    fill = "Species Name"
+  ) +
+  coord_flip() +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "vertical"
+  )  +
+  guides(
+    fill = guide_legend(
+      reverse = T
+    )
+  )
+
+horizontalbarchartdepth
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

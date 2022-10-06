@@ -1,0 +1,130 @@
+---
+title: "Stanford@SEA Analysis"
+author: "Sydney Schmitter and Tanvi Dutta Gupta"
+date: "4/25/2022"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(censusapi)
+library(sf)
+library(tigris)
+library(mapview)
+library(readxl)
+library(leaflet)
+library(ggplot2)
+library(shiny)
+library(shinydashboard)
+```
+
+```{r}
+#sampling locations code
+#plug in longitude, latitude of sampling sites and it will map on leaflet along with the ship track
+eDNA <- read.csv("eDNA_data.csv")
+
+map <- leaflet() %>%
+    addProviderTiles(providers$Esri.OceanBasemap) %>%
+    addProviderTiles(providers$Hydda.RoadsAndLabels, group = 'Place Names') %>% addWMSTiles(
+    "https://gis.ngdc.noaa.gov/arcgis/services/graticule/MapServer/WMSServer/",
+    layers = c("1-degree grid", "5-degree grid"),
+    options = WMSTileOptions(format = "image/png8", transparent = TRUE),
+    attribution = NULL,group = 'Graticules') %>%
+    setView(lng = -162.0787, lat = 5.8885, zoom = 7) %>%
+    addLayersControl(overlayGroups = c('Place Names',
+                      'Sampling Sites',
+                      'Ship Track'),
+                      options = layersControlOptions(collapsed = FALSE),
+                      position = 'topright') %>%
+  addCircleMarkers(data = eDNA, ~Longitude, ~Latitude,
+                   weight = 0.5,
+                   col = 'black',
+                   fillColor = 'darkslategrey',
+                   radius = 4,
+                   fillOpacity = 0.9,
+                   stroke = T,
+                   label = ~paste0(as.character(Sitename,3),
+                                   as.character(round(Latitude,3)), ', ',
+                                   as.character(round(Longitude,3))),
+                   group = 'Sampling Sites') %>%
+  addPolylines(data = eDNA, ~Longitude, ~Latitude,
+               weight = 3,
+               color = 'red',
+               popup = 'SSV Robert C. Seamans Ship Track',
+               smoothFactor = 3,
+               group = 'Ship Track')
+
+map
+```
+
+```{r}
+#horizontal bar chart
+horizontalbarchartdata <- read.csv("horizontalbarchart1_data.csv")
+
+horizontalbarchart <- horizontalbarchartdata %>%
+ggplot() +
+  geom_bar(
+    aes(
+      x = Sitename,
+      y = Proportion,
+      fill = Species
+    ),
+    stat = "identity",
+    position = "fill"
+  ) +
+  labs(
+    x = "Site Name",
+    y = "Proportion of Species Reads per Sample",
+    title = "Number of Species Reads per Site",
+    fill = "Species Name"
+  ) +
+  coord_flip() +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "vertical"
+  )  +
+  guides(
+    fill = guide_legend(
+      reverse = T
+    )
+  )
+
+horizontalbarchart
+```
+
+```{r}
+#horizontal bar chart
+horizontalbarchartdata <- read.csv("horizontalbarchart1_data.csv")
+
+horizontalbarchartdepth <- horizontalbarchartdata %>%
+ggplot() +
+  geom_bar(
+    aes(
+      x = OMZDepth,
+      y = Proportion,
+      fill = Species
+    ),
+    stat = "identity",
+    position = "fill"
+  ) +
+  labs(
+    x = "DSL Depth",
+    y = "Proportion of eDNA in Sample",
+    title = "Proportion of Species Reads per Sample",
+    fill = "Species Name"
+  ) +
+  coord_flip() +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "vertical"
+  )  +
+  guides(
+    fill = guide_legend(
+      reverse = T
+    )
+  )
+
+horizontalbarchartdepth
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

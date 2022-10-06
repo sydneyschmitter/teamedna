@@ -14,7 +14,7 @@ library(vegan)
 # Read and crop metadata
 ```{r}
 all.metadata <- read.csv("metadata.csv")
-all.metadata2 <- all.metadata[1:38,]
+all.metadata2 <- all.metadata[11:38,]
 
 # Order is a count of the number of reads per order per sample
 order.taxa <- read.csv("corder_taxa.csv")
