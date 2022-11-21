@@ -18,7 +18,7 @@ library(vegan)
 library(ggplot2)
 
 correlation_metadata <- read.csv("metadata.csv")
-correlation_metadata <- correlation_metadata[1:38,]
+correlation_metadata <- correlation_metadata[11:38,]
 order.taxa <- read.csv("corder_taxa.csv")
 order.taxa[is.na(order.taxa)] <- 0  # Replace NaN & Inf with NA
 

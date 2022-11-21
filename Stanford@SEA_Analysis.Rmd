@@ -501,6 +501,7 @@ familybarchartsitedepth200
 
 ```{r}
 dsltotaldata <- read.csv("dslandmastergraphingsheet.csv")
+dsltotaldata <- dsltotaldata[104:1502,]
 
 vect_orderdsltotaldata <- c(
                 "Site 17, Divergence (350m)",
@@ -516,11 +517,7 @@ vect_orderdsltotaldata <- c(
                 "Site 5, Swordfish Seamount (400m)",
                 "Site 4, Eddy Convergence (400m)",
                 "Site 3, Cyclonic Eddy (200m)",
-                "Site 3, Cyclonic Eddy (400m)",
-                "Site 2, Keiahoe/Hawai'I (200m)",
-                "Site 2, Keiahoe/Hawai'I (400m)",
-                "Site 1, Hawai'i Nearshore (400m)",
-        "Site 1, Hawai'i Nearshore (200m)"
+                "Site 3, Cyclonic Eddy (400m)"
 )
 
 dsltotaldata <- dsltotaldata %>% mutate(DescriptionDepth = factor(dsltotaldata$DescriptionDepth, levels = vect_orderdsltotaldata, ordered = T))
