@@ -1,0 +1,360 @@
+---
+title: "dissimilarity.indices"
+output: html_document
+---
+
+```{r setup - load code and set working directories}
+knitr::opts_chunk$set(echo = TRUE)
+library(vegan)
+library(ggplot2)
+
+setwd("~/teamedna")
+
+# Read order counts
+order.taxa <- read.csv("corder_taxa.csv")
+order.taxa[is.na(order.taxa)] <- 0  # Replace NaN & Inf with NA
+order.taxa.trimmed <- order.taxa[11:38,]
+
+#Read metadata
+all.metadata <- read.csv("metadata.csv")
+
+# Group by time
+time.div.hours <- as.integer(all.metadata$Start.Time/100)
+time.div <- as.integer(time.div.hours/6)
+all.metadata$TimeGroup <- time.div
+
+
+# 11:38 removes the first 3 nearshore sites
+all.metadata2 <- all.metadata[11:38,]
+
+# this code effectively just categorizes swordfish seamount as a cyclonic eddy
+ocean.type <- c("Cyclonic Eddy",         "Cyclonic Eddy",         "Cyclonic Eddy",         "Cyclonic Eddy",        
+"Eddy convergence",      "Eddy convergence",      "Anticyclonic eddy",    "Anticyclonic eddy",   
+"Anticyclonic eddy",    "Anticyclonic eddy",    "Anticyclonic eddy",     "Anticyclonic eddy",    
+"Anticyclonic eddy",     "Anticyclonic eddy",     "Edge of Cyclonic Eddy", "Edge of Cyclonic Eddy",
+"Edge of Cyclonic Eddy", "Edge of Cyclonic Eddy", "Cyclonic Eddy",         "Cyclonic Eddy",        
+"Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean",                                                 
+"Open Ocean", "Open Ocean",       "Open Ocean", "Open Ocean") 
+all.metadata2$OceanType <- ocean.type # note this merges all the open ocean samples under one factor
+
+
+```
+
+```{r anova dissimilarity}
+
+# Trying anova dissimilarity index
+station.ano.dissim <- anosim(order.taxa.trimmed, grouping = all.metadata2$STATION.NUMBER) # Insignificant difference
+depth.ano.dissim <- anosim(order.taxa.trimmed, grouping = all.metadata2$DEPTH) # Insignificant difference
+time.ano.dissim <- anosim(order.taxa.trimmed, grouping = all.metadata2$TimeGroup) # Significant difference - but not super explanatory
+ocean.ano.dissim <- anosim(order.taxa.trimmed, grouping = all.metadata2$OceanType) # Significant difference - not super explanatory
+lat.ano.dissim <- anosim(order.taxa.trimmed, grouping = all.metadata2$LatDeg) # Insignificant difference
+```
+
+```{r}
+# Trying mrpp dissimilarity index
+station.mrpp.dissim <- mrpp(order.taxa.trimmed, grouping = all.metadata2$STATION.NUMBER, distance = "bray") # Significant
+station.mrpp.dissim
+depth.mrpp.dissim <- mrpp(order.taxa.trimmed, grouping = all.metadata2$DEPTH, distance = "bray") # Significant
+depth.mrpp.dissim
+time.mrpp.dissim <- mrpp(order.taxa.trimmed, grouping = all.metadata2$TimeGroup, distance = "bray") # Significant 
+time.mrpp.dissim
+ocean.mrpp.dissim <- mrpp(order.taxa.trimmed, grouping = all.metadata2$OceanType, distance = "bray") # Insignificant
+ocean.mrpp.dissim
+lat.mrpp.dissim <- mrpp(order.taxa.trimmed, grouping = all.metadata2$LatDeg, distance = "bray") # Significant
+lat.mrpp.dissim
+
+# Trying mrpp dissimilarity index with Jaccard 
+# (see https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/edn3.239 for suggestion)
+station.mrpp.dissim <- mrpp(order.taxa.trimmed, grouping = all.metadata2$STATION.NUMBER, distance = "jaccard") # Significant
+station.mrpp.dissim
+depth.mrpp.dissim <- mrpp(order.taxa.trimmed, grouping = all.metadata2$DEPTH, distance = "jaccard") # Significant
+depth.mrpp.dissim
+time.mrpp.dissim <- mrpp(order.taxa.trimmed, grouping = all.metadata2$TimeGroup, distance = "jaccard") # Insignificant 
+time.mrpp.dissim
+ocean.mrpp.dissim <- mrpp(order.taxa.trimmed, grouping = all.metadata2$OceanType, distance = "jaccard") # Insignificant
+ocean.mrpp.dissim
+lat.mrpp.dissim <- mrpp(order.taxa.trimmed, grouping = all.metadata2$LatDeg, distance = "jaccard") # Significant
+lat.mrpp.dissim
+
+# Tried for DNA again
+dna.mrpp.dissim <- mrpp(order.taxa.trimmed, grouping = all.metadata2$DNA.extracted., distance = "bray") # Insignificant
+dna.mrpp.dissim
+```
+
+```{r adonis dissimilarity}
+# Trying adonis dissimilarity index, these seems more common for edna
+station.adonis.dissim <- adonis2(order.taxa.trimmed ~ STATION.NUMBER, all.metadata2) # Residual explains more than station num
+depth.adonis.dissim <- adonis2(order.taxa.trimmed ~ DEPTH, all.metadata2) # Depth was not stronger than residual
+time.adonis.dissim <- adonis2(order.taxa.trimmed ~ TimeGroup, all.metadata2) # Time group has poor (but mildly significant) explanatory power
+ocean.adonis.dissim <- adonis2(order.taxa.trimmed ~ OceanType, all.metadata2) # Insignificant explanatory poer
+ocean.adonis.dissim
+lat.adonis.dissim <- adonis2(order.taxa.trimmed ~ LatDeg, all.metadata2) # Insignificant explanatory poer
+lat.adonis.dissim
+
+# Trying adonis dissimilarity index with formula interactions
+
+depth.time.adonis.dissim <- adonis2(order.taxa.trimmed ~ DEPTH + TimeGroup, all.metadata2) # both are significant but ocean type explains more, large residual though
+depth.time.adonis.dissim
+
+ocean.station.adonis.dissim <- adonis2(order.taxa.trimmed ~ OceanType + STATION.NUMBER, all.metadata2) # Depth has strongly explanatory power than time
+ocean.station.adonis.dissim
+
+depth.mult.time.adonis.dissim <- adonis2(order.taxa.trimmed ~ DEPTH * TimeGroup, all.metadata2) # Depth has strongly explanatory power than time or interaction with time
+depth.mult.time.adonis.dissim
+
+all.adonis.dissim <- adonis2(order.taxa.trimmed ~ DEPTH + LatDeg + OceanType, all.metadata2) # depth is most significant, ocean type is weakly significant, time instead of depth holds too
+all.adonis.dissim
+
+time.adonis.dissim <- adonis2(order.taxa.trimmed ~ TimeGroup, all.metadata2) # Time group has poor (but mildly significant) explanatory power
+ocean.adonis.dissim <- adonis2(order.taxa.trimmed ~ OceanType, all.metadata2) # Insignificant explanatory poer
+lat.adonis.dissim <- adonis2(order.taxa.trimmed ~ LatDeg, all.metadata2) # Insignificant explanatory poer
+lat.adonis.dissim
+
+station.adonis.dissim <- adonis(order.taxa.trimmed ~ STATION.NUMBER, all.metadata2) # Residual explains more than station num
+station.adonis.dissim
+depth.adonis.dissim <- adonis(order.taxa.trimmed ~ DEPTH, all.metadata2) # Depth has stronger explanatory power than residual
+depth.adonis.dissim
+time.adonis.dissim <- adonis(order.taxa.trimmed ~ TimeGroup, all.metadata2) # Time group has poor (but mildly significant) explanatory power
+time.adonis.dissim
+ocean.adonis.dissim <- adonis(order.taxa.trimmed ~ OceanType, all.metadata2) # Insignificant explanatory poer
+lat.adonis.dissim <- adonis(order.taxa.trimmed ~ LatDeg, all.metadata2) # Insignificant explanatory poer
+lat.adonis.dissim
+```
+
+```{r anova for data verification}
+# Checking our data to see if we did it right lmao
+lib.ano.dissim <- anosim(order.taxa.trimmed, grouping = all.metadata2$Library.No) # Insignificant difference
+pcr.ano.dissim <- anosim(order.taxa.trimmed, grouping = all.metadata2$PCR.No.) # Insignificant difference
+dna.ano.dissim <- anosim(order.taxa.trimmed, grouping = all.metadata2$DNA.extracted.) # Significant difference
+niskin.ano.dissim <- anosim(order.taxa.trimmed, grouping = all.metadata2$Niskin.Bottle) # Significant difference
+
+
+sampling.adonis.dissim <- adonis2(order.taxa.trimmed ~ DNA.extracted. + Library.No + PCR.No., all.metadata2) # none of these are super significant (library number mildly significant)
+sampling.adonis.dissim
+
+```
+
+```{r}
+
+# Trying all of this with a distance matrix instead of community matrix - same trends seem to hold
+
+dist.order <- vegdist(order.taxa.trimmed, method = "jaccard")
+```
+
+
+```{r anova dissimilarity}
+
+# Trying anova dissimilarity index
+station.ano.dissim <- anosim(dist.order, grouping = all.metadata2$STATION.NUMBER) # Insignificant difference
+depth.ano.dissim <- anosim(dist.order, grouping = all.metadata2$DEPTH) # Insignificant difference
+time.ano.dissim <- anosim(dist.order, grouping = all.metadata2$TimeGroup) # Significant difference - but not super explanatory
+ocean.ano.dissim <- anosim(dist.order, grouping = all.metadata2$OceanType) # Significant difference - not super explanatory
+lat.ano.dissim <- anosim(dist.order, grouping = all.metadata2$LatDeg) # Insignificant difference
+```
+
+```{r}
+# Trying mrpp dissimilarity index
+station.mrpp.dissim <- mrpp(dist.order, grouping = all.metadata2$STATION.NUMBER, distance = "bray") # Significant
+station.mrpp.dissim
+depth.mrpp.dissim <- mrpp(dist.order, grouping = all.metadata2$DEPTH, distance = "bray") # Significant
+depth.mrpp.dissim
+time.mrpp.dissim <- mrpp(dist.order, grouping = all.metadata2$TimeGroup, distance = "bray") # Significant 
+time.mrpp.dissim
+ocean.mrpp.dissim <- mrpp(dist.order, grouping = all.metadata2$OceanType, distance = "bray") # Insignificant
+ocean.mrpp.dissim
+lat.mrpp.dissim <- mrpp(dist.order, grouping = all.metadata2$LatDeg, distance = "bray") # Significant
+lat.mrpp.dissim
+
+# Trying mrpp dissimilarity index with Jaccard 
+# (see https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/edn3.239 for suggestion)
+station.mrpp.dissim <- mrpp(dist.order, grouping = all.metadata2$STATION.NUMBER, distance = "jaccard") # Significant
+station.mrpp.dissim
+depth.mrpp.dissim <- mrpp(dist.order, grouping = all.metadata2$DEPTH, distance = "jaccard") # Significant
+depth.mrpp.dissim
+time.mrpp.dissim <- mrpp(dist.order, grouping = all.metadata2$TimeGroup, distance = "jaccard") # Insignificant 
+time.mrpp.dissim
+ocean.mrpp.dissim <- mrpp(dist.order, grouping = all.metadata2$OceanType, distance = "jaccard") # Insignificant
+ocean.mrpp.dissim
+lat.mrpp.dissim <- mrpp(dist.order, grouping = all.metadata2$LatDeg, distance = "jaccard") # Significant
+lat.mrpp.dissim
+
+# Tried for DNA again
+dna.mrpp.dissim <- mrpp(dist.order, grouping = all.metadata2$DNA.extracted., distance = "bray") # Insignificant
+dna.mrpp.dissim
+```
+
+```{r adonis dissimilarity}
+# Trying adonis dissimilarity index
+station.adonis.dissim <- adonis2(dist.order ~ STATION.NUMBER, all.metadata2) # Residual explains more than station num
+depth.adonis.dissim <- adonis2(dist.order ~ DEPTH, all.metadata2) # Depth has strongly explanatory power than residual
+time.adonis.dissim <- adonis2(dist.order ~ TimeGroup, all.metadata2) # Time group has poor (but mildly significant) explanatory power
+ocean.adonis.dissim <- adonis2(dist.order ~ OceanType, all.metadata2) # Insignificant explanatory poer
+lat.adonis.dissim <- adonis2(dist.order ~ LatDeg, all.metadata2) # Insignificant explanatory poer
+lat.adonis.dissim
+
+# Trying adonis dissimilarity index with formula interactions
+
+depth.time.adonis.dissim <- adonis2(dist.order ~ DEPTH + TimeGroup, all.metadata2) # both are significant but ocean type explains more, large residual though
+depth.time.adonis.dissim
+
+ocean.station.adonis.dissim <- adonis2(dist.order ~ OceanType + STATION.NUMBER, all.metadata2) # Depth has strongly explanatory power than time
+ocean.station.adonis.dissim
+
+depth.mult.time.adonis.dissim <- adonis2(dist.order ~ DEPTH * TimeGroup, all.metadata2) # Depth has strongly explanatory power than time or interaction with time
+depth.mult.time.adonis.dissim
+
+all.adonis.dissim <- adonis2(dist.order ~ DEPTH + LatDeg + OceanType, all.metadata2) # depth is most significant, ocean type is weakly significant, time instead of depth holds too
+all.adonis.dissim
+
+time.adonis.dissim <- adonis2(dist.order ~ TimeGroup, all.metadata2) # Time group has poor (but mildly significant) explanatory power
+time.adonis.dissim
+ocean.adonis.dissim <- adonis2(dist.order ~ OceanType, all.metadata2) # Insignificant explanatory poer
+ocean.adonis.dissim
+lat.adonis.dissim <- adonis2(dist.order ~ LatDeg, all.metadata2) # Insignificant explanatory poer
+lat.adonis.dissim
+
+station.adonis.dissim <- adonis(dist.order ~ STATION.NUMBER, all.metadata2) # Residual explains more than station num
+station.adonis.dissim
+depth.adonis.dissim <- adonis(dist.order ~ DEPTH, all.metadata2) # Depth has stronger explanatory power than residual
+depth.adonis.dissim
+time.adonis.dissim <- adonis(dist.order ~ TimeGroup, all.metadata2) # Time group has poor (but mildly significant) explanatory power
+time.adonis.dissim
+ocean.adonis.dissim <- adonis(dist.order ~ OceanType, all.metadata2) # Insignificant explanatory poer
+lat.adonis.dissim <- adonis(dist.order ~ LatDeg, all.metadata2) # Insignificant explanatory poer
+lat.adonis.dissim
+```
+
+```{r}
+
+
+# this code effectively just categorizes swordfish seamount as a cyclonic eddy
+simp.ocean.type <- c("Cyclonic Eddy",         "Cyclonic Eddy",         "Cyclonic Eddy",         "Cyclonic Eddy",        
+"Eddy convergence",      "Eddy convergence",      "Anticyclonic Eddy",    "Anticyclonic Eddy",   
+"Anticyclonic Eddy",    "Anticyclonic Eddy",    "Anticyclonic Eddy",     "Anticyclonic Eddy",    
+"Anticyclonic Eddy",     "Anticyclonic Eddy",     "Cyclonic Eddy", "Cyclonic Eddy",
+"Cyclonic Eddy", "Cyclonic Eddy", "Cyclonic Eddy",         "Cyclonic Eddy",        
+"Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean",                                                 
+"Open Ocean", "Open Ocean",       "Open Ocean", "Open Ocean") 
+all.metadata2$SimpOceanType <- simp.ocean.type
+
+```
+
+```{r adonis continued}
+
+## The person who invented this packaage agrees that beta dispersion is the best way of visualizing the results of adonis
+
+# use depth as factor in dispersion
+depths <- as.factor(all.metadata2$DEPTH)
+betadisper.mod.depth <- betadisper(dist.order, depths)
+betadisper.mod.depth
+boxplot(betadisper.mod.depth)
+title("Community Differences at Depth")
+
+oceantype <- as.factor(all.metadata2$SimpOceanType)
+betadisper.mod.ocean <- betadisper(dist.order, oceantype)
+betadisper.mod.ocean
+boxplot(betadisper.mod.ocean)
+title("Community Differences for Ocean Features")
+
+time <- as.factor(all.metadata2$TimeGroup)
+betadisper.mod.time <- betadisper(dist.order, time)
+betadisper.mod.time
+boxplot(betadisper.mod.time)
+title("Community Differences for Times of Day")
+
+lat <- as.factor(all.metadata2$LatDeg)
+betadisper.mod.lat <- betadisper(dist.order, lat)
+betadisper.mod.lat
+boxplot(betadisper.mod.lat)
+title("Community Differences at Latitude")
+
+
+```
+
+```{r permutest}
+
+set.seed(25)
+permutest(betadisper.mod.depth)
+plot(betadisper.mod.depth)
+
+permutest(betadisper.mod.ocean)
+plot(betadisper.mod.ocean)
+
+permutest(betadisper.mod.time)
+plot(betadisper.mod.time)
+
+permutest(betadisper.mod.lat)
+plot(betadisper.mod.lat)
+```
+
+
+
+```{r anova for data verification}
+# Checking our data to see if we did it right lmao
+lib.ano.dissim <- anosim(dist.order, grouping = all.metadata2$Library.No) # Insignificant difference
+pcr.ano.dissim <- anosim(dist.order, grouping = all.metadata2$PCR.No.) # Insignificant difference
+dna.ano.dissim <- anosim(dist.order, grouping = all.metadata2$DNA.extracted.) # Significant difference
+niskin.ano.dissim <- anosim(dist.order, grouping = all.metadata2$Niskin.Bottle) # Significant difference
+
+
+sampling.adonis.dissim <- adonis2(dist.order ~ DNA.extracted. + Library.No + PCR.No., all.metadata2) # none of these are super significant (library number mildly significant)
+sampling.adonis.dissim
+
+```
+
+```{r}
+# Permutations for cca
+
+cca(order.taxa.trimmed ~ Depth, explanatory.vars)
+
+explanatory.vars <- data.frame("Depth" = all.metadata2$DEPTH, "Station" = all.metadata2$STATION.NUMBER, "TimeGroup" = all.metadata2$TimeGroup, "Latitude" = all.metadata2$LatDeg, "OceanType" = all.metadata2$OceanType)
+
+simple.env <- data.frame("Depth" = explanatory.vars$Depth, "OceanType" = explanatory.vars$OceanType, "Latitude" = explanatory.vars$Latitude)
+
+ocean.chem <- data.frame("Salinity" = all.metadata2$Sal..psu., "Temperature" = all.metadata2$Temp..oC..1, "Chlorophyll" = all.metadata2$Fluoro..chl.a., "ADCP" = all.metadata2$Echo.Amplitude,  "Oxygen" = all.metadata2$O2.Seapoint..mL.L.)
+
+cca.chem <- cca(order.taxa.trimmed ~ Salinity + Temperature + Chlorophyll + ADCP + Oxygen, ocean.chem)
+stepAIC(cca(order.taxa.trimmed ~ Salinity + Temperature + Chlorophyll + ADCP + Oxygen, ocean.chem), reformulate(names(ocean.chem)))
+vif.cca(cca.chem) # very strong collinearity in constraints
+
+
+cca.env <- cca(order.taxa.trimmed ~ Depth + OceanType + Latitude, simple.env)
+cca.more.env <- cca(order.taxa.trimmed ~ Depth + TimeGroup + OceanType + Latitude, explanatory.vars)
+
+
+anova(cca.env)
+anova(cca.more.env)
+
+set.seed(1)
+anova(cca.more.env, by = "axis")
+
+m1 <- cca(dist.order ~ ., data = explanatory.vars)
+set.seed(67)
+lwr <- cca(dist.order ~ 1, data = explanatory.vars)
+( m2 <- ordistep(lwr, scope = formula(m1), trace = FALSE) )
+m2$anova
+
+anova(cca.chem)
+
+vif.cca(cca.env)
+upr <- cca(order.taxa.trimmed ~ ., data = simple.env)
+lwr <- cca(order.taxa.trimmed ~ 1, data = simple.env)
+set.seed(1)
+mods <- ordistep(lwr, scope = formula(upr), trace = 0)
+ordiR2step(lwr, upr, trace = FALSE)
+mods2 <- step(upr, scope = list(lower = formula(lwr), upper = formula(upr)), trace = 0,
+              test = "perm")
+mods2
+mods2$anova
+
+step(cca(order.taxa.trimmed ~ ., explanatory.vars), reformulate(names(explanatory.vars)))
+
+stepAIC(cca(order.taxa.trimmed ~ 1, ocean.chem), scope = c("upper", "lower"), reformulate(names(ocean.chem)))
+
+
+ordistep(adonis2(order.taxa.trimmed ~ 1, explanatory.vars), reformulate(names(explanatory.vars)))
+
+```
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
