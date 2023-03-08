@@ -13,7 +13,7 @@ library(vegan)
 # Set up libraries and directory
 ```{r}
 getwd()
-setwd("~/")
+setwd("~/teamedna")
 library(sjPlot)
 library(ggeffects)
 library(scales)
@@ -26,6 +26,8 @@ library(vegan)
 ```{r}
 all.metadata <- read.csv("metadata.csv")
 all.metadata2 <- all.metadata[1:38,]
+new.time <- as.integer(all.metadata2$Start.Time/6)
+all.metadata2$TimeGroup <- new.time
 # Order is a count of the number of reads per order per sample
 order.taxa <- read.csv("corder_taxa.csv")
 order.taxa[is.na(order.taxa)] <- 0  
