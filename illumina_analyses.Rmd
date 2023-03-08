@@ -1,0 +1,106 @@
+---
+title: "illumina_analyses"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(vegan)
+library(dplyr)
+library(tidyr)
+library(tidyverse)
+library(ggplot2)
+```
+
+
+```{r load data}
+
+setwd("~/SSeDNA")
+
+illumina <- read.delim("illumina_data.txt", row.names = NULL)
+
+illumina.nocon <- subset(illumina, select = -c(X12S_Sample.EB.combined, X12S_Sample.FB.combined))
+
+all.controls <- illumina$X12S_Sample.EB.combined + illumina$X12S_Sample.FB.combined
+
+all.controls.bin <- all.controls
+all.controls.bin[all.controls.bin > 0] <- 1
+
+controls.df <- data.frame("taxon" = illumina$sum.taxonomy, "controls" = all.controls.bin)
+controls.inds <- which(controls.df$controls > 0)
+con.rownames <- controls.df[controls.inds, "taxon"]
+con.rownames <- na.omit(c(con.rownames))
+
+illumina.nocon.trim <- illumina.nocon[-con.rownames,]
+
+# NOTE: FIGURE OUT HOW TO HANDLE REPLICATES
+```
+
+```{r organize by order, class, family}
+taxons <- illumina.nocon.trim$sum.taxonomy
+split.taxons <- str_split(taxons, ";") # splits the taxonomic assignment into kingdom level
+
+find.level <- function(order, vector) { # extracts the kingdom organization from the longer vector by indicating the number within each split you want to look at
+  return.vec <- c(1:length(vector))
+  for (i in 1:length(vector)) {
+    curr.elem <- vector[[i]]
+    to.add <- curr.elem[order]
+    return.vec[i] <- to.add
+  }
+  return(return.vec)
+}
+
+# extracts the order, classes, etc.
+all.order <- find.level(3, split.taxons)
+all.class <- find.level(4, split.taxons)
+all.family <- find.level(5, split.taxons)
+all.genus <- find.level(6, split.taxons)
+all.species <- find.level(7, split.taxons)
+
+
+# we don't need the overall taxonomy anymore
+illumina.nocon.trim <- subset(illumina.nocon.trim, select = -c(sum.taxonomy))
+illumina.nocon.trim <- remove_rownames(illumina.nocon.trim)
+
+# creates new columns with the organization
+illumina.nocon.trim$Order <- all.order
+illumina.nocon.trim$Class <- all.class
+illumina.nocon.trim$Family <- all.family
+illumina.nocon.trim$Genus <- all.genus
+illumina.nocon.trim$Species <- all.species
+
+# Separate dataframe with metadata
+taxon.organization <- data.frame("Order" = all.order, "Class" = all.class, "Family" = all.family, "Genus" = all.genus, "Species" = all.species)
+```
+
+
+```{r this plots a stacked bar chart of the data}
+illumina.nocon.trim.gather <- gather(illumina.nocon.trim, key = "site", value = "reads", -c(Order, Class, Family, Genus)) # gathers the data into a format for stacked bar chart plotting
+
+ggplot(illumina.nocon.trim.gather, aes(x = site, y = reads, fill = Class)) + geom_bar(position = "stack", stat = "identity") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+
+```{r}
+
+# Trying to figure out how to match this data up with the metadata but not succeeding thus far
+
+illumina.just.reads <- subset(illumina.nocon.trim, select = -c(Order, Class, Family, Genus, Species))
+
+illumina.percentages <- illumina.just.reads/colSums(illumina.just.reads)
+
+div <- diversity(t(illumina.percentages), index = "shannon")
+
+illumina.names <- colnames(illumina.percentages)
+
+split.names <- str_split(illumina.names, ".StatNo.")
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
