@@ -15,7 +15,7 @@ library(ggplot2)
 
 ```{r load data}
 
-setwd("~/SSeDNA")
+setwd("~/teamedna")
 
 illumina <- read.delim("illumina_data.txt", row.names = NULL)
 
@@ -71,11 +71,35 @@ illumina.nocon.trim$Species <- all.species
 
 # Separate dataframe with metadata
 taxon.organization <- data.frame("Order" = all.order, "Class" = all.class, "Family" = all.family, "Genus" = all.genus, "Species" = all.species)
+
+# Overall species accumulition curve for all data
+plot(specaccum(illumina.just.reads))
+
+# Setting up data to index by ocean type
+illumina.just.reads.loc <- data.frame(t(illumina.just.reads))
+
+illumina.just.reads.loc
+columns <- colnames(illumina.just.reads.loc)
+illumina.just.reads.loc$Ocean <- ocean.type.ill2
+
+# Doing a species accumulation curve for each ocean type
+
+temp.df
+for (ocean in unique(ocean.type.ill2)) {
+  temp.df <- illumina.just.reads.loc[which(illumina.just.reads.loc$Ocean == ocean),]
+  temp.df.trimmed <- subset(temp.df, select = -c(Ocean))
+  plot(specaccum(temp.df.trimmed))
+  title(ocean)
+}
+
+# Nestedness analysis
+(oecosimu(illumina.just.reads, nestedchecker, "r0"))
+
 ```
 
 
 ```{r this plots a stacked bar chart of the data}
-illumina.nocon.trim.gather <- gather(illumina.nocon.trim, key = "site", value = "reads", -c(Order, Class, Family, Genus)) # gathers the data into a format for stacked bar chart plotting
+illumina.nocon.trim.gather <- gather(illumina.nocon.trim, key = "site", value = "reads", -c(Order, Class, Family, Genus, Species)) # gathers the data into a format for stacked bar chart plotting
 
 ggplot(illumina.nocon.trim.gather, aes(x = site, y = reads, fill = Class)) + geom_bar(position = "stack", stat = "identity") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 ```
@@ -93,14 +117,141 @@ div <- diversity(t(illumina.percentages), index = "shannon")
 illumina.names <- colnames(illumina.percentages)
 
 split.names <- str_split(illumina.names, ".StatNo.")
+
+sample.id <- c(1:length(split.names))
+station.num <- c(1:length(split.names))
+sample.num <- c(1:length(split.names))
+
+i <- 1
+for (i in 1:length(split.names)) {
+  curr.name <- split.names[[i]]
+  station.num <- curr.name[2]
+  curr.id <- curr.name[1] 
+  curr.trim.id <- substring(curr.id, str_length(curr.id) - 1, str_length(curr.id))
+  if (substring(curr.trim.id, 1, 1) != ".") {
+      curr.trim.id <- substring(curr.id, str_length(curr.id) - 2, str_length(curr.id))
+  }
+  curr.sample.id <- paste0(station.num, curr.trim.id)
+  sample.id[i] <- curr.sample.id
+}
+
+colnames(illumina.percentages) <- as.factor(sample.id)
+
+
+illumina.metadata <- all.metadata2[which(all.metadata2$SAMPLE %in% as.factor(sample.id)),] # Trims metadata just for metadata we have information for an illumina samples
+
+t.ill.perc <- t(illumina.percentages)
+
+# We need to order this by the rownames
+illumina.metadata
+
+div.ill <- diversity(t.ill.perc, "shannon")
+
+t.ill.perc$SAMPLE <- row.names(t.ill.perc)
+
+rownames(illumina.metadata) <- illumina.metadata$SAMPLE
+
+try <- merge(illumina.metadata, div.ill, by = 'row.names', all = TRUE)
+
+ggplot(data = try, aes(x = y, y = OceanType, fill = OceanType)) + geom_boxplot()
+
+try
+
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
+```{r}
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+library(ggfortify)
+library(ecodist)
+
+
+illumina.meta.inds <- which(sample.id %in% all.metadata2$SAMPLE)
+
+illumina.perc.trimmed <- illumina.percentages[illumina.meta.inds,]
+
+try <- merge(illumina.metadata, div.ill, by = 'row.names')
+
+
+ano.dissim <- anosim(t(illumina.perc.trimmed), grouping = na.omit(try$OceanType))
+
+metadata.inds <- which(all.metadata2$SAMPLE %in% sample.id)
+
+metadata.ill.trim <- all.metadata2[metadata.inds,]
+
+pca <- prcomp((illumina.perc.trimmed), center = TRUE)
+
+illumina.perc.trimmed
+
+pca.plot <- autoplot(pca, data = metadata.ill.trim, colour = 'OceanType')
+pca.plot
+
+illumina.perc.t <- na.omit(t(illumina.perc.trimmed))
+illumina.perc.t <- illumina.perc.t[which(rowSums(illumina.perc.t) != 0),]
+
+illumina.perc.t %>%
+  metaMDS(trace = F) %>%
+  ordiplot(type = "none") %>%
+  text("sites")
+
+
+NMDS3 <- metaMDS(t(illumina.percentages), k = 2, trymax = 100, trace = F, autotransform = FALSE, distance="bray")
+
+plot(NMDS3, "sites")
+orditorp(NMDS3, "sites")
+
+
+vegdistance <- vegdist(illumina.perc.trimmed, method = 'bray')
+
+pcoaVS <- pco(vegdistance, negvals = "zero", dround = 0)
+
+NMDS3 <- metaMDS(t(illumina.percentages), distance = "bray")
+
+
+plot(NMDS3)
+orditorp(NMDS3, "sites")
+
+ocean.type.ill <- c("Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "Cyclonic Eddy", "Cyclonic Eddy", "Cyclonic Eddy", "Cyclonic Eddy", "Eddy Convergence", "Eddy Convergence", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Edge of Cyclonic Eddy", "Edge of Cyclonic Eddy", "Edge of Cyclonic Eddy", "Edge of Cyclonic Eddy", "Cyclonic Eddy", "Cyclonic Eddy")
+
+length(ocean.type.ill)
+
+rownames(t(illumina.percentages))
+
+all.metadata2$OceanType
+all.metadata2$SAMPLE
+
+ocean.type.ill <- c("Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "Cyclonic Eddy", "Cyclonic Eddy", "Cyclonic Eddy", "Cyclonic Eddy", "Eddy Convergence", "Eddy Convergence", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Edge of Cyclonic Eddy", "Edge of Cyclonic Eddy", "Edge of Cyclonic Eddy", "Edge of Cyclonic Eddy", "Cyclonic Eddy", "Cyclonic Eddy")
+  
+ocean.type.ill2 <- c("Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "NA", "NA", "NA", "NA", "NA", "NA", "Swordfish Seamount", "Swordfish Seamount", "Swordfish Seamount", "Swordfish Seamount", "Cyclonic Eddy", "Cyclonic Eddy", "Cyclonic Eddy", "Cyclonic Eddy", "Eddy Convergence", "Eddy Convergence", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Swordfish Seamount", "Swordfish Seamount", "Swordfish Seamount", "Swordfish Seamount", "Cyclonic Eddy", "Cyclonic Eddy")
+
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+length(rownames(illumina.perc.t))
+
+data.scores <- as.data.frame(scores(NMDS3))  #Using the scores function from vegan to extract the site scores and convert to a data.frame
+
+
+data.scores$site <- rownames(data.scores)  # create a column of site names, from the rownames of data.scores
+data.scores$OceanType <- ocean.type.ill  #  add the grp variable created earlier
+
+species.scores <- as.data.frame(scores(NMDS3, "species"))  #Using the scores function from vegan to extract the species scores and convert to a data.frame
+species.scores$species <- rownames(species.scores)  # create a column of species, from the rownames of species.scores
+
+
+ggplot() + 
+  geom_point(data=data.scores,aes(x=NMDS1,y=NMDS2,shape = OceanType, colour=OceanType),size=4) +
+  coord_equal() +
+  theme_bw() + 
+  theme(axis.text.x = element_blank(),  # remove x-axis text
+        axis.text.y = element_blank(), # remove y-axis text
+        axis.ticks = element_blank(),  # remove axis ticks
+        axis.title.x = element_text(size=18), # remove x-axis labels
+        axis.title.y = element_text(size=18), # remove y-axis labels
+        panel.background = element_blank(), 
+        panel.grid.major = element_blank(),  #remove major-grid labels
+        panel.grid.minor = element_blank(),  #remove minor-grid labels
+        plot.background = element_blank())
+```
+
