@@ -1,0 +1,832 @@
+---
+title: "dissimilarity.indices"
+output: html_document
+---
+
+```{r setup - load code and set working directories}
+knitr::opts_chunk$set(echo = TRUE)
+library(vegan)
+library(ggplot2)
+library(MASS)
+library(vegan)
+library(dplyr)
+library(tidyr)
+library(tidyverse)
+library(ggplot2)
+
+setwd("~/teamedna")
+```
+
+
+```{r}
+
+
+illumina <- read.delim("illumina_data.txt", row.names = NULL, stringsAsFactors = FALSE)
+
+all.metadata <- read.csv("final_hydrowork.csv")
+all.metadata
+
+colnames(illumina.nocon)
+
+illumina.nocon <- subset(illumina, select = -c(X12S_Sample.EB.combined, X12S_Sample.FB.combined,X12S_Sample3.4.StatNo.3, X12S_Sample27.11.StatNo.41))
+
+
+
+all.controls <- illumina$X12S_Sample.EB.combined + illumina$X12S_Sample.FB.combined
+
+all.controls.bin <- all.controls
+all.controls.bin[all.controls.bin > 0] <- 1
+
+controls.df <- data.frame("taxon" = illumina$sum.taxonomy, "controls" = all.controls.bin)
+controls.inds <- which(controls.df$controls > 0)
+con.rownames <- controls.df[controls.inds, "taxon"]
+con.rownames <- na.omit(c(con.rownames))
+
+illumina.nocon <- illumina.nocon[-con.rownames,]
+illumina.nocon <- illumina.nocon[1:474,]
+
+
+taxonomy <- illumina.nocon$sum.taxonomy
+
+
+rownames(illumina.nocon) <- illumina.nocon$sum.taxonomy
+illumina.nocon <- illumina.nocon[,2:length(colnames(illumina.nocon))]
+illumina.nocon
+
+colSums(illumina.nocon)
+rowSums(data.frame(t(illumina.nocon)))
+colnames(illumina.nocon)
+
+illumina.nocon
+
+sample.id2 <- c("12.2", "12.3", "16.2", "16.3", "17.1", "17.2", "17.3", "17.4", "18.2", "18.3", "19.1", "19.2", "28.1", "28.11", "28.2", "45.11", "45.12", "41.11", "3.1", "3.2", "3.3", "3.4", "4.1", "4.2", "4.1", "5.2", "5.3", "5.4", "6.2", "6.3", "6.4", "6.5", "7.2", "7.3", "7.4", "7.5", "8.1", "8.2")
+
+sample.id2
+sample.id
+
+# NOTE: FIGURE OUT HOW TO HANDLE REPLICATES
+```
+
+```{r loads minion data}
+
+# Read order counts
+order.taxa <- read.csv("corder_taxa.csv")
+order.taxa[is.na(order.taxa)] <- 0  # Replace NaN & Inf with NA
+order.taxa.trimmed <- order.taxa[11:38,]
+
+order.taxa <- order.taxa/rowSums(order.taxa)
+
+percentage.untrimmed <- order.taxa/rowSums(order.taxa)
+
+#Read metadata
+metadata.minion <- read.csv("metadata.csv")
+metadata.minion <- metadata.minion[1:38,]
+rownames(order.taxa) <- metadata.minion$SAMPLE
+
+# this code effectively just categorizes swordfish seamount as an anticyclonic eddy
+ocean.type <- c("Near shore", "Near shore", "Near shore", "Near shore", "Near shore", "Near shore", "Near shore", "Near shore", "Near shore", "Near shore", "Cyclonic Eddy",         "Cyclonic Eddy",         "Cyclonic Eddy",         "Cyclonic Eddy",        
+"Eddy convergence",      "Eddy convergence",      "Anticyclonic eddy",    "Anticyclonic eddy",   
+"Anticyclonic eddy",    "Anticyclonic eddy",    "Anticyclonic eddy",     "Anticyclonic eddy",    
+"Anticyclonic eddy",     "Anticyclonic eddy",     "Edge of Cyclonic Eddy", "Edge of Cyclonic Eddy",
+"Edge of Cyclonic Eddy", "Edge of Cyclonic Eddy", "Cyclonic Eddy",         "Cyclonic Eddy",        
+"Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean","Open Ocean", "Open Ocean") 
+metadata.minion$OceanType <- ocean.type # note this merges all the open ocean samples under one factor
+
+
+# Group by time
+time.div.hours <- as.integer(metadata.minion$Start.Time/100)
+time.div <- as.integer(time.div.hours/6)
+metadata.minion$TimeGroup <- time.div
+
+
+# 11:38 removes the first 3 nearshore sites
+metadata.minion2 <- metadata.minion[11:38,]
+
+
+```
+
+
+```{r extract sample IDs}
+
+illumina.names <- colnames(illumina.nocon)
+split.names <- str_split(illumina.names, ".StatNo.")
+
+sample.id <- c(1:length(split.names))
+station.num <- c(1:length(split.names))
+sample.num <- c(1:length(split.names))
+
+i <- 1
+for (i in 1:length(split.names)) {
+  curr.name <- split.names[[i]]
+  station.num <- curr.name[2]
+  curr.id <- curr.name[1] 
+  curr.trim.id <- substring(curr.id, str_length(curr.id) - 1, str_length(curr.id))
+  if (substring(curr.trim.id, 1, 1) != ".") {
+      curr.trim.id <- substring(curr.id, str_length(curr.id) - 2, str_length(curr.id))
+  }
+  curr.sample.id <- paste0(station.num, curr.trim.id)
+  sample.id[i] <- curr.sample.id
+}
+
+sample.id[sample.id == "NA.2"] <- "6.2"
+sample.id <- as.numeric(sample.id)
+
+illumina.by.sample <- data.frame(t(illumina.nocon))
+
+rowSums(illumina.by.sample)
+rownames(illumina.by.sample) <- sample.id
+
+colnames(illumina.by.sample) <- taxonomy
+
+all.metadata$SAMPLE2 <- as.character(all.metadata$SAMPLE)
+
+trimmed.metadata <- all.metadata[all.metadata$SAMPLE2 %in% sample.id,]
+
+illumina.by.sample <- illumina.by.sample[order(as.numeric(row.names(illumina.by.sample))), ]
+
+
+metadata.rep <- rownames(illumina.by.sample) %in% all.metadata$SAMPLE
+
+
+
+rowSums(illumina.by.sample)
+
+```
+
+```{r make colsums}
+
+make_colsums <- function(colnames, df) {
+  return.vec <- c(1:length(df))
+  i <- 1
+  for (name in colnames) {
+    val <- sum(as.numeric(df[[name]]))
+    return.vec[i] <- val
+    i <- i + 1
+  }
+  return(return.vec)
+}
+
+```
+
+```{r organize by order, order, family}
+split.taxons <- str_split(taxonomy, ";") # splits the taxonomic assignm nt into kingdom level
+
+find.level <- function(order, vector) { # extracts the kingdom organization from the longer vector by indicating the number within each split you want to look at
+  return.vec <- c(1:length(vector))
+  for (i in 1:length(vector)) {
+    curr.elem <- vector[[i]]
+    to.add <- curr.elem[order]
+    return.vec[i] <- to.add
+  }
+  return(list(return.vec))
+}
+
+split.taxons
+# extracts the order, orderes, etc.
+all.class <- find.level(3, split.taxons)
+all.order <- find.level(4, split.taxons)
+all.family <- find.level(5, split.taxons)
+all.genus <- find.level(6, split.taxons)
+all.species <- find.level(7, split.taxons)
+
+sample.id <- as.numeric(sample.id) %>% .[order(.)]
+
+t.illumina.sample <- data.frame(t(illumina.by.sample))
+illumina.class <- aggregate(t.illumina.sample, by = list(all.class[[1]]), FUN = sum)
+rownames(illumina.class) <- illumina.class$Group.1
+illumina.class <- illumina.class[,2:length(colnames(illumina.class))]
+colnames(illumina.class) <- sample.id
+
+illumina.order <- aggregate(t.illumina.sample, by = list(all.order[[1]]), FUN = sum)
+rownames(illumina.order) <- illumina.order$Group.1
+illumina.order <- illumina.order[,2:length(colnames(illumina.order))]
+colnames(illumina.order) <- sample.id
+
+illumina.family <- aggregate(t.illumina.sample, by = list(all.family[[1]]), FUN = sum)
+rownames(illumina.family) <- illumina.family$Group.1
+illumina.family <- illumina.family[,2:length(colnames(illumina.family))]
+colnames(illumina.family) <- sample.id
+
+illumina.genus <- aggregate(t.illumina.sample, by = list((all.genus[[1]])), FUN = sum)
+rownames(illumina.genus) <- illumina.genus$Group.1
+illumina.genus <- illumina.genus[,2:length(colnames(illumina.genus))]
+colnames(illumina.genus) <- sample.id
+
+illumina.species <- aggregate(t.illumina.sample, by = list((all.species[[1]])), FUN = sum)
+rownames(illumina.species) <- illumina.species$Group.1
+illumina.species <- illumina.species[,2:length(colnames(illumina.species))]
+colnames(illumina.species) <- sample.id
+
+illumina.order
+
+```
+
+# Read order counts
+```{r}
+illumina.order.t <- illumina.order %>% t()
+
+illumina.order.t <- illumina.order.t/rowSums(illumina.order.t)
+
+swordfish <- illumina.order.t[which(trimmed.metadata$GeneralLocale == "Swordfish Seamount"),] %>% data.frame()
+anticyclonic <- illumina.order.t[which(trimmed.metadata$GeneralLocale == "Anticyclonic Eddy"),] %>% data.frame()
+cyclonic <- illumina.order.t[which(trimmed.metadata$GeneralLocale == "Cyclonic Eddy"),] %>% data.frame()
+subtropical.gyre <- illumina.order.t[which(trimmed.metadata$GeneralLocale == "Subtropical Gyre"),] %>% data.frame()
+
+swordfish.div <- diversity(swordfish, index = "shannon")
+anticyclonic.div <- diversity(swordfish, index = "shannon")
+all.div <- diversity(illumina.order.t, index = "shannon")
+
+trimmed.metadata$ShannonDiv <- all.div
+
+```
+
+
+```{r fix metadata}
+
+make.station.num <- function(character.list) {
+  return.vec <- c(1:length(character.list))
+  for (i in 1:length(character.list)) {
+    curr.val <- character.list[i]
+    split <- str_split(curr.val, '[.]')
+    return.vec[i] <- split[[1]]
+  }
+  return(return.vec)
+}
+
+character.list <- (as.character(trimmed.metadata$SAMPLE))
+
+station.num <- character.list %>% make.station.num()
+trimmed.metadata$STATION.NUMBER <- as.numeric(station.num)
+
+times <- trimmed.metadata$Start.Time
+
+times[times > 1200] <- 2 
+times[times != 2] <- 1
+
+trimmed.metadata$TimeGroup <- times
+trimmed.metadata$DEPTH <-trimmed.metadata$Z.Target..m.
+
+length(rownames(illumina.order.t))
+
+illumina.order.t %>% rownames()
+
+summary(anosim(illumina.order.t, grouping = trimmed.metadata$GeneralLocale))
+
+
+illumina.order.local <- (illumina.order) 
+
+colnames(illumina.order.local) <- trimmed.metadata$GeneralLocale
+
+```
+
+```{r anova dissimilarity}
+
+illumina.order
+# Trying anova dissimilarity index
+station.ano.dissim <- anosim(illumina.order.t, grouping = trimmed.metadata$STATION.NUMBER) # Significant difference, even distribution of high and low ranks
+station.ano.dissim
+depth.ano.dissim <- anosim(illumina.order.t, grouping = trimmed.metadata$DEPTH) # Insignificant difference
+depth.ano.dissim
+time.ano.dissim <- anosim(illumina.order.t, grouping = trimmed.metadata$TimeGroup) # Insignificant
+time.ano.dissim
+ocean.ano.dissim <- anosim(illumina.order.t, grouping = trimmed.metadata$OceanType) # Significant difference, even distribution of high and low ranks
+
+ocean.ano.dissim <- anosim(illumina.order.t, grouping = trimmed.metadata$GeneralLocale) # Significant difference, even distribution of high and low ranks
+summary(ocean.ano.dissim)
+
+ocean.ano.dissim
+lat.ano.dissim <- anosim(illumina.order.t, grouping = trimmed.metadata$LatDeg) # Insignificant difference
+lat.ano.dissim
+
+rowSums(illumina.order.t)
+
+ocean.ano.dissim
+summary(ocean.ano.dissim)
+
+```
+
+```{r make vectors with metadata of interest}
+colnames(trimmed.metadata)
+
+
+trimmed.metadata$Hour <- round(trimmed.metadata$`Start Time`/100, 0)
+metadata.minion$Hour <- round(metadata.minion$Start.Time/100, 0)
+
+ocean.type <- trimmed.metadata$OceanType
+locale <- trimmed.metadata$GeneralLocale
+locale2 <- trimmed.metadata$`Updated Location`
+depths <- trimmed.metadata$`Z Target (m)`
+latitude <- trimmed.metadata$LatDeg
+temperature <- trimmed.metadata$`Temp (oC)`
+chlorophyll <- trimmed.metadata$`Chla-Fluoro (V)`
+salinity <- trimmed.metadata$`Salinity (psu)`
+o2 <- trimmed.metadata$`O2 Seapoint (mL/L)`
+density <- trimmed.metadata$`Density (kg/m3)`
+diversity <- trimmed.metadata$ShannonOrder
+hour <- trimmed.metadata$Hour
+
+key.metadata.illumina <- data.frame("OceanType" = ocean.type, "Locale" = locale, "Depth" = depths, "Latitude" = latitude, "Temperature" = temperature, "Chlorophyll" = chlorophyll, "Salinity" = salinity, "Oxygen" = o2, "Density" = density, "Hour" = hour, "Diversity" = diversity, "Location2" = locale2)
+
+big.group <- as.factor(round(key.metadata.illumina$Hour/6, 0))
+key.metadata.illumina$HourGroup <- big.group
+
+rownames(key.metadata.illumina) <- trimmed.metadata$SAMPLE
+
+
+ocean.type <- metadata.minion$OceanType
+ocean.type
+locale <- metadata.minion$General.Locale
+locale
+depths <- metadata.minion$Z.Target..m.
+depths
+latitude <- metadata.minion$LatDeg
+latitude
+temperature <- metadata.minion$Temp..oC.
+temperature
+chlorophyll <- metadata.minion$Chla.Fluoro..V.
+chlorophyll
+salinity <- metadata.minion$Salinity..psu.
+salinity
+o2 <- metadata.minion$O2.Seapoint..mL.L.
+o2
+density <- metadata.minion$Density..kg.m3.
+density
+time <- metadata.minion$Time
+time
+diversity <- metadata.minion$SWDivOrderUncut
+diversity
+hour <- metadata.minion$Hour
+
+key.metadata.minion <- data.frame("OceanType" = ocean.type, "Locale" = locale, "Depth" = depths, "Latitude" = latitude, "Temperature" = temperature, "Chlorophyll" = chlorophyll, "Salinity" = salinity, "Oxygen" = o2, "Density" = density, "Time" = time, "Hour" = hour, "Diversity" = diversity)
+
+big.group <- as.factor(round(key.metadata.minion$Hour/6, 0))
+key.metadata.minion$HourGroup <- big.group
+
+
+key.metadata.illumina$TimeOfDay <- as.character(key.metadata.illumina$HourGroup)
+
+key.metadata.illumina$TimeOfDay <- replace(key.metadata.illumina$TimeOfDay,key.metadata.illumina$TimeOfDay=="2","Morning")
+key.metadata.illumina$TimeOfDay <- replace(key.metadata.illumina$TimeOfDay,key.metadata.illumina$TimeOfDay=="3","Afternoon")
+key.metadata.illumina$TimeOfDay <- replace(key.metadata.illumina$TimeOfDay,key.metadata.illumina$TimeOfDay=="4","Night")
+
+
+
+key.metadata.minion$TimeOfDay <- as.character(key.metadata.minion$HourGroup)
+
+key.metadata.minion$TimeOfDay <- replace(key.metadata.minion$TimeOfDay,key.metadata.minion$TimeOfDay=="2","Morning")
+key.metadata.minion$TimeOfDay <- replace(key.metadata.minion$TimeOfDay,key.metadata.minion$TimeOfDay=="3","Afternoon")
+key.metadata.minion$TimeOfDay <- replace(key.metadata.minion$TimeOfDay,key.metadata.minion$TimeOfDay=="4","Night")
+
+key.metadata.minion$LocaleEdit <- as.character(key.metadata.minion$Locale)
+key.metadata.minion$LocaleEdit <- replace(key.metadata.minion$LocaleEdit, key.metadata.minion$LocaleEdit == "", "Open Ocean")
+key.metadata.minion$Locale <- key.metadata.minion$LocaleEdit
+#key.metadata.minion$Locale <- replace(key.metadata.minion$Locale,key.metadata.minion$Locale=="","Open Ocean")
+
+rownames(key.metadata.minion) <- metadata.minion$SAMPLE
+
+```
+
+
+```{r plot CCAs for group variables + test lms}
+library(car)
+
+cca(illumina.order.t ~ depths) %>% plot()
+cca(illumina.order.t ~ ocean.type) %>% plot()
+cca(illumina.order.t ~ locale) %>% plot()
+cca(illumina.order.t ~ time) %>% plot()
+
+lm(Diversity ~ Oxygen, key.metadata.illumina) %>% summary()
+lm(Diversity ~ Density, key.metadata.illumina) %>% summary()
+lm(Diversity ~ Salinity, key.metadata.illumina) %>% summary()
+lm(Diversity ~ Chlorophyll, key.metadata.illumina) %>% summary()
+lm(Diversity ~ Temperature, key.metadata.illumina) %>% summary()
+lm(Diversity ~ Latitude, key.metadata.illumina) %>% summary()
+lm(Diversity ~ Time, key.metadata.illumina) %>% summary()
+lm(Diversity ~ Depth, key.metadata.illumina) %>% summary()
+
+```
+
+
+```{r selecting for best fit linear model with stepAIC for illumina}
+
+
+
+cpus.lm <- lm(Diversity ~ ., data = key.metadata.illumina)
+cpus.lm2 <- stepAIC(cpus.lm, trace = FALSE)
+cpus.lm2$anova
+
+best.model <- lm(Diversity ~ Temperature + Oxygen + Density, key.metadata.illumina)
+
+best.model %>% summary()
+
+avPlots(best.model)
+
+plot(Diversity ~ Temperature + Oxygen + Density, key.metadata.illumina)
+
+lm(Diversity ~ Oxygen, key.metadata.illumina) %>% summary()
+lm(Diversity ~ Density, key.metadata.illumina) %>% summary()
+
+
+```
+
+```{r selecting for best fit linear model with stepAIC for minion}
+
+
+cpus.lm.minion <- lm(Diversity ~ ., data = key.metadata.minion)
+cpus.lm2.minion <- stepAIC(cpus.lm.minion, trace = FALSE)
+cpus.lm2.minion$anova
+
+best.model <- lm(Diversity ~ Locale + Depth + Chlorophyll + Oxygen + Density, key.metadata.illumina)
+
+best.model %>% summary()
+
+
+plot(Diversity ~ Temperature + Oxygen + Density, key.metadata.illumina)
+
+lm(Diversity ~ Oxygen, key.metadata.illumina) %>% summary()
+lm(Diversity ~ Density, key.metadata.illumina) %>% summary()
+
+
+```
+
+```{r dendogram}
+library(ggdendro)
+
+
+dist.order.minion <- vegdist(order.taxa, method = "bray")
+dist.order.illumina <- vegdist(illumina.order.t, method = "bray")
+
+dend.illumina <- hclust(dist.order.illumina)
+dend.illumina$labels <- key.metadata.illumina$Location2
+dend.illumina <- ggdendrogram(dend.illumina) + ggtitle("Dendogram with Illumina Data")
+dend.illumina
+
+dend.minion <- hclust(dist.order.minion)
+dend.minion$labels <- key.metadata.minion$Locale
+dend.minion <- ggdendrogram(dend.minion) + ggtitle("Dendogram with Minion Data")
+dend.minion
+
+rownames(dist.order.minion)
+
+```
+
+```{r}
+# Trying mrpp dissimilarity index
+station.mrpp.dissim <- mrpp(illumina.order.t, grouping = trimmed.metadata$STATION.NUMBER, distance = "bray") # Significant
+station.mrpp.dissim
+depth.mrpp.dissim <- mrpp(illumina.order.t, grouping = trimmed.metadata$DEPTH, distance = "bray") # Significant
+depth.mrpp.dissim
+time.mrpp.dissim <- mrpp(illumina.order.t, grouping = trimmed.metadata$TimeGroup, distance = "bray") # Significant 
+time.mrpp.dissim
+ocean.mrpp.dissim <- mrpp(illumina.order.t, grouping = trimmed.metadata$OceanType, distance = "bray") # Insignificant
+ocean.mrpp.dissim
+lat.mrpp.dissim <- mrpp(illumina.order.t, grouping = trimmed.metadata$LatDeg, distance = "bray") # Significant
+lat.mrpp.dissim
+
+# Trying mrpp dissimilarity index with Jaccard 
+# (see https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/edn3.239 for suggestion)
+station.mrpp.dissim <- mrpp(illumina.order.t, grouping = trimmed.metadata$STATION.NUMBER, distance = "jaccard") # Significant
+station.mrpp.dissim
+depth.mrpp.dissim <- mrpp(illumina.order.t, grouping = trimmed.metadata$DEPTH, distance = "jaccard") # Significant
+depth.mrpp.dissim
+time.mrpp.dissim <- mrpp(illumina.order.t, grouping = trimmed.metadata$TimeGroup, distance = "jaccard") # Insignificant 
+time.mrpp.dissim
+ocean.mrpp.dissim <- mrpp(illumina.order.t, grouping = trimmed.metadata$OceanType, distance = "jaccard") # Insignificant
+ocean.mrpp.dissim
+lat.mrpp.dissim <- mrpp(illumina.order.t, grouping = trimmed.metadata$LatDeg, distance = "jaccard") # Significant
+lat.mrpp.dissim
+
+```
+
+```{r adonis dissimilarity}
+# Trying adonis dissimilarity index, these seems more common for edna
+station.adonis.dissim <- adonis2(illumina.order.t ~ STATION.NUMBER, trimmed.metadata) # not significant
+station.adonis.dissim
+depth.adonis.dissim <- adonis2(illumina.order.t ~ DEPTH, trimmed.metadata) # not significant
+depth.adonis.dissim
+time.adonis.dissim <- adonis2(illumina.order.t ~ TimeGroup, trimmed.metadata) # Time group has poor (but mildly significant) explanatory power
+time.adonis.dissim
+ocean.adonis.dissim <- adonis2(illumina.order.t ~ OceanType, trimmed.metadata) # Insignificant explanatory poer
+ocean.adonis.dissim
+ocean.adonis.dissim.untrimmed <- adonis2(illumina.order.t ~ OceanType, trimmed.metadata) # Insignificant explanatory poer
+ocean.adonis.dissim.untrimmed
+lat.adonis.dissim <- adonis2(illumina.order.t ~ LatDeg, trimmed.metadata) # Insignificant explanatory poer
+lat.adonis.dissim
+
+# Just comparing eddies
+eddies.inds <- which(trimmed.metadata$OceanType == "Cyclonic Eddy" | trimmed.metadata$OceanType == "Anticyclonic Eddy" | trimmed.metadata$OceanType == "Eddy Convergence" | trimmed.metadata$OceanType == "Cyclonic Edge")
+eddies.only <- illumina.order.t[eddies.inds,]
+eddies.meta <- trimmed.metadata[eddies.inds,]
+eddies.adonis.dissim <- adonis2(eddies.only ~ OceanType, eddies.meta)
+eddies.adonis.dissim
+
+# Trying adonis dissimilarity index with formula interactions
+
+depth.time.adonis.dissim <- adonis2(illumina.order.t ~ DEPTH + TimeGroup, trimmed.metadata) # Depth has strongly explanatory power than time
+depth.time.adonis.dissim
+
+ocean.station.adonis.dissim <- adonis2(illumina.order.t ~ OceanType + STATION.NUMBER, trimmed.metadata) # both are significant but ocean type explains more, large residual though
+ocean.station.adonis.dissim
+
+depth.mult.time.adonis.dissim <- adonis2(illumina.order.t ~ DEPTH * TimeGroup, trimmed.metadata) # Depth has strongly explanatory power than time or interaction with time
+depth.mult.time.adonis.dissim
+
+all.adonis.dissim <- adonis2(illumina.order.t ~ DEPTH + LatDeg + OceanType + TimeGroup, trimmed.metadata) # depth is most significant, ocean type is weakly significant, time instead of depth holds too
+summary(all.adonis.dissim)
+all.adonis.dissim
+
+time.adonis.dissim <- adonis2(illumina.order.t ~ TimeGroup, trimmed.metadata) # Time group has poor (but mildly significant) explanatory power
+ocean.adonis.dissim <- adonis2(illumina.order.t ~ OceanType, trimmed.metadata) # Insignificant explanatory poer
+lat.adonis.dissim <- adonis2(illumina.order.t ~ LatDeg, trimmed.metadata) # Insignificant explanatory poer
+lat.adonis.dissim
+
+
+
+```
+
+```{r beta diversity adonis}
+beta.order <- betadiver(illumina.order.t)
+plot(beta.order)
+
+```
+
+```{r anova for data verification}
+# Checking our data to see if we did it right lmao
+#lib.ano.dissim <- anosim(illumina.order.t, grouping = trimmed.metadata$Library.No) # Insignificant difference
+#pcr.ano.dissim <- anosim(illumina.order.t, grouping = trimmed.metadata$PCR.No.) # Insignificant difference
+#dna.ano.dissim <- anosim(illumina.order.t, grouping = trimmed.metadata$DNA.extracted.) # Significant difference
+#niskin.ano.dissim <- anosim(illumina.order.t, grouping = trimmed.metadata$Niskin.Bottle) # Significant difference
+
+
+#sampling.adonis.dissim <- adonis2(illumina.order.t ~ DNA.extracted. + Library.No + PCR.No., trimmed.metadata) # none of these are super significant (library number mildly significant)
+
+#sampling.adonis.dissim <- adonis2(illumina.order.t ~Library.No + DNA.extracted. + PCR.No., trimmed.metadata) # none of these are super significant (library number mildly significant)
+
+#sampling.adonis.dissim
+
+```
+
+```{r}
+
+# Trying all of this with a distance matrix instead of community matrix - same trends seem to hold
+
+
+dist.order.illumina <- vegdist(illumina.order.t, method = "bray")
+dist.order.eddies <- vegdist(eddies.only, method = "jaccard")
+
+# redo with percentages
+
+dist.order
+```
+
+
+```{r anova dissimilarity}
+
+# Trying anova dissimilarity index
+station.ano.dissim <- anosim(dist.order, grouping = trimmed.metadata$STATION.NUMBER) # Insignificant difference
+station.ano.dissim
+depth.ano.dissim <- anosim(dist.order, grouping = trimmed.metadata$DEPTH) # Insignificant difference
+depth.ano.dissim
+time.ano.dissim <- anosim(dist.order, grouping = trimmed.metadata$TimeGroup) # Significant difference - but not super explanatory
+time.ano.dissim
+ocean.ano.dissim <- anosim(dist.order, grouping = trimmed.metadata$OceanType) # Significant difference - not super explanatory
+ocean.ano.dissim
+
+summary(ocean.ano.dissim)
+
+ocean.ano.dissim$class.vec
+lat.ano.dissim <- anosim(dist.order, grouping = trimmed.metadata$LatDeg) # Insignificant difference
+lat.ano.dissim
+```
+
+```{r}
+# Trying mrpp dissimilarity index
+station.mrpp.dissim <- mrpp(dist.order, grouping = trimmed.metadata$STATION.NUMBER, distance = "bray") # Significant
+station.mrpp.dissim
+depth.mrpp.dissim <- mrpp(dist.order, grouping = trimmed.metadata$DEPTH, distance = "bray") # Significant
+depth.mrpp.dissim
+time.mrpp.dissim <- mrpp(dist.order, grouping = trimmed.metadata$TimeGroup, distance = "bray") # Significant 
+time.mrpp.dissim
+ocean.mrpp.dissim <- mrpp(dist.order, grouping = trimmed.metadata$OceanType, distance = "bray") # Insignificant
+ocean.mrpp.dissim
+lat.mrpp.dissim <- mrpp(dist.order, grouping = trimmed.metadata$LatDeg, distance = "bray") # Significant
+lat.mrpp.dissim
+
+# Trying mrpp dissimilarity index with Jaccard 
+# (see https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/edn3.239 for suggestion)
+station.mrpp.dissim <- mrpp(dist.order, grouping = trimmed.metadata$STATION.NUMBER, distance = "jaccard") # Significant
+station.mrpp.dissim
+depth.mrpp.dissim <- mrpp(dist.order, grouping = trimmed.metadata$DEPTH, distance = "jaccard") # Significant
+depth.mrpp.dissim
+time.mrpp.dissim <- mrpp(dist.order, grouping = trimmed.metadata$TimeGroup, distance = "jaccard") # Insignificant 
+time.mrpp.dissim
+ocean.mrpp.dissim <- mrpp(dist.order, grouping = trimmed.metadata$OceanType, distance = "jaccard") # Insignificant
+ocean.mrpp.dissim
+lat.mrpp.dissim <- mrpp(dist.order, grouping = trimmed.metadata$LatDeg, distance = "jaccard") # Significant
+lat.mrpp.dissim
+
+```
+
+```{r adonis dissimilarity}
+# Trying adonis dissimilarity index
+station.adonis.dissim <- adonis2(dist.order ~ STATION.NUMBER, trimmed.metadata) # Residual explains more than station num
+station.adonis.dissim
+depth.adonis.dissim <- adonis2(dist.order ~ DEPTH, trimmed.metadata) # Depth has strongly explanatory power than residual
+depth.adonis.dissim
+time.adonis.dissim <- adonis2(dist.order ~ TimeGroup, trimmed.metadata) # Time group has poor (but mildly significant) explanatory power
+time.adonis.dissim
+ocean.adonis.dissim <- adonis2(dist.order ~ OceanType, trimmed.metadata) # Insignificant explanatory poer
+lat.adonis.dissim <- adonis2(dist.order ~ LatDeg, trimmed.metadata) # Insignificant explanatory power
+lat.adonis.dissim
+
+# Trying adonis dissimilarity index with formula interactions
+
+depth.time.adonis.dissim <- adonis2(dist.order ~ DEPTH + TimeGroup, trimmed.metadata) # both are significant but ocean type explains more, large residual though
+depth.time.adonis.dissim
+
+ocean.station.adonis.dissim <- adonis2(dist.order ~ OceanType + STATION.NUMBER, trimmed.metadata) # Depth has strongly explanatory power than time
+ocean.station.adonis.dissim
+
+depth.mult.time.adonis.dissim <- adonis2(dist.order ~ DEPTH * TimeGroup, trimmed.metadata) # Depth has strongly explanatory power than time or interaction with time
+depth.mult.time.adonis.dissim
+
+all.adonis.dissim <- adonis2(dist.order ~ DEPTH + LatDeg + OceanType + TimeGroup + STATION.NUMBER, trimmed.metadata) # depth is most significant, ocean type is weakly significant, time instead of depth holds too
+all.adonis.dissim
+
+time.adonis.dissim <- adonis2(dist.order ~ TimeGroup, trimmed.metadata) # Time group has poor (but mildly significant) explanatory power
+time.adonis.dissim
+ocean.adonis.dissim <- adonis2(dist.order ~ OceanType, trimmed.metadata) # Insignificant explanatory poer
+ocean.adonis.dissim
+lat.adonis.dissim <- adonis2(dist.order ~ LatDeg, trimmed.metadata) # Insignificant explanatory power
+lat.adonis.dissim
+
+station.adonis.dissim <- adonis(dist.order ~ STATION.NUMBER, trimmed.metadata) # Residual explains more than station num
+station.adonis.dissim
+depth.adonis.dissim <- adonis(dist.order ~ DEPTH, trimmed.metadata) # Depth has stronger explanatory power than residual
+depth.adonis.dissim
+time.adonis.dissim <- adonis(dist.order ~ TimeGroup, trimmed.metadata) # Time group has poor (but mildly significant) explanatory power
+time.adonis.dissim
+ocean.adonis.dissim <- adonis(dist.order ~ OceanType, trimmed.metadata) # Insignificant explanatory poer
+lat.adonis.dissim <- adonis(dist.order ~ LatDeg, trimmed.metadata) # Insignificant explanatory power
+lat.adonis.dissim
+
+```
+
+```{r}
+
+
+```
+
+```{r adonis continued}
+
+## The person who invented this packaage agrees that beta dispersion is the best way of visualizing the results of adonis
+
+# use depth as factor in dispersion
+depths <- as.factor(trimmed.metadata$DEPTH)
+betadisper.mod.depth <- betadisper(dist.order, depths)
+betadisper.mod.depth
+boxplot(betadisper.mod.depth)
+title("Community Differences at Depth")
+
+
+ano = anosim(illumina.order.t, trimmed.metadata$LatDeg, distance = "jaccard", permutations = 9999)
+ano
+
+ocean.types <- as.factor(eddies.meta$OceanType)
+betadisper.mod.eddy.ocean <- betadisper(dist.order.eddies, ocean.types)
+betadisper.mod.eddy.ocean
+boxplot(betadisper.mod.eddy.ocean)
+title("Community Differences Between Eddies")
+
+trimmed.metadata$GeneralLocale
+oceantype <- as.factor(trimmed.metadata$OceanType)
+betadisper.mod.ocean <- betadisper(dist.order, oceantype)
+betadisper.mod.ocean
+boxplot(betadisper.mod.ocean)
+title("Community Differences for Ocean Features")
+
+
+
+locale <- as.factor(trimmed.metadata$GeneralLocale)
+betadisper.mod.locale <- betadisper(dist.order, locale)
+betadisper.mod.locale
+boxplot(betadisper.mod.locale, las = 2.5, xlab = "")
+title("Community Differences for Locale")
+
+time <- as.factor(trimmed.metadata$TimeGroup)
+betadisper.mod.time <- betadisper(dist.order, time)
+betadisper.mod.time
+boxplot(betadisper.mod.time)
+title("Community Differences for Times of Day")
+
+lat <- as.factor(trimmed.metadata$LatDeg)
+betadisper.mod.lat <- betadisper(dist.order, lat)
+betadisper.mod.lat
+boxplot(betadisper.mod.lat)
+title("Community Differences at Latitude")
+
+```
+
+```{r permutest}
+
+set.seed(25)
+permutest(betadisper.mod.depth)
+plot(betadisper.mod.depth, main = NULL)
+title("Beta Dispersion by Depth")
+
+permutest(betadisper.mod.ocean)
+plot(betadisper.mod.ocean, main = NULL) 
+title("Beta Dispersion by Ocean Type")
+
+
+permutest(betadisper.mod.locale)
+plot(betadisper.mod.ocean, main = NULL) 
+title("Beta Dispersion by Locale")
+
+permutest(betadisper.mod.eddy.ocean)
+plot(betadisper.mod.eddy.ocean, main = NULL) 
+title("Beta Dispersion by Eddies")
+
+permutest(betadisper.mod.time)
+plot(betadisper.mod.time, main = NULL)
+title("Beta Dispersion by Time of Day")
+
+permutest(betadisper.mod.lat)
+plot(betadisper.mod.lat, main = NULL)
+title("Beta Dispersion by Latitude")
+
+```
+
+
+```{r anova for data verification}
+
+
+
+set.seed(123)
+nmds = metaMDS(illumina.order.t, distance = "bray")
+plot(nmds)
+data.scores = as.data.frame(scores(nmds))
+data.scores$Depth <- trimmed.metadata$DEPTH
+data.scores$Time <- trimmed.metadata$TimeGroup
+data.scores$Station <- trimmed.metadata$STATION.NUMBER
+data.scores$Ocean <- trimmed.metadata$OceanType
+
+```
+
+```{r}
+# Permutations for cca
+
+explanatory.vars <- data.frame("Depth" = trimmed.metadata$DEPTH, "Station" = trimmed.metadata$STATION.NUMBER, "TimeGroup" = trimmed.metadata$TimeGroup, "Latitude" = trimmed.metadata$LatDeg, "OceanType" = trimmed.metadata$OceanType)
+
+cca(illumina.order.t ~ Depth, explanatory.vars)
+
+
+simple.env <- data.frame("Depth" = explanatory.vars$Depth, "OceanType" = explanatory.vars$OceanType, "Latitude" = explanatory.vars$Latitude)
+
+ocean.chem <- data.frame("Salinity" = trimmed.metadata$Sal..psu., "Temperature" = trimmed.metadata$Temp..oC..1, "Chlorophyll" = trimmed.metadata$Fluoro..chl.a., "ADCP" = trimmed.metadata$Echo.Amplitude,  "Oxygen" = trimmed.metadata$O2.Seapoint..mL.L.)
+
+cca.chem <- cca(illumina.order.t ~ Salinity + Temperature + Chlorophyll + ADCP + Oxygen, ocean.chem)
+stepAIC(cca(illumina.order.t ~ Salinity + Temperature + Chlorophyll + ADCP + Oxygen, ocean.chem), reformulate(names(ocean.chem)))
+vif.cca(cca.chem) # very strong collinearity in constraints
+
+
+cca.env <- cca(illumina.order.t ~ Depth + OceanType + Latitude, simple.env)
+cca.more.env <- cca(illumina.order.t ~ Depth + TimeGroup + OceanType + Latitude, explanatory.vars)
+
+
+anova(cca.env)
+anova(cca.more.env)
+
+set.seed(1)
+anova(cca.more.env, by = "axis")
+
+m1 <- cca(dist.order ~ ., data = explanatory.vars)
+set.seed(67)
+lwr <- cca(dist.order ~ 1, data = explanatory.vars)
+( m2 <- ordistep(lwr, scope = formula(m1), trace = FALSE) )
+m2$anova
+
+anova(cca.chem)
+
+vif.cca(cca.env)
+upr <- cca(illumina.order.t ~ ., data = simple.env)
+lwr <- cca(illumina.order.t ~ 1, data = simple.env)
+set.seed(1)
+mods <- ordistep(lwr, scope = formula(upr), trace = 0)
+ordiR2step(lwr, upr, trace = FALSE)
+mods2 <- step(upr, scope = list(lower = formula(lwr), upper = formula(upr)), trace = 0,
+              test = "perm")
+mods2
+mods2$anova
+
+step(cca(illumina.order.t ~ ., explanatory.vars), reformulate(names(explanatory.vars)))
+
+stepAIC(cca(illumina.order.t ~ 1, ocean.chem), scope = c("upper", "lower"), reformulate(names(ocean.chem)))
+
+
+ordistep(adonis2(illumina.order.t ~ 1, explanatory.vars), reformulate(names(explanatory.vars)))
+
+```
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

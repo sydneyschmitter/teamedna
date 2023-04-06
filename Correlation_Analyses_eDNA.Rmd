@@ -28,6 +28,7 @@ order.taxa$Depths <- correlation_metadata$DEPTH
 order.taxa$Station <- correlation_metadata$STATION.NUMBER
 #coi_metadata <- read.csv("coi-metadata.csv", row.names = 1)
 
+anova
 ```
 
 ```{r}
@@ -138,6 +139,9 @@ df.nmds <- data.frame(pca_taxonomy_NMS$points,
 ggplot(df.nmds, aes(MDS1, MDS2, color = type)) + geom_point() + 
   ggtitle("NMDS Analysis of Similarity of Sample Site Order Composition")
 
+data <- anova(order.taxa)
+
+anova()
 ```
 
 ```{r}

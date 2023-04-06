@@ -17,9 +17,20 @@ library(ggplot2)
 
 setwd("~/teamedna")
 
-illumina <- read.delim("illumina_data.txt", row.names = NULL)
+illumina <- read.delim("illumina_data.txt", row.names = NULL, stringsAsFactors = FALSE)
 
-illumina.nocon <- subset(illumina, select = -c(X12S_Sample.EB.combined, X12S_Sample.FB.combined))
+all.metadata <- read_csv("final_hydrowork.csv")
+all.metadata <- all.metadata[!is.na(all.metadata$SAMPLE),]
+all.metadata$SAMPLE
+sample.id
+
+all.metadata$`Updated Location`
+
+colnames(illumina.nocon)
+
+illumina.nocon <- subset(illumina, select = -c(X12S_Sample.EB.combined, X12S_Sample.FB.combined,X12S_Sample3.4.StatNo.3, X12S_Sample27.11.StatNo.41))
+
+illumina$X12S_San
 
 all.controls <- illumina$X12S_Sample.EB.combined + illumina$X12S_Sample.FB.combined
 
@@ -31,91 +42,34 @@ controls.inds <- which(controls.df$controls > 0)
 con.rownames <- controls.df[controls.inds, "taxon"]
 con.rownames <- na.omit(c(con.rownames))
 
-illumina.nocon.trim <- illumina.nocon[-con.rownames,]
+illumina.nocon <- illumina.nocon[-con.rownames,]
+illumina.nocon <- illumina.nocon[1:474,]
+
+
+taxonomy <- illumina.nocon$sum.taxonomy
+
+
+rownames(illumina.nocon) <- illumina.nocon$sum.taxonomy
+illumina.nocon <- illumina.nocon[,2:length(colnames(illumina.nocon))]
+illumina.nocon
+
+colSums(illumina.nocon)
+rowSums(data.frame(t(illumina.nocon)))
+colnames(illumina.nocon)
+
+illumina.nocon
+
+sample.id2 <- c("12.2", "12.3", "16.2", "16.3", "17.1", "17.2", "17.3", "17.4", "18.2", "18.3", "19.1", "19.2", "28.1", "28.11", "28.2", "45.11", "45.12", "41.11", "3.1", "3.2", "3.3", "3.4", "4.1", "4.2", "4.1", "5.2", "5.3", "5.4", "6.2", "6.3", "6.4", "6.5", "7.2", "7.3", "7.4", "7.5", "8.1", "8.2")
+
+sample.id2
+sample.id
 
 # NOTE: FIGURE OUT HOW TO HANDLE REPLICATES
 ```
 
-```{r organize by order, class, family}
-taxons <- illumina.nocon.trim$sum.taxonomy
-split.taxons <- str_split(taxons, ";") # splits the taxonomic assignment into kingdom level
+```{r extract sample IDs}
 
-find.level <- function(order, vector) { # extracts the kingdom organization from the longer vector by indicating the number within each split you want to look at
-  return.vec <- c(1:length(vector))
-  for (i in 1:length(vector)) {
-    curr.elem <- vector[[i]]
-    to.add <- curr.elem[order]
-    return.vec[i] <- to.add
-  }
-  return(return.vec)
-}
-
-# extracts the order, classes, etc.
-all.order <- find.level(3, split.taxons)
-all.class <- find.level(4, split.taxons)
-all.family <- find.level(5, split.taxons)
-all.genus <- find.level(6, split.taxons)
-all.species <- find.level(7, split.taxons)
-
-
-# we don't need the overall taxonomy anymore
-illumina.nocon.trim <- subset(illumina.nocon.trim, select = -c(sum.taxonomy))
-illumina.nocon.trim <- remove_rownames(illumina.nocon.trim)
-
-# creates new columns with the organization
-illumina.nocon.trim$Order <- all.order
-illumina.nocon.trim$Class <- all.class
-illumina.nocon.trim$Family <- all.family
-illumina.nocon.trim$Genus <- all.genus
-illumina.nocon.trim$Species <- all.species
-
-# Separate dataframe with metadata
-taxon.organization <- data.frame("Order" = all.order, "Class" = all.class, "Family" = all.family, "Genus" = all.genus, "Species" = all.species)
-
-# Overall species accumulition curve for all data
-plot(specaccum(illumina.just.reads))
-
-# Setting up data to index by ocean type
-illumina.just.reads.loc <- data.frame(t(illumina.just.reads))
-
-illumina.just.reads.loc
-columns <- colnames(illumina.just.reads.loc)
-illumina.just.reads.loc$Ocean <- ocean.type.ill2
-
-# Doing a species accumulation curve for each ocean type
-
-temp.df
-for (ocean in unique(ocean.type.ill2)) {
-  temp.df <- illumina.just.reads.loc[which(illumina.just.reads.loc$Ocean == ocean),]
-  temp.df.trimmed <- subset(temp.df, select = -c(Ocean))
-  plot(specaccum(temp.df.trimmed))
-  title(ocean)
-}
-
-# Nestedness analysis
-(oecosimu(illumina.just.reads, nestedchecker, "r0"))
-
-```
-
-
-```{r this plots a stacked bar chart of the data}
-illumina.nocon.trim.gather <- gather(illumina.nocon.trim, key = "site", value = "reads", -c(Order, Class, Family, Genus, Species)) # gathers the data into a format for stacked bar chart plotting
-
-ggplot(illumina.nocon.trim.gather, aes(x = site, y = reads, fill = Class)) + geom_bar(position = "stack", stat = "identity") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-```
-
-```{r}
-
-# Trying to figure out how to match this data up with the metadata but not succeeding thus far
-
-illumina.just.reads <- subset(illumina.nocon.trim, select = -c(Order, Class, Family, Genus, Species))
-
-illumina.percentages <- illumina.just.reads/colSums(illumina.just.reads)
-
-div <- diversity(t(illumina.percentages), index = "shannon")
-
-illumina.names <- colnames(illumina.percentages)
-
+illumina.names <- colnames(illumina.nocon)
 split.names <- str_split(illumina.names, ".StatNo.")
 
 sample.id <- c(1:length(split.names))
@@ -135,27 +89,372 @@ for (i in 1:length(split.names)) {
   sample.id[i] <- curr.sample.id
 }
 
-colnames(illumina.percentages) <- as.factor(sample.id)
+sample.id[sample.id == "NA.2"] <- "6.2"
+sample.id <- as.numeric(sample.id)
+
+illumina.by.sample <- data.frame(t(illumina.nocon))
+
+rowSums(illumina.by.sample)
+rownames(illumina.by.sample) <- sample.id
+
+colnames(illumina.by.sample) <- taxonomy
+
+all.metadata$SAMPLE2 <- as.character(all.metadata$SAMPLE)
+
+length(sample.id)
+trimmed.metadata <- all.metadata[all.metadata$SAMPLE2 %in% sample.id,]
+
+illumina.by.sample <- illumina.by.sample[order(as.numeric(row.names(illumina.by.sample))), ]
+
+# DELETE ONCE METADATA IS UP TO DATE
+
+metadata.rep <- rownames(illumina.by.sample) %in% all.metadata$SAMPLE
 
 
-illumina.metadata <- all.metadata2[which(all.metadata2$SAMPLE %in% as.factor(sample.id)),] # Trims metadata just for metadata we have information for an illumina samples
 
-t.ill.perc <- t(illumina.percentages)
+rowSums(illumina.by.sample)
 
-# We need to order this by the rownames
-illumina.metadata
+```
 
-div.ill <- diversity(t.ill.perc, "shannon")
+```{r make colsums}
 
-t.ill.perc$SAMPLE <- row.names(t.ill.perc)
+make_colsums <- function(colnames, df) {
+  return.vec <- c(1:length(df))
+  i <- 1
+  for (name in colnames) {
+    val <- sum(as.numeric(df[[name]]))
+    return.vec[i] <- val
+    i <- i + 1
+  }
+  return(return.vec)
+}
 
-rownames(illumina.metadata) <- illumina.metadata$SAMPLE
+```
 
-try <- merge(illumina.metadata, div.ill, by = 'row.names', all = TRUE)
+```{r organize by order, order, family}
+split.taxons <- str_split(taxonomy, ";") # splits the taxonomic assignm nt into kingdom level
 
-ggplot(data = try, aes(x = y, y = OceanType, fill = OceanType)) + geom_boxplot()
+find.level <- function(order, vector) { # extracts the kingdom organization from the longer vector by indicating the number within each split you want to look at
+  return.vec <- c(1:length(vector))
+  for (i in 1:length(vector)) {
+    curr.elem <- vector[[i]]
+    to.add <- curr.elem[order]
+    return.vec[i] <- to.add
+  }
+  return(list(return.vec))
+}
 
-try
+split.taxons
+# extracts the order, orderes, etc.
+all.class <- find.level(3, split.taxons)
+all.order <- find.level(4, split.taxons)
+all.family <- find.level(5, split.taxons)
+all.genus <- find.level(6, split.taxons)
+all.species <- find.level(7, split.taxons)
+
+sample.id <- as.numeric(sample.id) %>% .[order(.)]
+
+t.illumina.sample <- data.frame(t(illumina.by.sample))
+illumina.class <- aggregate(t.illumina.sample, by = list(all.class[[1]]), FUN = sum)
+rownames(illumina.class) <- illumina.class$Group.1
+illumina.class <- illumina.class[,2:length(colnames(illumina.class))]
+colnames(illumina.class) <- sample.id
+
+illumina.order <- aggregate(t.illumina.sample, by = list(all.order[[1]]), FUN = sum)
+rownames(illumina.order) <- illumina.order$Group.1
+illumina.order <- illumina.order[,2:length(colnames(illumina.order))]
+colnames(illumina.order) <- sample.id
+
+illumina.family <- aggregate(t.illumina.sample, by = list(all.family[[1]]), FUN = sum)
+rownames(illumina.family) <- illumina.family$Group.1
+illumina.family <- illumina.family[,2:length(colnames(illumina.family))]
+colnames(illumina.family) <- sample.id
+
+illumina.genus <- aggregate(t.illumina.sample, by = list((all.genus[[1]])), FUN = sum)
+rownames(illumina.genus) <- illumina.genus$Group.1
+illumina.genus <- illumina.genus[,2:length(colnames(illumina.genus))]
+colnames(illumina.genus) <- sample.id
+
+illumina.species <- aggregate(t.illumina.sample, by = list((all.species[[1]])), FUN = sum)
+rownames(illumina.species) <- illumina.species$Group.1
+illumina.species <- illumina.species[,2:length(colnames(illumina.species))]
+colnames(illumina.species) <- sample.id
+
+illumina.order
+
+
+
+```
+
+```{r}
+
+
+# Separate dataframe with metadata
+taxon.organization <- data.frame("Order" = all.order, "order" = all.order, "Family" = all.family, "Genus" = all.genus, "Species" = all.species)
+
+
+# Overall species accumulition curve for all data
+plot(specaccum(illumina.family)) + title("SAC by Family")
+plot(specaccum(illumina.order)) + title("SAC by Order")
+plot(specaccum(illumina.order)) + title("SAC by order")
+plot(specaccum(illumina.species)) + title("SAC by Species")
+plot(specaccum(illumina.genus)) + title("SAC by Genus")
+
+```
+
+```{r}
+
+convert.to.perc <- function(df) {
+  return(df/rowSums(df))
+}
+
+df <- illumina.order
+aggregate.by.ocean <- function(df) {
+  df.t <- t(df)
+  return.df <- aggregate(df.t, by = list(trimmed.metadata$OceanType), FUN = sum)
+  rownames(return.df) <- return.df$Group.1
+  return.df <- return.df[,2:length(colnames(return.df))]
+  return(return.df)
+}
+
+length(colnames(illumina.order))
+
+length(trimmed.metadata$OceanType)
+
+length(colnames(illumina.order))
+length(trimmed.metadata$SAMPLE)
+
+order.ocean <- aggregate.by.ocean(illumina.order)
+order.ocean <- aggregate.by.ocean(illumina.order)
+family.ocean <- aggregate.by.ocean(illumina.family)
+genus.ocean <- aggregate.by.ocean(illumina.genus)
+species.ocean <- aggregate.by.ocean(illumina.species)
+
+```
+
+
+```{r}
+
+unique(trimmed.metadata$OceanType)[1]
+
+inds <- which(trimmed.metadata$OceanType == unique(trimmed.metadata$OceanType)[1])
+trimmed.metadata$SAMPLE
+trimmed.metadata$OceanType
+
+length(trimmed.metadata$OceanType)
+colnames(illumina.order)
+curr.ocean <- illumina.order[,inds]
+
+sac.ocean <- function(df) {
+  for (ocean in unique(trimmed.metadata$OceanType)) {
+    inds <- which(trimmed.metadata$OceanType == ocean)
+    curr.ocean <- df[inds,]
+    plot(specaccum(curr.ocean))
+    title(ocean)
+  }
+}
+
+sac.ocean(illumina.species)
+
+
+```
+
+
+```{r this plots a stacked bar chart of the data}
+
+
+illumina.class.percentage <- convert.to.perc(illumina.class)
+illumina.order.percentage <- convert.to.perc(illumina.order)
+illumina.family.percentage <- convert.to.perc(illumina.family)
+illumina.genus.percentage <- convert.to.perc(illumina.genus)
+illumina.species.percentage <- convert.to.perc(illumina.species)
+
+illumina.class$Class <- rownames(illumina.class)
+illumina.class.gather <- gather(illumina.class, key = "site", value = "reads", -c(Class)) # gathers the data into a format for stacked bar chart plotting
+illumina.order$Order <- rownames(illumina.order)
+illumina.order.gather <- gather(illumina.order, key = "site", value = "reads", -c(Order)) # gathers the data into a format for stacked bar chart plotting
+illumina.family$Family <- rownames(illumina.family)
+illumina.family.gather <- gather(illumina.family, key = "site", value = "reads", -c(Family)) # gathers the data into a format for stacked bar chart plotting
+illumina.genus$Genus <- rownames(illumina.genus)
+illumina.genus.gather <- gather(illumina.genus, key = "site", value = "reads", -c(Genus)) # gathers the data into a format for stacked bar chart plotting
+illumina.species$Species <- rownames(illumina.species)
+illumina.species.gather <- gather(illumina.species, key = "site", value = "reads", -c(Species)) # gathers the data into a format for stacked bar chart plotting
+
+illumina.class.gather$site <-as.factor(as.numeric(illumina.class.gather$site))
+illumina.order.gather$site <-as.factor(as.numeric(illumina.order.gather$site))
+illumina.family.gather$site <-as.factor(as.numeric(illumina.family.gather$site))
+
+ggplot(illumina.class.gather, aes(x = site, y = reads, fill = Class)) + geom_bar(position = "fill", stat = "identity") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+ggplot(illumina.order.gather, aes(x = site, y = reads, fill = Order)) + geom_bar(position = "fill", stat = "identity") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + xlab("Sample Number") + ylab("Percentage of Reads")
+
+ggplot(illumina.family.gather, aes(x = site, y = reads, fill = Family)) + geom_bar(position = "fill", stat = "identity") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+
+
+```
+
+```{r}
+
+# Trying to figure out how to match this data up with the metadata but not succeeding thus far
+
+div.order <- diversity(data.frame(t(illumina.order.percentage)), index = "shannon")
+div.order <- t(illumina.order.percentage) %>% data.frame() %>% select_if(~ !any(is.na(.)))  %>% diversity()
+div.family <- t(illumina.family.percentage) %>% data.frame() %>% select_if(~ !any(is.na(.)))  %>% diversity()
+div.genus <- t(illumina.genus.percentage) %>% data.frame() %>% select_if(~ !any(is.na(.)))  %>% diversity()
+div.species <- t(illumina.species.percentage) %>% data.frame() %>% select_if(~ !any(is.na(.)))  %>% diversity()
+
+trimmed.metadata$ShannonOrder <- div.order
+trimmed.metadata$ShannonFamily <- div.family
+trimmed.metadata$ShannonGenus <- div.genus
+trimmed.metadata$ShannonSpecies <- div.species
+
+
+ggplot(data = trimmed.metadata, aes(x = ShannonOrder, y = OceanType, fill = OceanType)) + geom_boxplot() + xlab("Shannon-Weiner Diversity Index") + ggtitle("Order Diversity")
+
+
+ggplot(data = trimmed.metadata, aes(x = ShannonOrder, y = GeneralLocale, fill = GeneralLocale)) + geom_boxplot() + xlab("Shannon-Weiner Diversity Index") + ggtitle("Order Diversity, Fine Locations") + ylab("Ocean Feature")
+
+
+general.locale <- list(trimmed.metadata$GeneralLocale)[[1]]
+general.locale <- as.character(general.locale)
+general.locale[general.locale == "Swordfish Seamount"] <- "Anticyclonic Eddy"
+trimmed.metadata$General.Locale.Edit <- general.locale
+
+ggplot(data = trimmed.metadata, aes(x = ShannonOrder, y = General.Locale.Edit, fill = General.Locale.Edit)) + geom_boxplot() + xlab("Shannon-Weiner Diversity Index") + ggtitle("Family Diversity, Swordfish is Anticyclonic")
+
+
+```
+
+```{r pairwise comps for shannon div}
+
+
+key.metadata.illumina$Locale <- as.character(key.metadata.illumina$Locale)
+key.metadata.illumina$Depth <- as.numeric(key.metadata.illumina$Depth)
+key.metadata.illumina$Hour <- as.numeric(key.metadata.illumina$Hour)
+key.metadata.illumina$Latitude <- as.numeric(key.metadata.illumina$Latitude)
+key.metadata.illumina$TimeOfDay <- as.character(key.metadata.illumina$TimeOfDay)
+
+key.metadata.minion$Locale <- as.character(key.metadata.minion$Locale)
+key.metadata.minion$Depth <- as.numeric(key.metadata.minion$Depth)
+key.metadata.minion$Hour <- as.numeric(key.metadata.minion$Hour)
+key.metadata.minion$Latitude <- as.numeric(key.metadata.minion$Latitude)
+key.metadata.minion$TimeOfDay <- as.character(key.metadata.minion$TimeOfDay)
+
+
+locale.ill.t <- t_test(key.metadata.illumina, Diversity ~ Locale)
+locale.ill.t
+locale2.ill.t <- t_test(key.metadata.illumina, Diversity ~ Location2)
+locale2.ill.t
+depth.ill.t <- t_test(key.metadata.illumina, Diversity ~ Depth)
+depth.ill.t
+hour.ill.t <- t_test(key.metadata.illumina, Diversity ~ Hour)
+hour.ill.t
+timeofday.ill.t <- t_test(key.metadata.illumina, Diversity ~ TimeOfDay) 
+timeofday.ill.t
+lat.ill.t <- t_test(key.metadata.illumina, Diversity ~ Latitude)
+lat.ill.t
+
+locale.min.t <- t_test(key.metadata.minion, Diversity ~ Locale)
+locale.min.t
+depth.min.t <- t_test(key.metadata.minion, Diversity ~ Depth)
+depth.min.t
+hour.min.t <- t_test(key.metadata.minion, Diversity ~ Hour)
+hour.min.t
+timeofday.min.t <- t_test(key.metadata.minion, Diversity ~ TimeOfDay)
+timeofday.min.t
+lat.min.t <- t_test(key.metadata.minion, Diversity ~ Latitude)
+lat.min.t
+
+library(openxlsx)
+
+dataset_names_ill <- list('Locale_Illumina' = locale.ill.t, 'Locale2_Illumina' = locale2.ill.t, 'Depth_Illumina' = depth.ill.t, 'Hour_Illumina' = hour.ill.t, 'TimeofDay_Illumina' = timeofday.ill.t, 'Latitude_Illumina' = lat.ill.t)
+write.xlsx(dataset_names_ill, file = 'ShannonDiv_Pairwise_Illumina.xlsx')
+
+
+dataset_names_min <- list('Locale_Minion' = locale.min.t, 'Depth_Minion' = depth.min.t, 'Hour_Minion' = hour.min.t, 'TimeofDay_Minion' = timeofday.min.t, 'Latitude_Minion' = lat.min.t)
+write.xlsx(dataset_names_min, file = 'ShannonDiv_Pairwise_Minion.xlsx')
+
+
+locale.ill.t <- t_test(key.metadata.illumina, Diversity ~ Locale) %>% .[which(.$p < 0.05 & .$p.adj.signif != "ns"),]
+locale.ill.t
+locale2.ill.t <- t_test(key.metadata.illumina, Diversity ~ Location2) %>% .[which(.$p < 0.05 & .$p.adj.signif != "ns"),]
+locale2.ill.t
+depth.ill.t <- t_test(key.metadata.illumina, Diversity ~ Depth) %>% .[which(.$p < 0.05 & .$p.adj.signif != "ns"),]
+depth.ill.t
+hour.ill.t <- t_test(key.metadata.illumina, Diversity ~ Hour) %>% .[which(.$p < 0.05 & .$p.adj.signif != "ns"),]
+hour.ill.t
+timeofday.ill.t <- t_test(key.metadata.illumina, Diversity ~ TimeOfDay) %>% .[which(.$p < 0.05 & .$p.adj.signif != "ns"),]
+timeofday.ill.t
+lat.ill.t <- t_test(key.metadata.illumina, Diversity ~ Latitude) %>% .[which(.$p < 0.05 & .$p.adj.signif != "ns"),]
+lat.ill.t
+
+locale.min.t <- t_test(key.metadata.minion, Diversity ~ Locale) %>% .[which(.$p < 0.05 & .$p.adj.signif != "ns"),]
+locale.min.t
+depth.min.t <- t_test(key.metadata.minion, Diversity ~ Depth) %>% .[which(.$p < 0.05 & .$p.adj.signif != "ns"),]
+depth.min.t
+hour.min.t <- t_test(key.metadata.minion, Diversity ~ Hour) %>% .[which(.$p < 0.05 & .$p.adj.signif != "ns"),]
+hour.min.t
+timeofday.min.t <- t_test(key.metadata.minion, Diversity ~ TimeOfDay) %>% .[which(.$p < 0.05 & .$p.adj.signif != "ns"),]
+timeofday.min.t
+lat.min.t <- t_test(key.metadata.minion, Diversity ~ Latitude) %>% .[which(.$p < 0.05 & .$p.adj.signif != "ns"),]
+lat.min.t
+
+df <- lat.min.t
+i <- 1
+make.couplets <- function(df) {
+  list.1 <- as.list(df$group1)
+  list.2 <- as.list(df$group2)
+  return.vec <- list()
+  for (i in 1:length(list.1)) {
+    val.1 <- list.1[[i]]
+    val.2 <- list.2[[i]]
+    return.vec[[i]] <- (c(val.1, val.2))
+  }
+  
+  return(return.vec)
+}
+
+```
+
+```{r}
+
+library(RColorBrewer)
+
+# NO significant differences to show
+depth.div.illumina <- ggplot(data = key.metadata.illumina, aes(y = Diversity, x = -Depth, group = -Depth, fill = -Depth)) + geom_boxplot(size = 0.5, width =20) + ylab("Shannon-Weiner Diversity Index") + ggtitle("Order Diversity by Depth (Illumina)") + xlab("Depth") + xlim( -450, 20)  
+depth.div.illumina
+
+lat.div.illumina <- ggplot(key.metadata.illumina, aes(y = Diversity, x = Latitude, fill = Latitude, group = Latitude)) + ggtitle("Order Diversity by Latitude of Sample Collection (Illumina)") + xlab("Latitude") + ylab("Shannon-Weiner Diversity Index") + xlim(2, 25) + geom_boxplot(size = 0.5, width = 20)+ scale_fill_distiller(palette = "BuPu")
+lat.div.illumina
+
+key.metadata.illumina$Hour
+
+time.div.illumina <- ggboxplot(key.metadata.illumina, y = "Diversity", x = "Hour", color = "Hour", legend = "none") + ggtitle("Order Diversity by Hour of Sample Collection (Illumina)") + xlab("Hour of Sample Collection") + ylab("Shannon-Weiner Diversity Index") + scale_fill_distiller(palette = "BuPu") + stat_compare_means(comparisons = make.couplets(hour.ill.t), label = "p.signif", hide.ns = TRUE, method = "t.test")
+time.div.illumina
+
+tod.div.illumina <- ggboxplot(key.metadata.illumina, y = "Diversity", x = "TimeOfDay", color = "TimeOfDay", legend = "none") + ggtitle("Order Diversity by Hour of Sample Collection (Illumina)") + xlab("Time of Day of Sample Collection") + ylab("Shannon-Weiner Diversity Index") + scale_fill_distiller(palette = "BuPu") + stat_compare_means(comparisons = make.couplets(timeofday.ill.t), label = "p.signif", hide.ns = TRUE, method = "t.test")
+tod.div.illumina
+
+make.couplets(depth.min.t)
+depth.min.t
+depth.div.minion <- ggboxplot(key.metadata.minion, y = "Diversity", x = "Depth", color = "Depth", legend = "none") + ggtitle("Order Diversity by Depth (Minion)") + xlab("Depth of Sample Collection (m)") + ylab("Shannon-Weiner Diversity Index") + scale_fill_distiller(palette = "BuPu") + stat_compare_means(comparisons = make.couplets(depth.min.t), label = "p.signif", hide.ns = TRUE, method = "t.test")
+depth.div.minion
+
+lat.div.minion <- ggboxplot(key.metadata.minion, y = "Diversity", x = "Latitude", color = "Latitude", legend = "none") + ggtitle("Order Diversity by Latitude (Minion)") + xlab("Latitude") + ylab("Shannon-Weiner Diversity Index") + scale_fill_distiller(palette = "BuPu") + stat_compare_means(comparisons = make.couplets(lat.min.t), label = "p.signif", hide.ns = TRUE, method = "t.test")
+lat.div.minion
+
+make.couplets(hour.min.t)
+time.div.minion <- ggboxplot(key.metadata.minion, y = "Diversity", x = "Hour", color = "Hour", legend = "none") + ggtitle("Order Diversity by Hour of Sample Collection (Minion)") + xlab("Hour of Sample Collection") + ylab("Shannon-Weiner Diversity Index") + stat_compare_means(comparisons = list(c("10", "16"), c("11", "16"), c("16", "22"), c("16", "23")), label = "p.signif", hide.ns = TRUE, method = "t.test")
+time.div.minion
+
+tod.div.minion <- ggboxplot(key.metadata.minion, y = "Diversity", x = "TimeOfDay", color = "TimeOfDay", legend = "none") + ggtitle("Order Diversity by Hour of Sample Collection (Minion)") + xlab("Time of Day of Sample Collection") + ylab("Shannon-Weiner Diversity Index") + scale_fill_distiller(palette = "BuPu") + stat_compare_means(comparisons = make.couplets(timeofday.min.t), label = "p.signif", hide.ns = TRUE, method = "t.test")
+tod.div.minion
+
+general.locale <- list(trimmed.metadata$GeneralLocale)[[1]]
+general.locale <- as.character(general.locale)
+general.locale[general.locale == "Swordfish Seamount"] <- "Anticyclonic Eddy"
+trimmed.metadata$General.Locale.Edit <- general.locale
 
 ```
 
@@ -163,95 +462,282 @@ try
 ```{r}
 
 library(ggfortify)
-library(ecodist)
 
+for.order.nmds <- t(illumina.order.percentage) %>% data.frame() %>% select_if(~ !any(is.na(.))) %>% .[rowSums(.[])>0,]
 
-illumina.meta.inds <- which(sample.id %in% all.metadata2$SAMPLE)
+trimmed.ocean.type <- trimmed.metadata$OceanType
+trimmed.try.2 <- trimmed.metadata$`Updated Location`
+trimmed.gen <- trimmed.metadata$GeneralLocale
+trimmed.edit <- trimmed.metadata$General.Locale.Edit
+trimmed.depth <- trimmed.metadata$General.Locale.Edit
 
-illumina.perc.trimmed <- illumina.percentages[illumina.meta.inds,]
+order.nmds <- metaMDS(for.order.nmds, k = 10, trymax = 100, trace = F, autotransform = FALSE, distance="bray")
+order.nmds$iters
 
-try <- merge(illumina.metadata, div.ill, by = 'row.names')
+NMDS3.minion <- metaMDS((order.taxa.perc), k = 10, trymax = 100, trace = F, autotransform = FALSE, distance = "bray")
+NMDS3.minion$iters
 
+nmds.en.ill <- key.metadata.illumina %>% select(., -c(Diversity, Locale, Location2, OceanType, HourGroup))
+en.ill = envfit(order.nmds, nmds.en.ill, permutations = 999, na.rm = TRUE)
 
-ano.dissim <- anosim(t(illumina.perc.trimmed), grouping = na.omit(try$OceanType))
+nmds.en.min <- key.metadata.minion %>% select(., -c(Diversity, Locale, OceanType, LocaleEdit, HourGroup, Time))
+en.min = envfit(NMDS3.minion, nmds.en.min, permutations = 999, na.rm = TRUE)
+en.min
 
-metadata.inds <- which(all.metadata2$SAMPLE %in% sample.id)
+```
 
-metadata.ill.trim <- all.metadata2[metadata.inds,]
+```{r nmds multiple environmental illumina}
 
-pca <- prcomp((illumina.perc.trimmed), center = TRUE)
+data.scores = as.data.frame(scores(order.nmds))
+data.scores$Station = key.metadata.illumina$Location2
+#extract NMDS scores (x and y coordinates) for sites from newer versions of vegan package
 
-illumina.perc.trimmed
+#add 'season' column as before
 
-pca.plot <- autoplot(pca, data = metadata.ill.trim, colour = 'OceanType')
-pca.plot
+en_coord_cont = as.data.frame(scores(en.ill, "vectors")) * ordiArrowMul(en.ill)
+en_coord_cat = as.data.frame(scores(en.ill, "factors")) * ordiArrowMul(en.ill)
 
-illumina.perc.t <- na.omit(t(illumina.perc.trimmed))
-illumina.perc.t <- illumina.perc.t[which(rowSums(illumina.perc.t) != 0),]
+gg = ggplot(data = data.scores, aes(x = NMDS1, y = NMDS2)) + 
+     geom_point(data = data.scores, aes(colour = Station), size = 3, alpha = 0.5) + 
+     theme(axis.title = element_text(size = 10, face = "bold", colour = "grey30"), 
+     panel.background = element_blank(), panel.border = element_rect(fill = NA, colour = "grey30"), 
+     axis.ticks = element_blank(), axis.text = element_blank(), legend.key = element_blank(), 
+     legend.title = element_text(size = 10, face = "bold", colour = "grey30"), 
+     legend.text = element_text(size = 9, colour = "grey30")) +
+     labs(colour = "Station")
+     
+gg
 
-illumina.perc.t %>%
-  metaMDS(trace = F) %>%
-  ordiplot(type = "none") %>%
-  text("sites")
+gg = ggplot(data = data.scores, aes(x = NMDS1, y = NMDS2)) + 
+     geom_point(data = data.scores, aes(colour = Station), size = 3, alpha = 0.5) + 
+     geom_segment(aes(x = 0, y = 0, xend = NMDS1, yend = NMDS2), 
+       data = en_coord_cont, size =1, alpha = 0.5, colour = "grey30") +
+     geom_point(data = en_coord_cat, aes(x = NMDS1, y = NMDS2), 
+       shape = "diamond", size = 4, alpha = 0.6, colour = "navy") +
+     geom_text(data = en_coord_cat, aes(x = NMDS1, y = NMDS2+0.04), 
+       label = c("Afternoon", "Morning", "Night"), colour = "navy", fontface = "bold") + 
+     geom_text(data = en_coord_cont, aes(x = NMDS1, y = NMDS2), colour = "grey30", 
+       fontface = "bold", label = row.names(en_coord_cont)) + 
+     theme(axis.title = element_text(size = 10, face = "bold", colour = "grey30"), 
+       panel.background = element_blank(), panel.border = element_rect(fill = NA, colour = "grey30"), 
+       axis.ticks = element_blank(), axis.text = element_blank(), legend.key = element_blank(), 
+       legend.title = element_text(size = 10, face = "bold", colour = "grey30"), 
+       legend.text = element_text(size = 9, colour = "grey30"))+
+     labs(colour = "Station") + ggtitle("NMDS for Multiple Environmental Variables (Illumina)")
 
-
-NMDS3 <- metaMDS(t(illumina.percentages), k = 2, trymax = 100, trace = F, autotransform = FALSE, distance="bray")
-
-plot(NMDS3, "sites")
-orditorp(NMDS3, "sites")
-
-
-vegdistance <- vegdist(illumina.perc.trimmed, method = 'bray')
-
-pcoaVS <- pco(vegdistance, negvals = "zero", dround = 0)
-
-NMDS3 <- metaMDS(t(illumina.percentages), distance = "bray")
-
-
-plot(NMDS3)
-orditorp(NMDS3, "sites")
-
-ocean.type.ill <- c("Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "Cyclonic Eddy", "Cyclonic Eddy", "Cyclonic Eddy", "Cyclonic Eddy", "Eddy Convergence", "Eddy Convergence", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Edge of Cyclonic Eddy", "Edge of Cyclonic Eddy", "Edge of Cyclonic Eddy", "Edge of Cyclonic Eddy", "Cyclonic Eddy", "Cyclonic Eddy")
-
-length(ocean.type.ill)
-
-rownames(t(illumina.percentages))
-
-all.metadata2$OceanType
-all.metadata2$SAMPLE
-
-ocean.type.ill <- c("Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "Cyclonic Eddy", "Cyclonic Eddy", "Cyclonic Eddy", "Cyclonic Eddy", "Eddy Convergence", "Eddy Convergence", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Edge of Cyclonic Eddy", "Edge of Cyclonic Eddy", "Edge of Cyclonic Eddy", "Edge of Cyclonic Eddy", "Cyclonic Eddy", "Cyclonic Eddy")
-  
-ocean.type.ill2 <- c("Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "NA", "NA", "NA", "NA", "NA", "NA", "Swordfish Seamount", "Swordfish Seamount", "Swordfish Seamount", "Swordfish Seamount", "Cyclonic Eddy", "Cyclonic Eddy", "Cyclonic Eddy", "Cyclonic Eddy", "Eddy Convergence", "Eddy Convergence", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Anticyclonic Eddy", "Swordfish Seamount", "Swordfish Seamount", "Swordfish Seamount", "Swordfish Seamount", "Cyclonic Eddy", "Cyclonic Eddy")
+gg
 
 
 ```
 
+```{r nmds multiple environmental minion}
+
+data.scores = as.data.frame(scores(NMDS3.minion))
+data.scores$Station = key.metadata.minion$Locale
+#extract NMDS scores (x and y coordinates) for sites from newer versions of vegan package
+
+#add 'season' column as before
+
+en_coord_cont = as.data.frame(scores(en.min, "vectors")) * ordiArrowMul(en.min)
+en_coord_cat = as.data.frame(scores(en.min, "factors")) * ordiArrowMul(en.min)
+
+gg = ggplot(data = data.scores, aes(x = NMDS1, y = NMDS2)) + 
+     geom_point(data = data.scores, aes(colour = Station), size = 3, alpha = 0.5) + 
+     theme(axis.title = element_text(size = 10, face = "bold", colour = "grey30"), 
+     panel.background = element_blank(), panel.border = element_rect(fill = NA, colour = "grey30"), 
+     axis.ticks = element_blank(), axis.text = element_blank(), legend.key = element_blank(), 
+     legend.title = element_text(size = 10, face = "bold", colour = "grey30"), 
+     legend.text = element_text(size = 9, colour = "grey30")) +
+     labs(colour = "Station")
+     
+gg
+
+gg = ggplot(data = data.scores, aes(x = NMDS1, y = NMDS2)) + 
+     geom_point(data = data.scores, aes(colour = Station), size = 3, alpha = 0.5) + 
+     geom_segment(aes(x = 0, y = 0, xend = NMDS1, yend = NMDS2), 
+       data = en_coord_cont, size =1, alpha = 0.5, colour = "grey30") +
+     geom_point(data = en_coord_cat, aes(x = NMDS1, y = NMDS2), 
+       shape = "diamond", size = 4, alpha = 0.6, colour = "navy") +
+     geom_text(data = en_coord_cat, aes(x = NMDS1, y = NMDS2+0.04), 
+       label = c("Afternoon", "Morning", "Night"), colour = "navy", fontface = "bold") + 
+     geom_text(data = en_coord_cont, aes(x = NMDS1, y = NMDS2), colour = "grey30", 
+       fontface = "bold", label = row.names(en_coord_cont)) + 
+     theme(axis.title = element_text(size = 10, face = "bold", colour = "grey30"), 
+       panel.background = element_blank(), panel.border = element_rect(fill = NA, colour = "grey30"), 
+       axis.ticks = element_blank(), axis.text = element_blank(), legend.key = element_blank(), 
+       legend.title = element_text(size = 10, face = "bold", colour = "grey30"), 
+       legend.text = element_text(size = 9, colour = "grey30"))+
+     labs(colour = "Station") + ggtitle("NMDS for Multiple Environmental Variables (Minion)")
+
+gg
+
+
+```
+
+```{r function to ggplot NMDS}
+
+
+
+ggplot.NMDS <- function(df, meta.plot,val.name) {
+  data.scores <- as.data.frame(scores(df))  #Using the scores function from vegan to extract the site scores and convert to a data.frame
+  
+  data.scores$site <- rownames(data.scores)  # create a column of site names, from the rownames of data.scores
+  data.scores$val <- meta.plot
+  
+  species.scores <- as.data.frame(scores(order.nmds, "species"))  #Using the scores function from vegan to extract the species scores and convert to a data.frame
+  species.scores$species <- rownames(species.scores)  # create a column of species, from the rownames of species.scores
+
+  
+  plot <- ggplot() + 
+    geom_point(data=data.scores,aes(x=NMDS1,y=NMDS2,colour=val),size=4) +
+    coord_equal() +
+    theme_bw() + 
+    theme(axis.text.x = element_blank(),  # remove x-axis text
+          axis.text.y = element_blank(), # remove y-axis text
+          axis.ticks = element_blank(),  # remove axis ticks
+          axis.title.x = element_text(size=18), # remove x-axis labels
+          axis.title.y = element_text(size=18), # remove y-axis labels
+          panel.background = element_blank(), 
+          panel.grid.major = element_blank(),  #remove major-grid labels
+          panel.grid.minor = element_blank(),  #remove minor-grid labels
+          plot.background = element_blank())+ labs(color=val.name) 
+  return(plot)
+}
+
+
+ggplot.NMDS.depth <- function(df, meta.plot,val.name) {
+  data.scores <- as.data.frame(scores(df))  #Using the scores function from vegan to extract the site scores and convert to a data.frame
+  
+  data.scores$site <- rownames(data.scores)  # create a column of site names, from the rownames of data.scores
+  data.scores$val <- meta.plot
+  
+  species.scores <- as.data.frame(scores(order.nmds, "species"))  #Using the scores function from vegan to extract the species scores and convert to a data.frame
+  species.scores$species <- rownames(species.scores)  # create a column of species, from the rownames of species.scores
+
+  
+  plot <- ggplot() + 
+    geom_point(data=data.scores,aes(x=NMDS1,y=NMDS2,colour=-val),size=4) +
+    coord_equal() +
+    theme_bw() + 
+    theme(axis.text.x = element_blank(),  # remove x-axis text
+          axis.text.y = element_blank(), # remove y-axis text
+          axis.ticks = element_blank(),  # remove axis ticks
+          axis.title.x = element_text(size=18), # remove x-axis labels
+          axis.title.y = element_text(size=18), # remove y-axis labels
+          panel.background = element_blank(), 
+          panel.grid.major = element_blank(),  #remove major-grid labels
+          panel.grid.minor = element_blank(),  #remove minor-grid labels
+          plot.background = element_blank())+ labs(color=val.name) 
+  return(plot)
+}
+tabasco(for.order.nmds)
+
+```
+
+
 ```{r}
-length(rownames(illumina.perc.t))
 
-data.scores <- as.data.frame(scores(NMDS3))  #Using the scores function from vegan to extract the site scores and convert to a data.frame
+minion.metadata <- read.csv("metadata.csv") %>% .[1:38,]
+
+colnames(order.taxa.perc)
+colnames(for.order.nmds)
+
+minion.metadata[["OceanType"]]
+ggplot.NMDS(NMDS3.minion, key.metadata.minion$Locale, "Locale") + ggtitle("Minion, Fine")
+
+```
 
 
-data.scores$site <- rownames(data.scores)  # create a column of site names, from the rownames of data.scores
-data.scores$OceanType <- ocean.type.ill  #  add the grp variable created earlier
-
-species.scores <- as.data.frame(scores(NMDS3, "species"))  #Using the scores function from vegan to extract the species scores and convert to a data.frame
-species.scores$species <- rownames(species.scores)  # create a column of species, from the rownames of species.scores
+```{r nmds for illumina}
 
 
-ggplot() + 
-  geom_point(data=data.scores,aes(x=NMDS1,y=NMDS2,shape = OceanType, colour=OceanType),size=4) +
-  coord_equal() +
-  theme_bw() + 
-  theme(axis.text.x = element_blank(),  # remove x-axis text
-        axis.text.y = element_blank(), # remove y-axis text
-        axis.ticks = element_blank(),  # remove axis ticks
-        axis.title.x = element_text(size=18), # remove x-axis labels
-        axis.title.y = element_text(size=18), # remove y-axis labels
-        panel.background = element_blank(), 
-        panel.grid.major = element_blank(),  #remove major-grid labels
-        panel.grid.minor = element_blank(),  #remove minor-grid labels
-        plot.background = element_blank())
+p.i.order.locale <- ggplot.NMDS(order.nmds, trimmed.try.2, "Locale") + ggtitle("NMDS by Order, Location, Illumina")
+p.i.order.depth <- ggplot.NMDS.depth(order.nmds, key.metadata.illumina$Depth, "Depth") + ggtitle("NMDS by Order, Depth, Illumina")
+p.i.order.latitude <- ggplot.NMDS(order.nmds, key.metadata.illumina$Latitude, "Latitude") + ggtitle("NMDS by Order, Latitude, Illumina")
+p.i.order.hour <- ggplot.NMDS(order.nmds, key.metadata.illumina$Hour, "Hour of Cast") + ggtitle("NMDS by Order, Hour, Illumina")
+p.i.order.group <- ggplot.NMDS(order.nmds, key.metadata.illumina$TimeOfDay, "Time Of Day") + ggtitle("NMDS by Order, Time of Day, Illumina")
+
+p.i.order.locale
+p.i.order.depth
+p.i.order.latitude
+p.i.order.hour
+p.i.order.group
+# DENDOGRAM (done)
+# ANOVA (done)
+# BOX PLOTS BY DIFF VARIABLES (done)
+# NMDS BY DIFF VARIABLES (done)
+
+```
+
+```{r nmds for minion}
+
+p.i.order.locale <- ggplot.NMDS(NMDS3.minion, key.metadata.minion$Locale, "Location") + ggtitle("NMDS by Order, Location, Minion")
+p.i.order.depth <- ggplot.NMDS.depth(NMDS3.minion, key.metadata.minion$Depth, "Depth") + ggtitle("NMDS by Order, Depth, Minion")
+p.i.order.latitude <- ggplot.NMDS(NMDS3.minion, key.metadata.minion$Latitude, "Latitude") + ggtitle("NMDS by Order, Latitude, Minion")
+p.i.order.hour <- ggplot.NMDS(NMDS3.minion, key.metadata.minion$Hour, "Hour of Cast") + ggtitle("NMDS by Order, Hour, Minion")
+p.i.order.group <- ggplot.NMDS(NMDS3.minion, key.metadata.minion$TimeOfDay, "Time Of Day") + ggtitle("NMDS by Order, Time of Day, Minion")
+
+p.i.order.locale
+p.i.order.depth
+p.i.order.latitude
+p.i.order.hour
+p.i.order.group
+# DENDOGRAM (done)
+# ANOVA (done)
+# BOX PLOTS BY DIFF VARIABLES (done)
+# NMDS BY DIFF VARIABLES (done)
+
+```
+
+```{r}
+
+
+ggplot.NMDS(family.nmds, trimmed.ocean.type) + ggtitle("Family, Ocean")
+ggplot.NMDS(family.nmds, trimmed.gen) + ggtitle("Family, Fine")
+ggplot.NMDS(family.nmds, trimmed.edit) + ggtitle("Family, Swordfish")
+
+
+length(trimmed.depth)
+ggplot.NMDS(family.nmds, trimmed.depth) + ggtitle("Family, Ocean")
+ggplot.NMDS(family.nmds, trimmed.gen) + ggtitle("Family, Fine")
+ggplot.NMDS(family.nmds, trimmed.edit) + ggtitle("Family, Swordfish")
+
+```
+
+```{r}
+
+
+ggplot.NMDS(genus.nmds, trimmed.ocean.type)
+ggplot.NMDS(genus.nmds, trimmed.gen)
+ggplot.NMDS(genus.nmds, trimmed.edit)
+
+```
+
+```{r anova.betadisper}
+
+dist.order.ill <- vegdist(illumina.order.t)
+fac.depth <- as.factor(key.metadata.illumina$Depth)
+fac.locale <- as.factor(key.metadata.illumina$Locale)
+fac.oceantype <- as.factor(key.metadata.illumina$OceanType)
+fac.latitude <- as.factor(key.metadata.illumina$Latitude)
+fac.hour <- as.factor(key.metadata.illumina$Hour)
+big.group <- as.factor(round(key.metadata.illumina$Hour/6, 0))
+key.metadata.illumina
+
+bd.depth.i <- betadisper(dist.order.ill, fac.depth)
+bd.locale.i <- betadisper(dist.order.ill, fac.locale)
+bd.oceantype.i <- betadisper(dist.order.ill, fac.oceantype)
+bd.latitude.i <- betadisper(dist.order.ill, fac.latitude)
+bd.hour.i <- betadisper(dist.order.ill, fac.hour)
+bd.hour2.i <- betadisper(dist.order.ill, big.group)
+
+
+bd.depth.i %>% TukeyHSD()
+bd.locale.i %>% TukeyHSD()
+bd.oceantype.i %>% TukeyHSD()
+bd.latitude.i %>% TukeyHSD()
+bd.hour.i %>% TukeyHSD()
+bd.hour2.i %>% TukeyHSD()
+
 ```
 

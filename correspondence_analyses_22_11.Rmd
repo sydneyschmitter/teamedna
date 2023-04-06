@@ -14,15 +14,16 @@ setwd("~/teamedna")
 # Read order counts
 order.taxa <- read.csv("corder_taxa.csv")
 order.taxa[is.na(order.taxa)] <- 0  # Replace NaN & Inf with NA
-class.taxa[is.na(class.taxa)] <- 0  # Replace NaN & Inf with NA
 order.taxa.trimmed <- order.taxa[11:38,]
 
-percentage <- order.taxa.trimmed/rowSums(order.taxa.trimmed)
+order.taxa <- order.taxa/rowSums(order.taxa)
+
 percentage.untrimmed <- order.taxa/rowSums(order.taxa)
 
 #Read metadata
-all.metadata <- read.csv("metadata.csv")
-all.metadata <- all.metadata[1:38,]
+metadata.minion <- read.csv("metadata.csv")
+metadata.minion <- metadata.minion[1:38,]
+rownames(order.taxa) <- metadata.minion$SAMPLE
 
 # this code effectively just categorizes swordfish seamount as an anticyclonic eddy
 ocean.type <- c("Near shore", "Near shore", "Near shore", "Near shore", "Near shore", "Near shore", "Near shore", "Near shore", "Near shore", "Near shore", "Cyclonic Eddy",         "Cyclonic Eddy",         "Cyclonic Eddy",         "Cyclonic Eddy",        
@@ -31,17 +32,17 @@ ocean.type <- c("Near shore", "Near shore", "Near shore", "Near shore", "Near sh
 "Anticyclonic eddy",     "Anticyclonic eddy",     "Edge of Cyclonic Eddy", "Edge of Cyclonic Eddy",
 "Edge of Cyclonic Eddy", "Edge of Cyclonic Eddy", "Cyclonic Eddy",         "Cyclonic Eddy",        
 "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean", "Open Ocean","Open Ocean", "Open Ocean") 
-all.metadata$OceanType <- ocean.type # note this merges all the open ocean samples under one factor
+metadata.minion$OceanType <- ocean.type # note this merges all the open ocean samples under one factor
 
 
 # Group by time
-time.div.hours <- as.integer(all.metadata$Start.Time/100)
+time.div.hours <- as.integer(metadata.minion$Start.Time/100)
 time.div <- as.integer(time.div.hours/6)
-all.metadata$TimeGroup <- time.div
+metadata.minion$TimeGroup <- time.div
 
 
 # 11:38 removes the first 3 nearshore sites
-all.metadata2 <- all.metadata[11:38,]
+metadata.minion2 <- metadata.minion[11:38,]
 
 
 ```
@@ -230,6 +231,8 @@ time.ano.dissim <- anosim(dist.order, grouping = all.metadata2$TimeGroup) # Sign
 time.ano.dissim
 ocean.ano.dissim <- anosim(dist.order, grouping = all.metadata2$OceanType) # Significant difference - not super explanatory
 ocean.ano.dissim
+
+ocean.ano.dissim$class.vec
 lat.ano.dissim <- anosim(dist.order, grouping = all.metadata2$LatDeg) # Insignificant difference
 lat.ano.dissim
 
@@ -245,6 +248,7 @@ ocean.ano.dissim.class
 lat.ano.dissim.class <- anosim(dist.class, grouping = all.metadata2$LatDeg) # Insignificant difference
 lat.ano.dissim.class
 
+summary(station.ano.dissim)
 ```
 
 ```{r}
@@ -417,6 +421,8 @@ title("Beta Dispersion by Time of Day")
 permutest(betadisper.mod.lat)
 plot(betadisper.mod.lat, main = NULL)
 title("Beta Dispersion by Latitude")
+
+
 
 ```
 

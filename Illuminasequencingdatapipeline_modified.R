@@ -445,4 +445,89 @@ title("Constrained Correspondence Analysis by Ocean Type")
 
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+# Create plots for our five most common species over time with counts drawn from average count per trap night
+a.s.time <- ggplot(data = pop.data.avg.day, 
+                   aes(y = Aedes.sierrensis, x = DecimalDate), 
+                   suppressWarnings=TRUE) + geom_bar(stat = 'identity', 
+                                                     fill = cbPalette[2], 
+                                                     width=0.15) + 
+  ggtitle("Aedes sierrensis") + ylab("Count") + 
+  scale_y_continuous(n.breaks = 2, limits = c(0, 120)) + 
+  theme_bw() + theme(axis.title.x = element_blank(), 
+                     axis.title.y = element_blank(), 
+                     axis.text.x = element_blank())
+
+c.e.time <- ggplot(data = pop.data.avg.day, 
+                   aes(y = Culex.erythrothorax, x = DecimalDate), 
+                   suppressWarnings=TRUE) + geom_bar(stat = 'identity', 
+                                                     fill = cbPalette[3], 
+                                                     width=0.15) + 
+  ggtitle("Culex erythrothorax") + ylab("Count")+ 
+  scale_y_continuous(n.breaks = 2, limits = c(0, 120)) + 
+  theme_bw() + theme(axis.title.x = element_blank(), 
+                     axis.title.y = element_blank(), 
+                     axis.text.x = element_blank())
+
+c.p.time <- ggplot(data = pop.data.avg.day, 
+                   aes(y = Culiseta.particeps, x = DecimalDate), 
+                   suppressWarnings=TRUE) + geom_bar(stat = 'identity', 
+                                                     fill = cbPalette[4], 
+                                                     width=0.15) + 
+  ggtitle("Culiseta particeps") + ylab("Count")+ 
+  scale_y_continuous(n.breaks = 2, limits = c(0, 120)) + 
+  theme_bw() + theme(axis.title.x = element_blank(), 
+                     axis.title.y = element_blank(), 
+                     axis.text.x = element_blank())
+
+a.w.time <- ggplot(data = pop.data.avg.day, 
+                   aes(y = Aedes.washinoi, x = DecimalDate), 
+                   suppressWarnings=TRUE) + geom_bar(stat = 'identity', 
+                                                     fill = cbPalette[7], 
+                                                     width=0.15) + 
+  ggtitle("Aedes washinoi") + ylab("Count")+ 
+  scale_y_continuous(n.breaks = 2, limits = c(0, 120)) + 
+  theme_bw() + theme(axis.title.x = element_blank(), 
+                     axis.title.y = element_blank(), 
+                     axis.text.x = element_blank())
+
+a.p.time <- ggplot(data = pop.data.avg.day, 
+                   aes(y = Anopheles.punctipennis, x = DecimalDate), 
+                   suppressWarnings=TRUE) + geom_bar(stat = 'identity', 
+                                                     fill = cbPalette[6], 
+                                                     width=0.15) + 
+  ggtitle("Anopheles punctipennis") + ylab("Count") +
+  scale_y_continuous(n.breaks = 2, limits = c(0, 120)) + 
+  theme_bw() + theme(axis.title.x = element_blank(),
+                     axis.title.y = element_blank(),
+                     axis.text.x = element_blank())
+
+
+
+all.species <- ggplot() + geom_bar(data = pop.data.avg.day, 
+                                   aes(y = Anopheles.punctipennis, x = DecimalDate), 
+                                   stat = 'identity', fill = cbPalette[6], 
+                                   width=0.15) + geom_bar(data = pop.data.avg.day, 
+                                                          aes(y = Aedes.sierrensis, x = DecimalDate), 
+                                                          stat = 'identity', fill = cbPalette[6], 
+                                                          width=0.15) + geom_bar(data = pop.data.avg.day, 
+                                                                                 aes(y = Culex.erythrothorax, x = DecimalDate), 
+                                                                                 stat = 'identity', fill = cbPalette[6], 
+                                                                                 width=0.15) + geom_bar(data = pop.data.avg.day, 
+                                                                                                        aes(y = Aedes.washinoi, x = DecimalDate), 
+                                                                                                        stat = 'identity', fill = cbPalette[6], 
+                                                                                                        width=0.15) + geom_bar(data = pop.data.avg.day, 
+                                                                                                                                aes(y = , x = DecimalDate), 
+                                                                                                                                stat = 'identity', fill = cbPalette[6], 
+                                                                                                                                width=0.15)
+
+all.species
+
+library(tidyr)
+gathered<-gather(pop.data.avg.day, "Species", "Count", c("Anopheles.punctipennis", "Aedes.sierrensis", "Aedes.washinoi", "Culex.erythrothorax", "Culiseta.particeps"))
+
+ggplot(data = gathered, aes(x = DecimalDate, y = Count, color = Species)) + geom_point()
+grid.arrange(a.w.time, a.s.time, c.e.time, c.p.time, a.p.time, ncol = 1, nrow = 5)
+

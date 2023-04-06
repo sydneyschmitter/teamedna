@@ -1,0 +1,59 @@
+```{r}
+library(tidyverse)
+library(rstatix)
+library(ggpubr)
+
+
+key.metadata.illumina$Locale <- as.character(key.metadata.illumina$Locale)
+key.metadata.illumina$Depth <- as.numeric(key.metadata.illumina$Depth)
+key.metadata.illumina$Hour <- as.numeric(key.metadata.illumina$Hour)
+key.metadata.illumina$Latitude <- as.numeric(key.metadata.illumina$Latitude)
+key.metadata.illumina$TimeOfDay <- as.character(key.metadata.illumina$TimeOfDay)
+
+key.metadata.minion$Locale <- as.character(key.metadata.minion$Locale)
+key.metadata.minion$Depth <- as.numeric(key.metadata.minion$Depth)
+key.metadata.minion$Hour <- as.numeric(key.metadata.minion$Hour)
+key.metadata.minion$Latitude <- as.numeric(key.metadata.minion$Latitude)
+key.metadata.minion$TimeOfDay <- as.character(key.metadata.minion$TimeOfDay)
+
+locale.ill.t <- t_test(key.metadata.illumina, Diversity ~ Locale) %>% .[which(.$p < 0.05),]
+locale.ill.t
+locale2.ill.t <- t_test(key.metadata.illumina, Diversity ~ Location2) %>% .[which(.$p < 0.05),]
+locale2.ill.t
+depth.ill.t <- t_test(key.metadata.illumina, Diversity ~ Depth) %>% .[which(.$p < 0.05),]
+depth.ill.t
+hour.ill.t <- t_test(key.metadata.illumina, Diversity ~ Hour) %>% .[which(.$p < 0.05),]
+hour.ill.t
+timeofday.ill.t <- t_test(key.metadata.illumina, Diversity ~ TimeOfDay) %>% .[which(.$p < 0.05),]
+timeofday.ill.t
+lat.ill.t <- t_test(key.metadata.illumina, Diversity ~ Latitude) %>% .[which(.$p < 0.05),]
+lat.ill.t
+
+locale.min.t <- t_test(key.metadata.minion, Diversity ~ Locale) %>% .[which(.$p < 0.05),]
+locale.min.t
+depth.min.t <- t_test(key.metadata.minion, Diversity ~ Depth) %>% .[which(.$p < 0.05),]
+depth.min.t
+hour.min.t <- t_test(key.metadata.minion, Diversity ~ Hour) %>% .[which(.$p < 0.05),]
+hour.min.t
+timeofday.min.t <- t_test(key.metadata.minion, Diversity ~ TimeOfDay) %>% .[which(.$p < 0.05),]
+timeofday.min.t
+lat.min.t <- t_test(key.metadata.minion, Diversity ~ Latitude) %>% .[which(.$p < 0.05),]
+lat.min.t
+
+df <- lat.min.t
+i <- 1
+make.couplets <- function(df) {
+  list.1 <- as.list(df$group1)
+  list.2 <- as.list(df$group2)
+  return.vec <- list()
+  for (i in 1:length(list.1)) {
+    val.1 <- list.1[[i]]
+    val.2 <- list.2[[i]]
+    return.vec[[i]] <- (c(val.1, val.2))
+  }
+  return(return.vec)
+}
+
+
+
+```
