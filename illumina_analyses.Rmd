@@ -415,6 +415,8 @@ make.couplets <- function(df) {
   return(return.vec)
 }
 
+make.couplets(hour.min.t) %>% unique()
+
 ```
 
 ```{r}
@@ -639,6 +641,9 @@ tabasco(for.order.nmds)
 
 minion.metadata <- read.csv("metadata.csv") %>% .[1:38,]
 
+NMDS3.minion
+for.order.nmds 
+
 colnames(order.taxa.perc)
 colnames(for.order.nmds)
 
@@ -739,5 +744,53 @@ bd.latitude.i %>% TukeyHSD()
 bd.hour.i %>% TukeyHSD()
 bd.hour2.i %>% TukeyHSD()
 
+```
+
+```{r pcoa and cca for illumina}
+library(ape)
+
+pcoa.results <- illumina.order.t[which(key.metadata.illumina$Locale != "Swordfish Seamount" & key.metadata.illumina$Locale != "Subtropical Gyre" & key.metadata.illumina$Locale != "Eddy convergence"),] %>% vegdist(., method = "bray") %>% pcoa(.)
+
+pcoa.gg <- key.metadata.illumina[which(key.metadata.illumina$Locale != "Swordfish Seamount" & key.metadata.illumina$Locale != "Subtropical Gyre" & key.metadata.illumina$Locale != "Eddy convergence"),] %>% data.frame("PCoA1" = pcoa.results$vectors[,1], "PCoA2" = pcoa.results$vectors[,2], "Locale" = .$Locale, "Hour" = .$Hour)
+
+ggplot(data = pcoa.gg, aes(x = PCoA1, y = PCoA2, colour = Locale)) + geom_point()
+
+ggplot(data = pcoa.gg, aes(x = PCoA1, y = PCoA2, colour = Hour)) + geom_point()
+
+# Ugly AF plots
+cca(illumina.order.t ~ Locale, key.metadata.illumina) %>% plot()
+cca(illumina.order.t ~ Hour, key.metadata.illumina) %>% plot()
+cca(illumina.order.t ~ TimeOfDay, key.metadata.illumina) %>% plot()
+
+```
+
+```{r pcoa and cca for minion}
+
+pcoa.results.min <- pcoa(dist.order.minion)
+
+pcoa.gg.min <- data.frame("PCoA1" = pcoa.results.min$vectors[,1], "PCoA2" = pcoa.results.min$vectors[,2], "Locale" = key.metadata.minion$Locale, "Hour" = key.metadata.minion$Hour)
+
+ggplot(data = pcoa.gg.min, aes(x = PCoA1, y = PCoA2, colour = Locale)) + geom_point()
+ggplot(data = pcoa.gg.min, aes(x = PCoA1, y = PCoA2, colour = Hour)) + geom_point()
+
+# Ugly AF plots
+cca(order.taxa ~ Locale, key.metadata.minion) %>% plot()
+cca(order.taxa ~ Hour, key.metadata.illumina) %>% plot()
+cca(order.taxa ~ TimeOfDay, key.metadata.minion) %>% plot()
+
+```
+
+```{r}
+
+colnames(key.metadata.illumina)
+
+
+permanova.illumina <- adonis2(dist.order.illumina ~  Depth+ Latitude+ Temperature+ Chlorophyll+ Salinity+ Oxygen+ Density+ Hour, key.metadata.illumina, by = "margin")
+permanova.illumina
+
+permanova.minion <- adonis2(dist.order.minion ~ Depth+ Latitude+ Temperature+ Chlorophyll+ Salinity+ Oxygen+ Density+ Hour, key.metadata.minion, by = "margin")
+permanova.minion
+
+```
 ```
 
