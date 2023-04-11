@@ -352,7 +352,7 @@ key.metadata.illumina <- data.frame("OceanType" = ocean.type, "Locale" = locale,
 ```
 
 
-```{r}
+```{r make metadata files}
 big.group <- as.factor(round(key.metadata.illumina$Hour/6, 0))
 key.metadata.illumina$HourGroup <- big.group
 
