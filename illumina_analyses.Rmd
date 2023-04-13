@@ -718,7 +718,7 @@ ggplot.NMDS(genus.nmds, trimmed.edit)
 
 ```
 
-```{r anova.betadisper}
+```{r tukey multiple comparison of means i.e. pairwise comparisons}
 
 dist.order.ill <- vegdist(illumina.order.t)
 fac.depth <- as.factor(key.metadata.illumina$Depth)
@@ -744,6 +744,29 @@ bd.latitude.i %>% TukeyHSD()
 bd.hour.i %>% TukeyHSD()
 bd.hour2.i %>% TukeyHSD()
 
+
+fac.depth <- as.factor(key.metadata.minion$Depth)
+fac.locale <- as.factor(key.metadata.minion$Locale)
+fac.oceantype <- as.factor(key.metadata.minion$OceanType)
+fac.latitude <- as.factor(key.metadata.minion$Latitude)
+fac.hour <- as.factor(key.metadata.minion$Hour)
+big.group <- as.factor(round(key.metadata.minion$Hour/6, 0))
+key.metadata.minion
+
+bd.depth.i <- betadisper(dist.order.minion, fac.depth)
+bd.locale.i <- betadisper(dist.order.minion, fac.locale)
+bd.oceantype.i <- betadisper(dist.order.minion, fac.oceantype)
+bd.latitude.i <- betadisper(dist.order.minion, fac.latitude)
+bd.hour.i <- betadisper(dist.order.minion, fac.hour)
+bd.hour2.i <- betadisper(dist.order.minion, big.group)
+
+bd.depth.i %>% TukeyHSD()
+bd.locale.i %>% TukeyHSD()
+bd.oceantype.i %>% TukeyHSD()
+bd.latitude.i %>% TukeyHSD()
+bd.hour.i %>% TukeyHSD()
+bd.hour2.i %>% TukeyHSD()
+
 ```
 
 ```{r pcoa and cca for illumina}
@@ -755,6 +778,12 @@ pcoa.gg <- key.metadata.illumina[which(key.metadata.illumina$Locale != "Swordfis
 
 ggplot(data = pcoa.gg, aes(x = PCoA1, y = PCoA2, colour = Locale)) + geom_point()
 
+
+
+pcoa.results <- pcoa(dist.order.illumina)
+
+pcoa.gg <- data.frame("PCoA1" = pcoa.results$vectors[,1], "PCoA2" = pcoa.results$vectors[,2], "Hour" = key.metadata.illumina$Hour)
+
 ggplot(data = pcoa.gg, aes(x = PCoA1, y = PCoA2, colour = Hour)) + geom_point()
 
 # Ugly AF plots
@@ -764,18 +793,61 @@ cca(illumina.order.t ~ TimeOfDay, key.metadata.illumina) %>% plot()
 
 ```
 
+
+```{r simper analyses}
+simper.illumina <- simper(illumina.order.t, group = as.factor(key.metadata.illumina$Locale)) 
+simper.illumina$`Cyclonic Eddy_Anticyclonic Eddy`
+
+simper.illumina
+
+test <- simper.illumina["Cyclonic Eddy_Eddy convergence"][[1]] %>% .[which(.$ratio > 0.5 & .$cumsum < 0.99),]
+test
+test$Order <- rownames(test)
+curr.df
+name <- names(simper.illumina)[1]
+
+for (name in names(simper.illumina)) {
+  curr.df <- simper.illumina[name][[1]] %>% .[which(.$ratio > 0.5 & .$cumsum < 0.99 & .$avb > 0 & .$ava > 0),]
+  curr.df$Order <- rownames(curr.df)
+  test <- rbind(test, curr.df)
+}
+
+test
+
+most.val.member <- aggregate(test, by = list(test$Order), FUN = mean)
+most.val.member
+
+simper.illumina <- simper(illumina.order.t, group = as.factor(key.metadata.illumina$Locale))
+(simper.illumina)
+
+simper.minion <- simper(order.taxa, group = as.factor(key.metadata.minion$Locale))
+(simper.minion)
+
+```
+
 ```{r pcoa and cca for minion}
 
-pcoa.results.min <- pcoa(dist.order.minion)
+pcoa.results.min <- order.taxa[which(key.metadata.minion$Latitude == "19" | key.metadata.minion$Latitude == "10" | key.metadata.minion$Latitude == "13" | key.metadata.minion$Latitude == "18" | key.metadata.minion$Latitude == "14" | key.metadata.minion$Latitude == "17"),] %>% vegdist(.) %>% pcoa(.)
 
-pcoa.gg.min <- data.frame("PCoA1" = pcoa.results.min$vectors[,1], "PCoA2" = pcoa.results.min$vectors[,2], "Locale" = key.metadata.minion$Locale, "Hour" = key.metadata.minion$Hour)
+pcoa.results.min <- order.taxa %>% vegdist(.) %>% pcoa(.)
 
-ggplot(data = pcoa.gg.min, aes(x = PCoA1, y = PCoA2, colour = Locale)) + geom_point()
+pcoa.gg.min <- data.frame("PCoA1" = pcoa.results.min$vectors[,1], "PCoA2" = pcoa.results.min$vectors[,2], "Locale" = key.metadata.minion$Locale, "Hour" = key.metadata.minion$Hour, "Latitude" = key.metadata.minion$Latitude, "Locale" = key.metadata.minion$OceanType)
+
+ggplot(data = pcoa.gg.min, aes(x = PCoA1, y = PCoA2, colour = Latitude)) + geom_point()
 ggplot(data = pcoa.gg.min, aes(x = PCoA1, y = PCoA2, colour = Hour)) + geom_point()
+ggplot(data = pcoa.gg.min, aes(x = PCoA1, y = PCoA2, colour = Locale)) + geom_point()
+
+
+pcoa.gg.min <- key.metadata.minion[which(key.metadata.minion$OceanType == "Near shore" | key.metadata.minion$OceanType == "Open Ocean" | key.metadata.minion$OceanType == "Anticyclonic eddy"),] %>% data.frame("PCoA1" = pcoa.results.min$vectors[,1], "PCoA2" = pcoa.results.min$vectors[,2], "Hour" = .$Hour, "Locale" = .$OceanType)
+
+pcoa.gg.min
+
+ggplot(data = pcoa.gg.min, aes(x = PCoA1, y = PCoA2, colour = Locale.1)) + geom_point()
+
 
 # Ugly AF plots
 cca(order.taxa ~ Locale, key.metadata.minion) %>% plot()
-cca(order.taxa ~ Hour, key.metadata.illumina) %>% plot()
+cca(order.taxa ~ Hour, key.metadata.minion) %>% plot()
 cca(order.taxa ~ TimeOfDay, key.metadata.minion) %>% plot()
 
 ```

@@ -291,6 +291,8 @@ colnames(illumina.order.local) <- trimmed.metadata$GeneralLocale
 
 ```{r anova dissimilarity}
 
+write.csv(illumina.order, "~/illumina_order.csv")
+
 illumina.order
 # Trying anova dissimilarity index
 station.ano.dissim <- anosim(illumina.order.t, grouping = trimmed.metadata$STATION.NUMBER) # Significant difference, even distribution of high and low ranks
