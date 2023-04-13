@@ -1,0 +1,475 @@
+"","X12S_Sample12.2.StatNo.12","X12S_Sample12.3.StatNo.12","X12S_Sample13.1.StatNo.13","X12S_Sample13.2.StatNo.13","X12S_Sample16.2.StatNo.16","X12S_Sample16.3.StatNo.16","X12S_Sample17.1.StatNo.17","X12S_Sample17.2.StatNo.17","X12S_Sample17.3.StatNo.17","X12S_Sample17.4.StatNo.17","X12S_Sample18.2.StatNo.18","X12S_Sample18.3.StatNo.18","X12S_Sample19.1.StatNo.19","X12S_Sample19.2.StatNo.19","X12S_Sample25.1.StatNo.28","X12S_Sample25.11.StatNo.28","X12S_Sample25.2.StatNo.28","X12S_Sample26.11.StatNo.45","X12S_Sample26.12.StatNo.45","X12S_Sample3.1.StatNo.3","X12S_Sample3.2.StatNo.3","X12S_Sample3.3.StatNo.3","X12S_Sample4.1.StatNo.4","X12S_Sample4.2.StatNo.4","X12S_Sample5.1.StatNo.5","X12S_Sample5.2.StatNo.5","X12S_Sample5.3.StatNo.5","X12S_Sample5.4.StatNo.5","X12S_Sample6.2.StatNo.6","X12S_Sample6.3.StatNo.6","X12S_Sample6.4.StatNo.6","X12S_Sample6.5.StatNo.6","X12S_Sample7.2.StatNo.7","X12S_Sample7.3.StatNo.7","X12S_Sample7.4.StatNo.7","X12S_Sample7.5.StatNo.7","X12S_Sample8.1.StatNo.8","X12S_Sample8.2.StatNo.8"
+"Eukaryota;Chordata;Actinopteri;Acanthuriformes;Acanthuridae;Acanthurus;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Acanthuriformes;Acanthuridae;Acanthurus;Acanthurus leucosternon",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Acanthuriformes;Acanthuridae;Acanthurus;Acanthurus nigricauda",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Acanthuriformes;Acanthuridae;Acanthurus;Acanthurus triostegus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Acanthuriformes;Acanthuridae;Acanthurus;Acanthurus xanthopterus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Acanthuriformes;Acanthuridae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+"Eukaryota;Chordata;Actinopteri;Acanthuriformes;Acanthuridae;Naso;Naso brachycentron",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Acanthuriformes;Acanthuridae;Prionurus;Prionurus maculatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Acanthuriformes;Acanthuridae;Prionurus;Prionurus scalprum",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Acanthuriformes;Acanthuridae;Zebrasoma;Zebrasoma flavescens",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Acanthuriformes;Luvaridae;Luvarus;Luvarus imperialis",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Alepocephaliformes;Alepocephalidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Alepocephaliformes;NA;;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,19,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Alepocephaliformes;Platytroctidae;Holtbyrnia;Holtbyrnia innesi",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,28441,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Alepocephaliformes;Platytroctidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,59,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Alepocephaliformes;Platytroctidae;Normichthys;Normichthys operosus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Alepocephaliformes;Platytroctidae;Platytroctes;Platytroctes apus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Anabantiformes;Channidae;Channa;Channa punctata",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Anabantiformes;Channidae;Channa;Channa striata",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Anguilliformes;NA;;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Anguilliformes;Serrivomeridae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,97169,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Argentiniformes;Argentinidae;Argentina;Argentina kagoshimae",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Argentiniformes;Argentinidae;Argentina;Argentina silus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+"Eukaryota;Chordata;Actinopteri;Argentiniformes;Bathylagidae;Bathylagus;Bathylagus pacificus",0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Argentiniformes;Bathylagidae;Leuroglossus;Leuroglossus schmidti",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Argentiniformes;Bathylagidae;Lipolagus;Lipolagus ochotensis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,210,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Argentiniformes;Bathylagidae;Melanolagus;Melanolagus bericoides",0,0,0,8196,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Argentiniformes;Bathylagidae;NA;",0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,158,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Argentiniformes;Bathylagidae;Pseudobathylagus;Pseudobathylagus milleri",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Argentiniformes;Microstomatidae;Nansenia;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,60,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,86
+"Eukaryota;Chordata;Actinopteri;Argentiniformes;Microstomatidae;Nansenia;Nansenia ardesiaca",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,149,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,45
+"Eukaryota;Chordata;Actinopteri;Argentiniformes;Microstomatidae;Nansenia;Nansenia sanrikuensis",0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,30,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5
+"Eukaryota;Chordata;Actinopteri;Argentiniformes;Microstomatidae;Xenophthalmichthys;Xenophthalmichthys danae",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+"Eukaryota;Chordata;Actinopteri;Argentiniformes;NA;;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,583,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,56991
+"Eukaryota;Chordata;Actinopteri;Argentiniformes;Opisthoproctidae;Macropinna;Macropinna microstoma",0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Argentiniformes;Opisthoproctidae;Monacoa;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Argentiniformes;Opisthoproctidae;Monacoa;Monacoa sp. JYP-2016b",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Argentiniformes;Opisthoproctidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+"Eukaryota;Chordata;Actinopteri;Argentiniformes;Opisthoproctidae;Opisthoproctus;Opisthoproctus soleatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Atheriniformes;Atherinidae;Atherinomorus;Atherinomorus aetholepis",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Atheriniformes;Atherinidae;Atherinosoma;Atherinosoma microstoma",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Atheriniformes;Atherinopsidae;Menidia;Menidia beryllina",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Atheriniformes;Atherinopsidae;Odontesthes;Odontesthes bonariensis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Atheriniformes;Atherinopsidae;Odontesthes;Odontesthes sp. Odsp-001",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Atheriniformes;Melanotaeniidae;Melanotaenia;Melanotaenia australis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Aulopiformes;Scopelarchidae;Scopelarchus;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,826,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Beloniformes;Exocoetidae;Cheilopogon;",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Beloniformes;Exocoetidae;Hirundichthys;",0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Beryciformes;Anomalopidae;Anomalops;Anomalops katoptron",0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Beryciformes;Barbourisiidae;Barbourisia;Barbourisia rufa",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Beryciformes;Berycidae;Beryx;Beryx mollis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+"Eukaryota;Chordata;Actinopteri;Beryciformes;Berycidae;Beryx;Beryx sp.",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Beryciformes;Cetomimidae;Ataxolepis;Ataxolepis apus",0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Beryciformes;Cetomimidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+"Eukaryota;Chordata;Actinopteri;Beryciformes;Cetomimidae;Procetichthys;Procetichthys kreffti",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Beryciformes;Diretmidae;Diretmus;Diretmus argenteus",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Beryciformes;Melamphaidae;Scopeloberyx;Scopeloberyx robustus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Beryciformes;Melamphaidae;Scopelogadus;",0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Beryciformes;Melamphaidae;Scopelogadus;Scopelogadus cf. bispinosus CBM DNA No. 2015-012",0,0,1,11000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Beryciformes;Melamphaidae;Scopelogadus;Scopelogadus mizolepis",0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Beryciformes;Monocentridae;Monocentris;Monocentris japonicus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,11,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Beryciformes;NA;;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Beryciformes;Trachichthyidae;Hoplostethus;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Beryciformes;Trachichthyidae;Hoplostethus;Hoplostethus japonicus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Blenniiformes;Clinidae;Gibbonsia;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Blenniiformes;Clinidae;Gibbonsia;Gibbonsia montereyensis",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Blenniiformes;Clinidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Blenniiformes;Labrisomidae;Labrisomus;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Blenniiformes;NA;;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Blenniiformes;Tripterygiidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Caproiformes;Caproidae;Antigonia;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Carangiformes;Carangidae;Decapterus;Decapterus maruadsi",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Carangiformes;Carangidae;Seriola;",0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,2,0,0,62,0
+"Eukaryota;Chordata;Actinopteri;Carangiformes;Carangidae;Seriola;Seriola dumerili",0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+"Eukaryota;Chordata;Actinopteri;Carangiformes;Carangidae;Seriola;Seriola lalandi",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,13,0
+"Eukaryota;Chordata;Actinopteri;Carangiformes;Carangidae;Seriola;Seriola rivoliana",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0
+"Eukaryota;Chordata;Actinopteri;Carangiformes;Carangidae;Trachinotus;Trachinotus blochii",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Carangiformes;Carangidae;Ulua;Ulua mentalis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Carangiformes;Carangidae;Uraspis;Uraspis uraspis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Carangiformes;Coryphaenidae;Coryphaena;Coryphaena hippurus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Centrarchidae;Lepomis;",0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Centrarchidae;Lepomis;Lepomis gibbosus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Centrarchidae;Lepomis;Lepomis humilis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Centrarchidae;Micropterus;Micropterus salmoides",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Centrarchidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Centrarchidae;Pomoxis;Pomoxis nigromaculatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Cheilodactylidae;Cheilodactylus;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Elassomatidae;Elassoma;Elassoma boehlkei",1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Kuhliidae;Kuhlia;Kuhlia rupestris",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Kyphosidae;Girella;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Kyphosidae;Girella;Girella mezina",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Kyphosidae;Girella;Girella punctata",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Kyphosidae;Graus;Graus nigra",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Kyphosidae;Hermosilla;Hermosilla azurea",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Kyphosidae;Kyphosus;Kyphosus incisor",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Kyphosidae;Microcanthus;Microcanthus strigatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Kyphosidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Kyphosidae;Neoscorpis;Neoscorpis lithophilus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Percichthyidae;Macquaria;Macquaria australasica",0,0,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Percichthyidae;Percilia;Percilia irwini",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Terapontidae;Pelates;Pelates quadrilineatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Terapontidae;Pelates;Pelates sexlineatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Centrarchiformes;Terapontidae;Terapon;Terapon puta",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Chaetodontiformes;Chaetodontidae;Amphichaetodon;Amphichaetodon melbae",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Chaetodontiformes;Chaetodontidae;Chaetodon;Chaetodon modestus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Chaetodontiformes;Chaetodontidae;Hemitaurichthys;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Chaetodontiformes;Leiognathidae;Nuchequula;Nuchequula blochii",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Characiformes;Bryconidae;Brycon;Brycon orbignyanus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Characiformes;Characidae;Hemigrammus;Hemigrammus erythrozonus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Characiformes;Characidae;Hemigrammus;Hemigrammus hyanuary",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Characiformes;Hemiodontidae;Hemiodopsis;Hemiodopsis gracilis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,5,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Characiformes;Lebiasinidae;Lebiasina;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Characiformes;NA;;",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Cichliformes;Cichlidae;Amatitlania;Amatitlania sajica",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Cichliformes;Cichlidae;Andinoacara;Andinoacara rivulatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Cichliformes;Cichlidae;Archocentrus;Archocentrus multispinosus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Cichliformes;Cichlidae;Geophagus;Geophagus steindachneri",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Cichliformes;Cichlidae;Heterotilapia;Heterotilapia buttikoferi",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Cichliformes;Cichlidae;Nannacara;Nannacara anomala",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Cichliformes;Cichlidae;Paretroplus;Paretroplus maculatus",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Cichliformes;Cichlidae;Ptychochromoides;Ptychochromoides katria",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Cichliformes;Cichlidae;Satanoperca;Satanoperca jurupari",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Cichliformes;Cichlidae;Tropheus;Tropheus moorii",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Cichliformes;Cichlidae;Tylochromis;Tylochromis polylepis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Clupeiformes;Clupeidae;Microthrissa;Microthrissa congica",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Clupeiformes;Clupeidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Clupeiformes;Clupeidae;Nematalosa;Nematalosa come",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+"Eukaryota;Chordata;Actinopteri;Clupeiformes;Clupeidae;Potamothrissa;Potamothrissa acutirostris",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+"Eukaryota;Chordata;Actinopteri;Clupeiformes;Engraulidae;Anchoviella;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Clupeiformes;Engraulidae;Anchoviella;Anchoviella jamesi",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Clupeiformes;Engraulidae;Engraulis;Engraulis encrasicolus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Clupeiformes;Engraulidae;Engraulis;Engraulis japonicus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Clupeiformes;Engraulidae;Lycengraulis;Lycengraulis grossidens",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Clupeiformes;NA;;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Cypriniformes;Cobitidae;Acantopsis;Acantopsis choirorhynchos",1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Cypriniformes;Cyprinidae;Labeo;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Cypriniformes;Cyprinidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Cypriniformes;Cyprinidae;Poropuntius;Poropuntius normani",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Cypriniformes;NA;;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Cyprinodontiformes;Cyprinodontidae;Cyprinodon;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Cyprinodontiformes;Poeciliidae;Poeciliopsis;Poeciliopsis occidentalis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Ephippiformes;Ephippidae;Ephippus;Ephippus orbis",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Ephippiformes;Ephippidae;Platax;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Esociformes;Umbridae;Umbra;Umbra limi",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Gadiformes;Gadidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1140
+"Eukaryota;Chordata;Actinopteri;Gadiformes;Gadidae;Trisopterus;Trisopterus luscus",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Gadiformes;Moridae;Halargyreus;Halargyreus johnsonii",0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Gadiformes;Moridae;Lotella;Lotella phycis",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Gerreiformes;Gerreidae;Gerres;Gerres erythrourus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Gobiiformes;Eleotridae;Oxyeleotris;",0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Gobiiformes;Eleotridae;Oxyeleotris;Oxyeleotris urophthalmoides",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Gobiiformes;Gobiidae;Asterropteryx;Asterropteryx semipunctata",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Gobiiformes;Gobiidae;Bollmannia;Bollmannia boqueronensis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Gobiiformes;Gobiidae;Gobiosoma;Gobiosoma ginsburgi",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Gobiiformes;Gobiidae;Microgobius;Microgobius thalassinus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Gobiiformes;Gobiidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Gobiiformes;Gobiidae;Redigobius;Redigobius bikolanus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Gobiiformes;Gobiidae;Vanderhorstia;Vanderhorstia ornatissima",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Gobiiformes;Odontobutidae;Odontobutis;Odontobutis haifengensis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Holocentriformes;Holocentridae;Neoniphon;Neoniphon opercularis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Holocentriformes;Holocentridae;Sargocentron;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Holocentriformes;Holocentridae;Sargocentron;Sargocentron punctatissimum",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Istiophoriformes;Xiphiidae;Xiphias;Xiphias gladius",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Kurtiformes;Apogonidae;Fibramia;Fibramia thermalis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Labriformes;Labridae;Bodianus;Bodianus bilunulatus",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Labriformes;Labridae;Coris;Coris dorsomacula",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Labriformes;Labridae;Halichoeres;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Labriformes;Labridae;Halichoeres;Halichoeres ornatissimus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Labriformes;Labridae;Hologymnosus;Hologymnosus doliatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Labriformes;Labridae;Iniistius;Iniistius umbrilatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Labriformes;Labridae;Macropharyngodon;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Labriformes;Labridae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Labriformes;Labridae;Symphodus;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Lophiiformes;Antennariidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Lophiiformes;Ogcocephalidae;Coelophrys;Coelophrys brevicaudata",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Lutjaniformes;Haemulidae;Plectorhinchus;Plectorhinchus lineatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Lutjaniformes;Haemulidae;Plectorhinchus;Plectorhinchus schotaf",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Lutjaniformes;Lutjanidae;Lutjanus;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Lutjaniformes;Lutjanidae;Lutjanus;Lutjanus argentimaculatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Lutjaniformes;Lutjanidae;Lutjanus;Lutjanus campechanus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Lutjaniformes;Lutjanidae;Lutjanus;Lutjanus dodecacanthoides",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Lutjaniformes;Lutjanidae;Lutjanus;Lutjanus malabaricus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Lutjaniformes;Lutjanidae;Paracaesio;Paracaesio sordida",0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Lutjaniformes;Lutjanidae;Pristipomoides;",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Lutjaniformes;Lutjanidae;Pterocaesio;Pterocaesio tile",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Bolinichthys;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,21498,0,0,0,0,0,0,86,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Diaphus;Diaphus fragilis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Diaphus;Diaphus gigas",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Diaphus;Diaphus luetkeni",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Diaphus;Diaphus parri",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Diaphus;Diaphus perspicillatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Diaphus;Diaphus regani",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Diaphus;Diaphus schmidti",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,15,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Hygophum;Hygophum hygomii",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Hygophum;Hygophum proximum",1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Hygophum;Hygophum reinhardtii",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Hygophum;Hygophum sp. CBM:ZF:15239",1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Krefftichthys;Krefftichthys anderssoni",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Lampadena;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Lampadena;Lampadena urophaos",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Lampanyctus;",0,0,0,0,0,0,37,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1648,0,0,0,0,2,0,0,0,0,0,0,4,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Lampanyctus;Lampanyctus jordani",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Lampanyctus;Lampanyctus macdonaldi",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,2,0,0,0,0,1,0,0,0,0,0,0,3,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Lampanyctus;Lampanyctus nobilis",0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,113564,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Lampanyctus;Lampanyctus pusillus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Lampanyctus;Lampanyctus sp. CBM:ZF:14792",0,0,0,0,0,0,19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Lampanyctus;Lampanyctus sp. Y13",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Lampanyctus;Lampanyctus turneri",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Lampichthys;Lampichthys procerus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Lepidophanes;Lepidophanes guentheri",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Lobianchia;Lobianchia gemellarii",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,59688,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Myctophum;Myctophum orientale",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Nannobrachium;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,1,0,0,0,0,0,0,117,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Nannobrachium;Nannobrachium achirus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46,0,1,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Nannobrachium;Nannobrachium atrum",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Nannobrachium;Nannobrachium lineatum",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,3,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Nannobrachium;Nannobrachium regale",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,3,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Notoscopelus;Notoscopelus caudispinosus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Notoscopelus;Notoscopelus elongatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Notoscopelus;Notoscopelus japonicus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Protomyctophum;",0,0,0,0,0,0,0,0,0,0,0,0,1170,0,0,0,0,0,0,0,0,0,0,0,0,1788,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Protomyctophum;Protomyctophum sp. CBM:ZF:14758",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,72,0,0,0,0,0,101182,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Protomyctophum;Protomyctophum thompsoni",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Stenobrachius;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Symbolophorus;Symbolophorus californiensis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2274,0,0,0,0,3,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Triphoturus;Triphoturus mexicanus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Myctophiformes;Myctophidae;Triphoturus;Triphoturus nigrescens",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1618,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Ambassidae;Parambassis;Parambassis ranga",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Congrogadidae;Congogradus;Congrogadus subducens",0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Embiotocidae;Amphistichus;Amphistichus argenteus",0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Embiotocidae;Embiotoca;",0,0,0,0,0,0,0,0,0,0,0,0,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Embiotocidae;Embiotoca;Embiotoca jacksoni",0,1,0,0,0,0,0,1,0,0,0,0,36,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,35,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Embiotocidae;Neoditrema;Neoditrema ransonnetii",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Embiotocidae;Rhacochilus;Rhacochilus vacca",0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Grammatidae;Gramma;Gramma loreto",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Opistognathidae;Opistognathus;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Opistognathidae;Opistognathus;Opistognathus aurifrons",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Pomacanthidae;Apolemichthys;Apolemichthys griffisi",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Pomacentridae;Amblyglyphidodon;Amblyglyphidodon ternatensis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Pomacentridae;Amphiprion;Amphiprion ocellaris",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Pomacentridae;Chromis;Chromis atripes",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Pomacentridae;Chromis;Chromis chromis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Pomacentridae;Chromis;Chromis lepidolepis",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Pomacentridae;Chromis;Chromis notata",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0
+"Eukaryota;Chordata;Actinopteri;NA;Pomacentridae;Parma;Parma microlepis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Pomacentridae;Stegastes;Stegastes albifasciatus",0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Siganidae;Siganus;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Sillaginidae;Sillago;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Sillaginidae;Sillago;Sillago sinica",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;NA;Toxotidae;Toxotes;Toxotes chatareus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0
+"Eukaryota;Chordata;Actinopteri;Ophidiiformes;Bythitidae;Brosmophycis;Brosmophycis marginata",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Ophidiiformes;Bythitidae;Cataetyx;Cataetyx rubrirostris",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Ophidiiformes;Bythitidae;Diplacanthopoma;Diplacanthopoma brachysoma",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,56,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Ophidiiformes;Bythitidae;Grammonus;Grammonus robustus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,1,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Ophidiiformes;Bythitidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,49617,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Ophidiiformes;NA;;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Ophidiiformes;Ophidiidae;Bassozetus;Bassozetus zenkevitchi",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Ophidiiformes;Ophidiidae;Brotula;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Osmeriformes;NA;;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Osmeriformes;Osmeridae;Allosmerus;Allosmerus elongatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Osmeriformes;Osmeridae;Osmerus;Osmerus mordax",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Osmeriformes;Osmeridae;Spirinchus;Spirinchus starksi",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Osmeriformes;Salangidae;Neosalanx;Neosalanx taihuensis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Osmeriformes;Salangidae;Salangichthys;Salangichthys microdon",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Osmeriformes;Salangidae;Salanx;Salanx ariakensis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Osteoglossiformes;Osteoglossidae;Scleropages;Scleropages formosus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pempheriformes;Acropomatidae;Neoscombrops;Neoscombrops pacificus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pempheriformes;Banjosidae;Banjos;Banjos banjos",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pempheriformes;Epigonidae;Epigonus;Epigonus sp. CBM:ZF:15589",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pempheriformes;Howellidae;Howella;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,196109,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pempheriformes;Howellidae;Howella;Howella cf. broidei CBM:ZF:14249",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pempheriformes;Lateolabracidae;Lateolabrax;Lateolabrax japonicus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pempheriformes;NA;;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pempheriformes;Pempheridae;Parapriacanthus;Parapriacanthus ransonneti",1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pempheriformes;Pempheridae;Pempheris;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pempheriformes;Polyprionidae;Stereolepis;Stereolepis doederleini",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Agonidae;Agonomalus;Agonomalus proboscidalis",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Agonidae;Hemitripterus;Hemitripterus villosus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Anoplopomatidae;Erilepis;Erilepis zonifer",0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,2,0,0,0,2,0,0,0,0,0,0,0,1,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Bathymasteridae;Ronquilus;Ronquilus jordani",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Channichthyidae;Chionodraco;Chionodraco myersi",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Cottidae;Icelinus;Icelinus fimbriatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Cottidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,73,0,0,0,0,0,0,0,0,0,74486,0,0,0,0,0,0,236,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Cottidae;Ocynectes;Ocynectes maschalis",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Cottidae;Pseudoblennius;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Cottidae;Radulinopsis;Radulinopsis taranetzi",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Cottidae;Scorpaenichthys;Scorpaenichthys marmoratus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,338710,0,0,0,0,0,0,0,0,0,11,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Cryptacanthodidae;Cryptacanthodes;",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Cryptacanthodidae;Cryptacanthodes;Cryptacanthodes giganteus",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Eleginopidae;Eleginops;Eleginops maclovinus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Gasterosteidae;Apeltes;Apeltes quadracus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Jordaniidae;Jordania;Jordania zonope",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Niphonidae;Niphon;Niphon spinosus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Nototheniidae;Dissostichus;Dissostichus mawsoni",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Nototheniidae;Trematomus;Trematomus bernacchii",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Percidae;Ammocrypta;Ammocrypta pellucida",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Percidae;Etheostoma;",0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Percidae;Etheostoma;Etheostoma chlorosomum",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Percidae;Etheostoma;Etheostoma gracile",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Percidae;Etheostoma;Etheostoma jessiae",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Percidae;Etheostoma;Etheostoma okaloosae",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Percidae;Etheostoma;Etheostoma proeliare",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Percidae;Etheostoma;Etheostoma punctulatum",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Percidae;Etheostoma;Etheostoma swaini",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Percidae;Etheostoma;Etheostoma tuscumbia",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Percidae;Gymnocephalus;Gymnocephalus baloni",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Percidae;Perca;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Percidae;Perca;Perca flavescens",0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Percidae;Perca;Perca fluviatilis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Percidae;Percina;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Percidae;Percina;Percina caprodes",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Percidae;Sander;Sander lucioperca",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Platycephalidae;Platycephalus;",0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Platycephalidae;Rogadius;Rogadius pristiger",0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Psychrolutidae;Malacocottus;Malacocottus zonurus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Ptilichthyidae;Ptilichthys;Ptilichthys goodei",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Scorpaenidae;Brachypterois;Brachypterois serrulifer",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Scorpaenidae;Idiastion;Idiastion pacificum",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Scorpaenidae;Parascorpaena;Parascorpaena aurita",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Scorpaenidae;Scorpaena;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Scorpaenidae;Scorpaena;Scorpaena miostoma",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Scorpaenidae;Scorpaena;Scorpaena onaria",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Scorpaenidae;Scorpaenodes;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Scorpaenidae;Scorpaenodes;Scorpaenodes albaiensis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Scorpaenidae;Scorpaenopsis;Scorpaenopsis neglecta",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Scorpaenidae;Taenianotus;Taenianotus triacanthus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Sebastidae;Hozukius;Hozukius emblemarius",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+"Eukaryota;Chordata;Actinopteri;Perciformes;Sebastidae;Sebastes;Sebastes auriculatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,6
+"Eukaryota;Chordata;Actinopteri;Perciformes;Sebastidae;Sebastes;Sebastes babcocki",0,1,0,0,0,0,0,1,3,0,0,0,0,0,1,0,0,0,1,2,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Sebastidae;Sebastes;Sebastes fasciatus",0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Sebastidae;Sebastes;Sebastes inermis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Sebastidae;Sebastes;Sebastes schlegelii",0,1,0,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Sebastidae;Sebastes;Sebastes sp. CBM Chiba DNA 2015-535",0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Sebastidae;Sebastes;Sebastes thompsoni",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Sebastidae;Sebastiscus;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Sebastidae;Sebastiscus;Sebastiscus marmoratus",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Sebastidae;Sebastiscus;Sebastiscus tertius",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Sebastidae;Sebastolobus;Sebastolobus macrochir",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Serranidae;Anyperodon;Anyperodon leucogrammicus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Serranidae;Caesioperca;Caesioperca lepidoptera",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Serranidae;Epinephelus;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Serranidae;Epinephelus;Epinephelus bleekeri",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Serranidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+"Eukaryota;Chordata;Actinopteri;Perciformes;Serranidae;Plectranthias;Plectranthias japonicus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Setarchidae;Ectreposebastes;Ectreposebastes imus",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Setarchidae;NA;",1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Stichaeidae;Dictyosoma;",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Stichaeidae;NA;",0,0,0,0,0,0,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Stichaeidae;Stichaeopsis;Stichaeopsis nana",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Triglidae;Lepidotrigla;Lepidotrigla punctipectoralis",0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Zoarcidae;Andriashevia;Andriashevia sp. CBM:ZF:16351-2",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Zoarcidae;Lycodes;",0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Zoarcidae;Lycodes;Lycodes vahlii",0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Zoarcidae;NA;",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Perciformes;Zoarcidae;Zoarces;Zoarces viviparus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Percopsiformes;Amblyopsidae;Forbesichthys;Forbesichthys agassizii",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pleuronectiformes;Bothidae;Asterorhombus;Asterorhombus cocosensis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pleuronectiformes;Cynoglossidae;Cynoglossus;Cynoglossus joyneri",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pleuronectiformes;Cynoglossidae;NA;",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pleuronectiformes;Paralichthyidae;NA;",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pleuronectiformes;Paralichthyidae;Tarphops;Tarphops elegans",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pleuronectiformes;Paralichthyidae;Xystreurys;Xystreurys liolepis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pleuronectiformes;Pleuronectidae;Hypsopsetta;Hypsopsetta guttulata",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pleuronectiformes;Pleuronectidae;Lepidopsetta;Lepidopsetta bilineata",0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pleuronectiformes;Pleuronectidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pleuronectiformes;Pleuronectidae;Pleuronichthys;Pleuronichthys coenosus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pleuronectiformes;Pleuronectidae;Pleuronichthys;Pleuronichthys verticalis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pleuronectiformes;Pleuronectidae;Psettichthys;Psettichthys melanostictus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pleuronectiformes;Rhombosoleidae;Pelotretis;Pelotretis flavilatus",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pleuronectiformes;Scophthalmidae;Scophthalmus;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Pleuronectiformes;Soleidae;Pseudaesopia;Pseudaesopia japonica",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Priacanthiformes;Priacanthidae;Cookeolus;Cookeolus japonicus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Salmoniformes;Salmonidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8622,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Salmoniformes;Salmonidae;Oncorhynchus;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Salmoniformes;Salmonidae;Prosopium;Prosopium williamsoni",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Salmoniformes;Salmonidae;Thymallus;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Amarsipidae;Amarsipus;Amarsipus carlsbergi",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Bramidae;Brama;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Bramidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Bramidae;Taractes;Taractes asper",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Caristiidae;Caristius;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Caristiidae;Caristius;Caristius macropus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Gempylidae;Diplospinus;Diplospinus multistriatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Gempylidae;Lepidocybium;Lepidocybium flavobrunneum",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Gempylidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Gempylidae;Nealotus;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Gempylidae;Nealotus;Nealotus sp. CBM:ZF:14751",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Gempylidae;Nealotus;Nealotus tripes",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Gempylidae;Promethichthys;Promethichthys prometheus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Gempylidae;Rexea;Rexea nakamurai",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Gempylidae;Ruvettus;Ruvettus pretiosus",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Gempylidae;Thyrsitoides;Thyrsitoides marleyi",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Icosteidae;Icosteus;Icosteus aenigmaticus",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Nomeidae;Cubiceps;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Nomeidae;Cubiceps;Cubiceps whiteleggii",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Nomeidae;Psenes;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Scombridae;Acanthocybium;Acanthocybium solandri",0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Scombridae;Katsuwonus;Katsuwonus pelamis",0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,6,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Scombridae;Rastrelliger;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Scombridae;Scomber;Scomber scombrus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Scombridae;Scomberomorus;Scomberomorus cavalla",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Scombridae;Scomberomorus;Scomberomorus niphonius",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Scombridae;Thunnus;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,3,8,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Scombridae;Thunnus;Thunnus thynnus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Scombrolabracidae;Scombrolabrax;Scombrolabrax heterolepis",0,0,0,2,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,88045,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Stromateidae;Peprilus;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Stromateidae;Peprilus;Peprilus medius",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Tetragonuridae;Tetragonurus;Tetragonurus pacificus",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Scombriformes;Trichiuridae;Benthodesmus;Benthodesmus tenuis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Siluriformes;Heptapteridae;Phreatobius;Phreatobius sp. INPA S/N",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Siluriformes;NA;;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Siluriformes;Pseudopimelodidae;Microglanis;Microglanis sp. MM-2017",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Spariformes;Lethrinidae;Lethrinus;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Spariformes;Lethrinidae;Lethrinus;Lethrinus cf. lentjan UPVMI-1086",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Spariformes;Sparidae;Argyrops;Argyrops bleekeri",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Spariformes;Sparidae;Pagellus;Pagellus bogaraveo",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Stomiiformes;Diplophidae;Diplophos;",1,1,0,0,0,0,0,0,1,0,0,93308,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Stomiiformes;Diplophidae;Diplophos;Diplophos sp. MM-1999",0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Stomiiformes;Diplophidae;Diplophos;Diplophos taenia",0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Stomiiformes;Gonostomatidae;Bonapartia;Bonapartia pedaliota",0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Stomiiformes;Sternoptychidae;Argyropelecus;Argyropelecus affinis",0,0,0,0,0,0,0,0,0,0,0,448,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Stomiiformes;Stomiidae;Astronesthes;",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Stomiiformes;Stomiidae;Astronesthes;Astronesthes gemmifer",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Stomiiformes;Stomiidae;Astronesthes;Astronesthes sp. CBM DNA No. 2015-229",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Stomiiformes;Stomiidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,0,0,0,0,2,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Stomiiformes;Stomiidae;Opostomias;Opostomias mitsuii",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Stomiiformes;Stomiidae;Stomias;Stomias nebulosus",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Stomiiformes;Stomiidae;Tactostoma;Tactostoma macropus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Syngnathiformes;Dactylopteridae;Dactyloptena;Dactyloptena peterseni",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Syngnathiformes;Mullidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,1,0,5,0,0,0,0,1,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Syngnathiformes;Mullidae;Parupeneus;",2,0,0,3,0,0,2,0,0,0,0,0,0,0,0,1,0,0,0,0,0,4,0,0,809316,73629,33627,154972,0,0,0,0,0,0,552,18,1,0
+"Eukaryota;Chordata;Actinopteri;Syngnathiformes;Mullidae;Parupeneus;Parupeneus barberinus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Syngnathiformes;Mullidae;Parupeneus;Parupeneus chrysopleuron",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Syngnathiformes;Mullidae;Parupeneus;Parupeneus ciliatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Syngnathiformes;Mullidae;Parupeneus;Parupeneus cyclostomus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Syngnathiformes;Mullidae;Parupeneus;Parupeneus heptacanthus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,23,0,3,1,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Syngnathiformes;Mullidae;Parupeneus;Parupeneus indicus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Syngnathiformes;Mullidae;Parupeneus;Parupeneus spilurus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Syngnathiformes;Syngnathidae;Syngnathus;Syngnathus leptorhynchus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Tetraodontiformes;Aracanidae;Kentrocapros;Kentrocapros aculeatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Tetraodontiformes;Balistidae;NA;",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Tetraodontiformes;Molidae;Masturus;Masturus lanceolatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Tetraodontiformes;Molidae;Mola;Mola mola",0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Tetraodontiformes;Tetraodontidae;Arothron;Arothron mappa",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Tetraodontiformes;Tetraodontidae;Torquigener;Torquigener brevipinnis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Tetraodontiformes;Triodontidae;Triodon;Triodon macropterus",0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Uranoscopiformes;Ammodytidae;Ammodytes;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Uranoscopiformes;Uranoscopidae;Ichthyscopus;Ichthyscopus sannio",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Uranoscopiformes;Uranoscopidae;Uranoscopus;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Uranoscopiformes;Uranoscopidae;Uranoscopus;Uranoscopus chinensis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Uranoscopiformes;Uranoscopidae;Uranoscopus;Uranoscopus cognatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Actinopteri;Uranoscopiformes;Uranoscopidae;Uranoscopus;Uranoscopus japonicus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Amphibia;Anura;Megophryidae;Leptobrachium;Leptobrachium xanthospilum",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Aves;Galliformes;Phasianidae;Meleagris;Meleagris gallopavo",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Aves;Galliformes;Phasianidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Chondrichthyes;Lamniformes;Alopiidae;Lamna;Lamna ditropis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Mammalia;Carnivora;Felidae;Felis;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,70,0,0
+"Eukaryota;Chordata;Mammalia;Chiroptera;Hipposideridae;Hipposideros;Hipposideros bicolor",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Mammalia;Chiroptera;NA;;",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Mammalia;Chiroptera;Rhinolophidae;Rhinolophus;Rhinolophus alcyone",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Mammalia;Macroscelidea;Macroscelididae;Rhynchocyon;Rhynchocyon petersi",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Mammalia;NA;Bovidae;Bison;",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Mammalia;NA;Bovidae;Bison;Bison bonasus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Mammalia;NA;Bovidae;Bison;Bison priscus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Mammalia;NA;Bovidae;Capricornis;Capricornis crispus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Mammalia;NA;Bovidae;Neotragus;Neotragus moschatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Mammalia;NA;Bovidae;Ovis;Ovis aries",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Mammalia;NA;Cervidae;NA;",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Mammalia;NA;Suidae;NA;",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Mammalia;NA;Suidae;Sus;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Mammalia;NA;Suidae;Sus;Sus scrofa",0,0,0,0,0,0,0,0,0,0,0,0,0,3765,0,4572,0,0,0,0,0,0,0,0,237,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Mammalia;Primates;Cercopithecidae;Cercopithecus;Cercopithecus albogularis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Mammalia;Primates;Hominidae;Gorilla;",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Eukaryota;Chordata;Mammalia;Primates;Hylobatidae;NA;",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
