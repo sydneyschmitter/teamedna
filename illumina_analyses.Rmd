@@ -10,6 +10,7 @@ library(dplyr)
 library(tidyr)
 library(tidyverse)
 library(ggplot2)
+library(gridExtra)
 ```
 
 
@@ -262,7 +263,8 @@ sac.ocean(illumina.species)
 
 ```{r this plots a stacked bar chart of the data}
 
-
+illumina.order.locale <- illumina.order
+colnames(illumina.order.locale) <- key.metadata.illumina$Location2
 illumina.class.percentage <- convert.to.perc(illumina.class)
 illumina.order.percentage <- convert.to.perc(illumina.order)
 illumina.family.percentage <- convert.to.perc(illumina.family)
@@ -273,6 +275,10 @@ illumina.class$Class <- rownames(illumina.class)
 illumina.class.gather <- gather(illumina.class, key = "site", value = "reads", -c(Class)) # gathers the data into a format for stacked bar chart plotting
 illumina.order$Order <- rownames(illumina.order)
 illumina.order.gather <- gather(illumina.order, key = "site", value = "reads", -c(Order)) # gathers the data into a format for stacked bar chart plotting
+
+
+illumina.order.locale$Order <- rownames(illumina.order.locale)
+illumina.order.locale.gather <- gather(illumina.order.locale, key = "site", value = "reads", -c(Order)) # gathers the data into a format for stacked bar chart plotting
 illumina.family$Family <- rownames(illumina.family)
 illumina.family.gather <- gather(illumina.family, key = "site", value = "reads", -c(Family)) # gathers the data into a format for stacked bar chart plotting
 illumina.genus$Genus <- rownames(illumina.genus)
@@ -286,7 +292,7 @@ illumina.family.gather$site <-as.factor(as.numeric(illumina.family.gather$site))
 
 ggplot(illumina.class.gather, aes(x = site, y = reads, fill = Class)) + geom_bar(position = "fill", stat = "identity") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
-ggplot(illumina.order.gather, aes(x = site, y = reads, fill = Order)) + geom_bar(position = "fill", stat = "identity") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + xlab("Sample Number") + ylab("Percentage of Reads")
+ggplot(illumina.order.gather, aes(x = site, y = reads, fill = Order)) + geom_bar(position = "fill", stat = "identity", color = "black") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + xlab("Sample Number") + ylab("Percentage of Reads") + scale_x_discrete(labels= c(key.metadata.illumina$Location2))
 
 ggplot(illumina.family.gather, aes(x = site, y = reads, fill = Family)) + geom_bar(position = "fill", stat = "identity") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
@@ -327,7 +333,7 @@ ggplot(data = trimmed.metadata, aes(x = ShannonOrder, y = General.Locale.Edit, f
 ```
 
 ```{r pairwise comps for shannon div}
-
+library(rstatix)
 
 key.metadata.illumina$Locale <- as.character(key.metadata.illumina$Locale)
 key.metadata.illumina$Depth <- as.numeric(key.metadata.illumina$Depth)
@@ -344,8 +350,8 @@ key.metadata.minion$TimeOfDay <- as.character(key.metadata.minion$TimeOfDay)
 
 locale.ill.t <- t_test(key.metadata.illumina, Diversity ~ Locale)
 locale.ill.t
-locale2.ill.t <- t_test(key.metadata.illumina, Diversity ~ Location2)
-locale2.ill.t
+#locale2.ill.t <- t_test(key.metadata.illumina, Diversity ~ Location2)
+#locale2.ill.t
 depth.ill.t <- t_test(key.metadata.illumina, Diversity ~ Depth)
 depth.ill.t
 hour.ill.t <- t_test(key.metadata.illumina, Diversity ~ Hour)
@@ -368,7 +374,7 @@ lat.min.t
 
 library(openxlsx)
 
-dataset_names_ill <- list('Locale_Illumina' = locale.ill.t, 'Locale2_Illumina' = locale2.ill.t, 'Depth_Illumina' = depth.ill.t, 'Hour_Illumina' = hour.ill.t, 'TimeofDay_Illumina' = timeofday.ill.t, 'Latitude_Illumina' = lat.ill.t)
+dataset_names_ill <- list('Locale_Illumina' = locale.ill.t, 'Depth_Illumina' = depth.ill.t, 'Hour_Illumina' = hour.ill.t, 'TimeofDay_Illumina' = timeofday.ill.t, 'Latitude_Illumina' = lat.ill.t)
 write.xlsx(dataset_names_ill, file = 'ShannonDiv_Pairwise_Illumina.xlsx')
 
 
@@ -378,8 +384,6 @@ write.xlsx(dataset_names_min, file = 'ShannonDiv_Pairwise_Minion.xlsx')
 
 locale.ill.t <- t_test(key.metadata.illumina, Diversity ~ Locale) %>% .[which(.$p < 0.05 & .$p.adj.signif != "ns"),]
 locale.ill.t
-locale2.ill.t <- t_test(key.metadata.illumina, Diversity ~ Location2) %>% .[which(.$p < 0.05 & .$p.adj.signif != "ns"),]
-locale2.ill.t
 depth.ill.t <- t_test(key.metadata.illumina, Diversity ~ Depth) %>% .[which(.$p < 0.05 & .$p.adj.signif != "ns"),]
 depth.ill.t
 hour.ill.t <- t_test(key.metadata.illumina, Diversity ~ Hour) %>% .[which(.$p < 0.05 & .$p.adj.signif != "ns"),]
@@ -402,6 +406,8 @@ lat.min.t
 
 df <- lat.min.t
 i <- 1
+
+timeofday.ill.t
 make.couplets <- function(df) {
   list.1 <- as.list(df$group1)
   list.2 <- as.list(df$group2)
@@ -422,41 +428,50 @@ make.couplets(hour.min.t) %>% unique()
 ```{r}
 
 library(RColorBrewer)
+library(ggpubr)
 
 # NO significant differences to show
-depth.div.illumina <- ggplot(data = key.metadata.illumina, aes(y = Diversity, x = -Depth, group = -Depth, fill = -Depth)) + geom_boxplot(size = 0.5, width =20) + ylab("Shannon-Weiner Diversity Index") + ggtitle("Order Diversity by Depth (Illumina)") + xlab("Depth") + xlim( -450, 20)  
+depth.div.illumina <- ggplot(data = key.metadata.illumina, aes(y = Diversity, x = -Depth, group = -Depth, color = -Depth)) + geom_boxplot(size = 0.5, width =20) + ylab("Shannon-Weiner Diversity Index") +  xlab("Depth") + xlim( -450, 20) + theme_classic()
+
+depth.div.illumina <- ggplot(data = key.metadata.illumina, aes(y = Diversity, x = as.character(Depth), group = as.character(Depth), color = as.character(Depth))) + geom_boxplot() + ylab("Shannon-Weiner Diversity Index") + xlab("Depth")  + theme_classic() + theme(axis.title.x = element_blank(), legend.position = "none", axis.title.y = element_blank(), axis.text.x = element_text(size = 12), axis.text.y = element_text(size = 12)) + ylim(0, 2.5)
+
 depth.div.illumina
 
-lat.div.illumina <- ggplot(key.metadata.illumina, aes(y = Diversity, x = Latitude, fill = Latitude, group = Latitude)) + ggtitle("Order Diversity by Latitude of Sample Collection (Illumina)") + xlab("Latitude") + ylab("Shannon-Weiner Diversity Index") + xlim(2, 25) + geom_boxplot(size = 0.5, width = 20)+ scale_fill_distiller(palette = "BuPu")
+key.metadata.illumina <- key.metadata.illumina[order(key.metadata.illumina$Latitude),]
+lat.div.illumina <- ggplot(key.metadata.illumina, aes(y = Diversity, x = factor(as.character(Latitude), levels = c("6", "8", "9", "10", "13", "14", "17", "18", "19")), color = as.character(Latitude), group = as.character(Latitude))) + xlab("Latitude") + ylab("Shannon-Weiner Diversity Index")  + geom_boxplot()+ scale_fill_distiller(palette = "BuPu") + theme_classic()+ theme(legend.position = "none") + theme(axis.title.x = element_blank(), axis.title.y = element_blank(), axis.text.x = element_text(size = 12), axis.text.y = element_text(size = 12)) + ylim(0, 2.5)
 lat.div.illumina
 
 key.metadata.illumina$Hour
 
-time.div.illumina <- ggboxplot(key.metadata.illumina, y = "Diversity", x = "Hour", color = "Hour", legend = "none") + ggtitle("Order Diversity by Hour of Sample Collection (Illumina)") + xlab("Hour of Sample Collection") + ylab("Shannon-Weiner Diversity Index") + scale_fill_distiller(palette = "BuPu") + stat_compare_means(comparisons = make.couplets(hour.ill.t), label = "p.signif", hide.ns = TRUE, method = "t.test")
-time.div.illumina
-
-tod.div.illumina <- ggboxplot(key.metadata.illumina, y = "Diversity", x = "TimeOfDay", color = "TimeOfDay", legend = "none") + ggtitle("Order Diversity by Hour of Sample Collection (Illumina)") + xlab("Time of Day of Sample Collection") + ylab("Shannon-Weiner Diversity Index") + scale_fill_distiller(palette = "BuPu") + stat_compare_means(comparisons = make.couplets(timeofday.ill.t), label = "p.signif", hide.ns = TRUE, method = "t.test")
+key.metadata.illumina <- key.metadata.illumina[order(key.metadata.illumina$TimeOfDay),]
+tod.div.illumina <- ggboxplot(key.metadata.illumina, y = "Diversity", x = "TimeOfDay", color = "TimeOfDay", legend = "none") +  xlab("Time of Day of Sample Collection") + ylab("Shannon-Weiner Diversity Index") + scale_fill_distiller(palette = "BuPu") + stat_compare_means(comparisons = make.couplets(timeofday.ill.t), label = "p.signif", hide.ns = TRUE, method = "t.test") + theme(axis.title.x = element_blank(), axis.title.y = element_blank()) + ylim(0, 2.5)
+tod.div.illumina <- ggplot(data = key.metadata.illumina, aes(y = Diversity, x = factor(TimeOfDay, levels = c("Morning", "Afternoon", "Night")), group = TimeOfDay, color = TimeOfDay)) + geom_boxplot() + ylab("Shannon-Weiner Diversity Index") + xlab("Time of Day")  + theme_classic() + theme(axis.title.x = element_blank(), legend.position = "none", axis.title.y = element_blank(), axis.text.x = element_text(size = 12), axis.text.y = element_text(size = 12)) + ylim(0, 2.5)
 tod.div.illumina
 
 make.couplets(depth.min.t)
 depth.min.t
-depth.div.minion <- ggboxplot(key.metadata.minion, y = "Diversity", x = "Depth", color = "Depth", legend = "none") + ggtitle("Order Diversity by Depth (Minion)") + xlab("Depth of Sample Collection (m)") + ylab("Shannon-Weiner Diversity Index") + scale_fill_distiller(palette = "BuPu") + stat_compare_means(comparisons = make.couplets(depth.min.t), label = "p.signif", hide.ns = TRUE, method = "t.test")
+depth.div.minion <- ggboxplot(key.metadata.minion, y = "Diversity", x = "Depth", color = "Depth", legend = "none") +xlab("Depth of Sample Collection (m)") + ylab("Shannon-Weiner Diversity Index") + scale_fill_distiller(palette = "BuPu") + stat_compare_means(comparisons = make.couplets(depth.min.t), label = "p.signif", hide.ns = TRUE, method = "t.test") + theme( axis.title.y = element_blank()) + ylim(0, 2.5)
 depth.div.minion
 
-lat.div.minion <- ggboxplot(key.metadata.minion, y = "Diversity", x = "Latitude", color = "Latitude", legend = "none") + ggtitle("Order Diversity by Latitude (Minion)") + xlab("Latitude") + ylab("Shannon-Weiner Diversity Index") + scale_fill_distiller(palette = "BuPu") + stat_compare_means(comparisons = make.couplets(lat.min.t), label = "p.signif", hide.ns = TRUE, method = "t.test")
+lat.div.minion <- ggboxplot(key.metadata.minion, y = "Diversity", x = "Latitude", color = "Latitude", legend = "none") +  xlab("Latitude") + ylab("Shannon-Weiner Diversity Index") + scale_fill_distiller(palette = "BuPu") + stat_compare_means(comparisons = make.couplets(lat.min.t), label = "p.signif", hide.ns = TRUE, method = "t.test") + theme(axis.title.y = element_blank()) + ylim(0, 2.5)
 lat.div.minion
 
 make.couplets(hour.min.t)
-time.div.minion <- ggboxplot(key.metadata.minion, y = "Diversity", x = "Hour", color = "Hour", legend = "none") + ggtitle("Order Diversity by Hour of Sample Collection (Minion)") + xlab("Hour of Sample Collection") + ylab("Shannon-Weiner Diversity Index") + stat_compare_means(comparisons = list(c("10", "16"), c("11", "16"), c("16", "22"), c("16", "23")), label = "p.signif", hide.ns = TRUE, method = "t.test")
+time.div.minion <- ggboxplot(key.metadata.minion, y = "Diversity", x = "Hour", color = "Hour", legend = "none") + xlab("Hour of Sample Collection") + ylab("Shannon-Weiner Diversity Index") + stat_compare_means(comparisons = list(c("10", "16"), c("11", "16"), c("16", "22"), c("16", "23")), label = "p.signif", hide.ns = TRUE, method = "t.test") + ylim(0, 2.5)
 time.div.minion
 
-tod.div.minion <- ggboxplot(key.metadata.minion, y = "Diversity", x = "TimeOfDay", color = "TimeOfDay", legend = "none") + ggtitle("Order Diversity by Hour of Sample Collection (Minion)") + xlab("Time of Day of Sample Collection") + ylab("Shannon-Weiner Diversity Index") + scale_fill_distiller(palette = "BuPu") + stat_compare_means(comparisons = make.couplets(timeofday.min.t), label = "p.signif", hide.ns = TRUE, method = "t.test")
+key.metadata.minion
+
+key.metadata.minion <- key.metadata.minion[order(key.metadata.minion$TimeOfDay),]
+tod.div.minion <- ggboxplot(key.metadata.minion, y = "Diversity", x = "TimeOfDay", color = "TimeOfDay", legend = "none") +  xlab("Time of Day of Sample Collection") + ylab("Shannon-Weiner Diversity Index") + scale_fill_distiller(palette = "BuPu") + stat_compare_means(comparisons = make.couplets(timeofday.min.t), label = "p.signif", hide.ns = TRUE, method = "t.test") + theme(axis.title.y = element_blank()) + ylim(0, 2.5)
 tod.div.minion
 
 general.locale <- list(trimmed.metadata$GeneralLocale)[[1]]
 general.locale <- as.character(general.locale)
 general.locale[general.locale == "Swordfish Seamount"] <- "Anticyclonic Eddy"
 trimmed.metadata$General.Locale.Edit <- general.locale
+
+grid.arrange(depth.div.illumina, lat.div.illumina, tod.div.illumina, depth.div.minion, lat.div.minion, tod.div.minion, ncol = 3, nrow = 2)
 
 ```
 
@@ -479,16 +494,20 @@ order.nmds$iters
 NMDS3.minion <- metaMDS((order.taxa.perc), k = 10, trymax = 100, trace = F, autotransform = FALSE, distance = "bray")
 NMDS3.minion$iters
 
-nmds.en.ill <- key.metadata.illumina %>% select(., -c(Diversity, Locale, Location2, OceanType, HourGroup))
+nmds.en.ill <- key.metadata.illumina %>% select(-c(Diversity, Locale, Location2, OceanType, HourGroup))
 en.ill = envfit(order.nmds, nmds.en.ill, permutations = 999, na.rm = TRUE)
 
-nmds.en.min <- key.metadata.minion %>% select(., -c(Diversity, Locale, OceanType, LocaleEdit, HourGroup, Time))
+nmds.en.min <- key.metadata.minion %>% select(-c(Diversity, Locale, OceanType, LocaleEdit, HourGroup, Time))
 en.min = envfit(NMDS3.minion, nmds.en.min, permutations = 999, na.rm = TRUE)
 en.min
 
 ```
 
 ```{r nmds multiple environmental illumina}
+
+plot(NMDS3.minion, type = "t")
+plot(order.nmds, type = "t")
+
 
 data.scores = as.data.frame(scores(order.nmds))
 data.scores$Station = key.metadata.illumina$Location2
@@ -795,10 +814,92 @@ cca(illumina.order.t ~ TimeOfDay, key.metadata.illumina) %>% plot()
 
 
 ```{r simper analyses}
+
+illumina.order.t <- t(illumina.order)
 simper.illumina <- simper(illumina.order.t, group = as.factor(key.metadata.illumina$Locale)) 
+simper.illumina.depth <- simper(illumina.order.t, group = as.factor(key.metadata.illumina$Depth)) 
+simper.illumina.depth
 simper.illumina$`Cyclonic Eddy_Anticyclonic Eddy`
 
 simper.illumina
+
+
+simper.df <- simper.illumina$`OMZ Compression_Anticyclonic Eddy`
+simper.illumina$`OMZ Compression_Cyclonic Eddy`
+simper.illumina$`OMZ Compression_Cyclonic Edge`
+simper.illumina$`OMZ Compression_Divergence`
+simper.illumina$`OMZ Compression_Divergence Front`
+simper.illumina$`Kingman Reef_OMZ Compression`
+simper.illumina$`OMZ Compression_Swordfish Seamount`
+
+simper.minion <- simper(order.taxa, group = as.factor(key.metadata.minion$Locale))
+```
+
+
+```{r}
+simper.illumina$`Anticyclonic Eddy_OMZ Compression`$cusum[2] - simper.illumina$`Anticyclonic Eddy_OMZ Compression`$cusum[2 -1]
+cusum <- (simper.illumina$`Anticyclonic Eddy_OMZ Compression`$cusum)
+
+convert.cusum <- function(cusum) {
+  return.vec <- c(1:length(cusum))
+  return.vec[1] <- cusum[1]
+  for (i in 2:length(cusum)) {
+    val = cusum[i] - cusum[i - 1]
+    print(i)
+    return.vec[i] <- val
+  }
+  return(return.vec)
+}
+
+simper.df <- simper.illumina$`OMZ Compression_Divergence Front`
+plot.simper <- function(simper.df) {
+  ordered.sp <- simper.df$ord
+  species <- simper.df$species[order(ordered.sp)]
+  sd <- simper.df$sd[order(ordered.sp)]
+  cusum <- simper.df$cusum
+  avg <- simper.df$average[order(ordered.sp)]
+  df <- data.frame("Species" = species, "SD" = sd, "Contribution" = cusum, "Average" = avg)
+  plot.df <- df[which(df$Contribution < 0.99),]
+  plot.df$ContributionVal <- convert.cusum(plot.df$Contribution)
+  return.plot <- ggplot(plot.df, aes(x = reorder(Species, -ContributionVal), y = ContributionVal)) + geom_bar(stat = "identity", aes(fill = Species)) + theme(legend.position = "none", axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)) + xlab("Order") + ylab("Contribution to Dissimilarity") 
+  
+  return(return.plot)
+}
+
+
+simp.omz.anticyc.eddy <- plot.simper(simper.illumina$`Anticyclonic Eddy_OMZ Compression`)
+simp.omz.anticyc.eddy <- simp.omz.anticyc.eddy + ggtitle("OMZ Compression vs. Anticyclonic Eddy") + theme(legend.position = "none", axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1), axis.title.x = element_blank(), axis.title.y = element_blank())
+simp.omz.cyc.eddy <- plot.simper(simper.illumina$`Cyclonic Eddy_OMZ Compression`)
+simp.omz.cyc.eddy <- simp.omz.cyc.eddy + ggtitle("OMZ Compression vs. Cyclonic Eddy") + theme(legend.position = "none", axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1), axis.title.x = element_blank(), axis.title.y = element_blank())
+simp.omz.cyc.edge <- plot.simper(simper.illumina$`Cyclonic Edge_OMZ Compression`)
+simp.omz.cyc.edge <- simp.omz.cyc.edge + ggtitle("OMZ Compression vs. Cyclonic Edge") + theme(legend.position = "none", axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1), axis.title.x = element_blank(), axis.title.y = element_blank())
+simp.omz.div <- plot.simper(simper.illumina$`OMZ Compression_Divergence`)
+simp.omz.div <- simp.omz.div + ggtitle("OMZ Compression vs. Divergence") + theme(legend.position = "none", axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1), axis.title.x = element_blank(), axis.title.y = element_blank())
+simp.omz.div.front <- plot.simper(simper.illumina$`OMZ Compression_Divergence Front`)
+simp.omz.div.front <- simp.omz.div.front + ggtitle("OMZ Compression vs. Divergence Front") + theme(legend.position = "none", axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1), axis.title.x = element_blank(), axis.title.y = element_blank())
+simp.omz.reef <- plot.simper(simper.illumina$`OMZ Compression_Kingman Reef`)
+simp.omz.reef <- simp.omz.reef + ggtitle("OMZ Compression vs. Kingman Reef") + theme(legend.position = "none", axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1), axis.title.x = element_blank(), axis.title.y = element_blank())
+simp.omz.swordfish <- plot.simper(simper.illumina$`Swordfish Seamount_OMZ Compression`)
+simp.omz.swordfish <- simp.omz.swordfish + ggtitle("OMZ Compression vs. Swordfish Seamount") + theme(legend.position = "none", axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1), axis.title.x = element_blank(), axis.title.y = element_blank())
+
+simper.illumina.grid <- grid.arrange(simp.omz.anticyc.eddy,simp.omz.cyc.eddy,simp.omz.cyc.edge,simp.omz.div,simp.omz.div.front,simp.omz.reef,simp.omz.swordfish,nrow = 3)
+
+simp.anticyc.ocean.min <- plot.simper(simper.minion$`Anticyclonic Eddy_Open Ocean`)
+simp.anticyc.ocean.min <- simp.anticyc.ocean.min + ggtitle("Anticyclonic Eddy vs. Open Ocean") + theme(legend.position = "none", axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1), axis.title.x = element_blank(), axis.title.y = element_blank())
+simp.ocean.keiahoe <- plot.simper(simper.minion$`Keiahoe/Hawai'i_Open Ocean`)
+simp.ocean.keiahoe <- simp.ocean.keiahoe + ggtitle("Keiahoe/Hawai'i vs. Open Ocean")+ theme(legend.position = "none", axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1), axis.title.x = element_blank(), axis.title.y = element_blank())
+simp.ocean.nearshore <- plot.simper(simper.minion$`Hawai'I Nearshore_Open Ocean`)
+simp.ocean.nearshore <- simp.ocean.nearshore + ggtitle("Hawai'i Nearshore vs. Open Ocean") + theme(legend.position = "none", axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1), axis.title.x = element_blank(), axis.title.y = element_blank())
+
+simper.minion.grid <- grid.arrange(simp.anticyc.ocean.min,simp.ocean.keiahoe,simp.ocean.nearshore, nrow = 3)
+simper.illumina$`OMZ Compression_Cyclonic Edge`
+
+
+simper.illumina$`Anticyclonic Eddy_OMZ Compression`
+```
+
+
+```{r}
 
 test <- simper.illumina["Cyclonic Eddy_Eddy convergence"][[1]] %>% .[which(.$ratio > 0.5 & .$cumsum < 0.99),]
 test
@@ -817,7 +918,7 @@ test
 most.val.member <- aggregate(test, by = list(test$Order), FUN = mean)
 most.val.member
 
-simper.illumina <- simper(illumina.order.t, group = as.factor(key.metadata.illumina$Locale))
+simper.illumina <- simper(illumina.order.t, group = as.factor(key.metadata.illumina$Location2))
 (simper.illumina)
 
 simper.minion <- simper(order.taxa, group = as.factor(key.metadata.minion$Locale))

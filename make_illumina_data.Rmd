@@ -45,6 +45,8 @@ con.rownames <- na.omit(c(con.rownames))
 illumina.nocon <- illumina.nocon[-con.rownames,]
 illumina.nocon <- illumina.nocon[1:474,]
 
+illumina.nocon.for.export <- illumina.nocon
+write.csv(illumina.nocon.for.export, "illumina_nocon.csv")
 
 taxonomy <- illumina.nocon$sum.taxonomy
 
@@ -443,6 +445,7 @@ cpus.lm <- lm(Diversity ~ ., data = key.metadata.illumina)
 summary(cpus.lm)
 cpus.lm2 <- stepAIC(cpus.lm, trace = FALSE)
 summary(cpus.lm2)
+summary(cpus.lm2)
 cpus.lm2$anova
 
 best.model <- lm(Diversity ~ Temperature + Oxygen + Density, key.metadata.illumina)
@@ -466,7 +469,7 @@ cpus.lm.minion <- lm(Diversity ~ ., data = key.metadata.minion)
 cpus.lm2.minion <- stepAIC(cpus.lm.minion, trace = FALSE)
 cpus.lm2.minion$anova
 
-best.model <- lm(Diversity ~ Locale + Depth + Chlorophyll + Oxygen + Density, key.metadata.illumina)
+best.model <- lm(Diversity ~ Chlorophyll + Oxygen + Density, key.metadata.illumina)
 
 best.model %>% summary()
 
@@ -484,16 +487,16 @@ library(ggdendro)
 
 
 dist.order.minion <- vegdist(order.taxa, method = "bray")
-dist.order.illumina <- vegdist(illumina.order.t, method = "bray")
+dist.order.illumina <- vegdist(t(illumina.order), method = "bray")
 
 dend.illumina <- hclust(dist.order.illumina)
 dend.illumina$labels <- key.metadata.illumina$Location2
-dend.illumina <- ggdendrogram(dend.illumina) + ggtitle("Dendogram with Illumina Data")
+dend.illumina <- ggdendrogram(dend.illumina) + ggtitle("Dendogram with Illumina Data")+ theme(axis.text.x = element_text(size = 11, vjust = 1, hjust = 1))
 dend.illumina
 
 dend.minion <- hclust(dist.order.minion)
 dend.minion$labels <- key.metadata.minion$Locale
-dend.minion <- ggdendrogram(dend.minion) + ggtitle("Dendogram with Minion Data")
+dend.minion <- ggdendrogram(dend.minion) + ggtitle("Dendogram with Minion Data") + theme(axis.text.x = element_text(size = 11, vjust = 1, hjust = 1))
 dend.minion
 
 rownames(dist.order.minion)
