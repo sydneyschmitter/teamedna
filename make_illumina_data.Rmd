@@ -184,6 +184,14 @@ find.level <- function(order, vector) { # extracts the kingdom organization from
   return(list(return.vec))
 }
 
+
+convert.to.perc <- function(df) {
+  for (col in colnames(df)) {
+    df[[col]] <- df[[col]]/sum(df[[col]])
+  }
+  return(df)
+}
+
 split.taxons
 # extracts the order, orderes, etc.
 all.class <- find.level(3, split.taxons)
@@ -199,37 +207,40 @@ illumina.class <- aggregate(t.illumina.sample, by = list(all.class[[1]]), FUN = 
 rownames(illumina.class) <- illumina.class$Group.1
 illumina.class <- illumina.class[,2:length(colnames(illumina.class))]
 colnames(illumina.class) <- sample.id
-illumina.class <- illumina.class/colSums(illumina.class)
+illumina.class <- convert.to.perc(illumina.class)
 
 illumina.order <- aggregate(t.illumina.sample, by = list(all.order[[1]]), FUN = sum)
 rownames(illumina.order) <- illumina.order$Group.1
 illumina.order <- illumina.order[,2:length(colnames(illumina.order))]
 colnames(illumina.order) <- sample.id
-illumina.order <- illumina.order/colSums(illumina.order)
+illumina.order <- convert.to.perc(illumina.order)
 
 
 illumina.family <- aggregate(t.illumina.sample, by = list(all.family[[1]]), FUN = sum)
 rownames(illumina.family) <- illumina.family$Group.1
 illumina.family <- illumina.family[,2:length(colnames(illumina.family))]
 colnames(illumina.family) <- sample.id
-illumina.family <- illumina.family/colSums(illumina.family)
+illumina.family <- convert.to.perc(illumina.family)
 
 
 illumina.genus <- aggregate(t.illumina.sample, by = list((all.genus[[1]])), FUN = sum)
 rownames(illumina.genus) <- illumina.genus$Group.1
 illumina.genus <- illumina.genus[,2:length(colnames(illumina.genus))]
 colnames(illumina.genus) <- sample.id
-illumina.genus <- illumina.genus/colSums(illumina.genus)
+illumina.genus <- convert.to.perc(illumina.genus)
 
 
 illumina.species <- aggregate(t.illumina.sample, by = list((all.species[[1]])), FUN = sum)
 rownames(illumina.species) <- illumina.species$Group.1
 illumina.species <- illumina.species[,2:length(colnames(illumina.species))]
 colnames(illumina.species) <- sample.id
-illumina.species <- illumina.species/colSums(illumina.species)
+illumina.species <- convert.to.perc(illumina.species)
 
 
 illumina.order
+
+(rowSums(illumina.class)/sum(rowSums(illumina.class))) * 100
+
 
 ```
 
@@ -484,9 +495,22 @@ lm(Diversity ~ Density, key.metadata.illumina) %>% summary()
 
 ```{r dendogram}
 library(ggdendro)
+library(ggraph)
+library(vegan)
+
+trimmed.order.taxa <- order.taxa
+trimmed.order.taxa[trimmed.order.taxa < 0.1] <- 0
 
 
-dist.order.minion <- vegdist(order.taxa, method = "bray")
+trimmed.illumina <- data.frame(illumina.order.t)
+trimmed.illumina[trimmed.illumina < 0.1] <- 0
+
+
+dist.trim.order.minion <- vegdist(trimmed.order.taxa, method = "bray")
+dist.trim.order.illumina <- vegdist(trimmed.illumina, method = "bray")
+
+
+dist.order.minion <- vegdist(trimmed.order.taxa, method = "bray")
 dist.order.illumina <- vegdist(t(illumina.order), method = "bray")
 
 dend.illumina <- hclust(dist.order.illumina)
@@ -498,6 +522,24 @@ dend.minion <- hclust(dist.order.minion)
 dend.minion$labels <- key.metadata.minion$Locale
 dend.minion <- ggdendrogram(dend.minion) + ggtitle("Dendogram with Minion Data") + theme(axis.text.x = element_text(size = 11, vjust = 1, hjust = 1))
 dend.minion
+library(ggplot2)
+
+dend.minion <- hclust(dist.trim.order.minion)
+dend.minion$labels <- key.metadata.minion$Locale
+dend.minion <- ggdendrogram(dend.minion) + ggtitle("Dendogram with Minion Data") + theme(axis.text.x = element_text(size = 11, vjust = 1, hjust = 1))
+dend.minion
+
+trimmed.illumina <- data.frame(trimmed.illumina)
+rows <- rownames(trimmed.illumina)
+cols <- colnames(trimmed.illumina)
+trimmed.illumina.mat <- data.frame((t((trimmed.illumina))))
+
+
+dist.trim.order.illumina <- vegdist(trimmed.illumina, method = "bray")
+dend.illumina <- hclust(dist.order.illumina)
+dend.illumina$labels <- key.metadata.illumina$Location2
+dend.illumina <- ggdendrogram(dend.illumina) + ggtitle("Dendogram with Illumina Data")+ theme(axis.text.x = element_text(size = 11, vjust = 1, hjust = 1))
+dend.illumina
 
 rownames(dist.order.minion)
 
